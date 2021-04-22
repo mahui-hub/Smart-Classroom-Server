@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.spring.dao.XueshenghupingMapper">
+    <resultMap id="BaseResultMap" type="com.spring.entity.Xueshenghuping">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+                            <result column="xuehao" property="xuehao" jdbcType="VARCHAR"/>
+                                    <result column="xingming" property="xingming" jdbcType="VARCHAR"/>
+                                    <result column="hupingneirong" property="hupingneirong" jdbcType="VARCHAR"/>
+                                    <result column="hupingfenshu" property="hupingfenshu" jdbcType="DECIMAL"/>
+                                    <result column="hupingren" property="hupingren" jdbcType="VARCHAR"/>
+                                                    <result column="xueshengid" property="xueshengid" jdbcType="INTEGER"/>
+                <result column="addtime" property="addtime" jdbcType="VARCHAR"/>
+            </resultMap>
+    <sql id="Base_Column_List">
+        id, xuehao, xingming, hupingneirong, hupingfenshu, hupingren, xueshengid, addtime    </sql>
+    </mapper>

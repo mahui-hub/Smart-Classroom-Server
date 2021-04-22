@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.spring.dao.JiaoshiMapper">
+    <resultMap id="BaseResultMap" type="com.spring.entity.Jiaoshi">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+                            <result column="gonghao" property="gonghao" jdbcType="VARCHAR"/>
+                                    <result column="mima" property="mima" jdbcType="VARCHAR"/>
+                                    <result column="xingming" property="xingming" jdbcType="VARCHAR"/>
+                                    <result column="xingbie" property="xingbie" jdbcType="VARCHAR"/>
+                                    <result column="qqhao" property="qqhao" jdbcType="VARCHAR"/>
+                                    <result column="shouji" property="shouji" jdbcType="VARCHAR"/>
+                                    <result column="suojiaobanji" property="suojiaobanji" jdbcType="VARCHAR"/>
+                                    <result column="xiangqing" property="xiangqing" jdbcType="VARCHAR"/>
+        <result column="xueyuan" property="xueyuan" jdbcType="VARCHAR"/>
+        <result column="zhicheng" property="zhicheng" jdbcType="VARCHAR"/>
+                                                <result column="addtime" property="addtime" jdbcType="VARCHAR"/>
+            </resultMap>
+    <sql id="Base_Column_List">
+        id, gonghao, mima, xingming, xingbie,xueyuan, qqhao,zhicheng, shouji, suojiaobanji, xiangqing, addtime    </sql>
+        <select id="login" resultMap="BaseResultMap" parameterType="com.spring.entity.Jiaoshi">
+        select
+        <include refid="Base_Column_List"/>
+        from jiaoshi        where gonghao = #{gonghao}
+        AND mima = #{mima}
+    </select>
+    </mapper>

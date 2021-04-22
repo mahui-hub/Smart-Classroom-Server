@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.spring.dao.ShitiMapper">
+    <resultMap id="BaseResultMap" type="com.spring.entity.Shiti">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+                            <result column="tikubianhao" property="tikubianhao" jdbcType="VARCHAR"/>
+                                    <result column="tikumingcheng" property="tikumingcheng" jdbcType="VARCHAR"/>
+                                    <result column="shititimu" property="shititimu" jdbcType="VARCHAR"/>
+                                    <result column="leixing" property="leixing" jdbcType="VARCHAR"/>
+                                    <result column="daan" property="daan" jdbcType="VARCHAR"/>
+                                    <result column="faburen" property="faburen" jdbcType="VARCHAR"/>
+                                                    <result column="tikuid" property="tikuid" jdbcType="INTEGER"/>
+                <result column="addtime" property="addtime" jdbcType="VARCHAR"/>
+            </resultMap>
+    <sql id="Base_Column_List">
+        id, tikubianhao, tikumingcheng, shititimu, leixing, daan, faburen, tikuid, addtime    </sql>
+    </mapper>

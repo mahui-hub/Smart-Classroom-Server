@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.spring.dao.KechengMapper">
+    <resultMap id="BaseResultMap" type="com.spring.entity.Kecheng">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+                            <result column="kechengbianhao" property="kechengbianhao" jdbcType="VARCHAR"/>
+                                    <result column="kechengmingcheng" property="kechengmingcheng" jdbcType="VARCHAR"/>
+                                    <result column="kechengleixing" property="kechengleixing" jdbcType="VARCHAR"/>
+                                    <result column="tupian" property="tupian" jdbcType="VARCHAR"/>
+        <result column="kechengshipin" property="kechengshipin" jdbcType="VARCHAR"/>
+        <result column="kechengwendang" property="kechengwendang" jdbcType="VARCHAR"/>
+        <result column="banjiid" property="banjiid" jdbcType="INTEGER"/>
+        <result column="jiaoshiid" property="jiaoshiid" jdbcType="INTEGER"/>
+                                    <result column="banjimingcheng" property="banjimingcheng" jdbcType="VARCHAR"/>
+                                    <result column="kechengjieshao" property="kechengjieshao" jdbcType="VARCHAR"/>
+                                    <result column="faburen" property="faburen" jdbcType="VARCHAR"/>
+                                                <result column="addtime" property="addtime" jdbcType="VARCHAR"/>
+            </resultMap>
+    <sql id="Base_Column_List">
+        id, kechengbianhao, kechengmingcheng, kechengleixing, kechengwendang,kechengshipin,tupian
+        ,banjiid, banjimingcheng,jiaoshiid, kechengjieshao, faburen, addtime    </sql>
+<!--    <select id="kechengxinxi" resultMap="BaseResultMap" parameterType="com.spring.entity.kecheng">-->
+<!--        select-->
+<!--        <include refid="Base_Column_List"/>-->
+<!--        from kecheng,xuesheng         where kecheng.banjiid=xuesheng.banjiid-->
+<!--        AND xuesheng.banjiid = #{banjiid}-->
+<!--    </select>-->
+    </mapper>

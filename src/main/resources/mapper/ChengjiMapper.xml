@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.spring.dao.ChengjiMapper">
+    <resultMap id="BaseResultMap" type="com.spring.entity.Chengji">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+                            <result column="xuehao" property="xuehao" jdbcType="VARCHAR"/>
+                                    <result column="xingming" property="xingming" jdbcType="VARCHAR"/>
+                                    <result column="banji" property="banji" jdbcType="VARCHAR"/>
+                                    <result column="zhuanye" property="zhuanye" jdbcType="VARCHAR"/>
+                                    <result column="kaoqinchengji" property="kaoqinchengji" jdbcType="DECIMAL"/>
+                                    <result column="shenghupingchengji" property="shenghupingchengji" jdbcType="DECIMAL"/>
+                                    <result column="jiaoshipingjiachengji" property="jiaoshipingjiachengji" jdbcType="DECIMAL"/>
+                                    <result column="suitangceshichengji" property="suitangceshichengji" jdbcType="DECIMAL"/>
+                                    <result column="qiangdawentichengji" property="qiangdawentichengji" jdbcType="DECIMAL"/>
+                                    <result column="zongfen" property="zongfen" jdbcType="DECIMAL"/>
+                                    <result column="tianjiaren" property="tianjiaren" jdbcType="VARCHAR"/>
+                                                    <result column="xueshengid" property="xueshengid" jdbcType="INTEGER"/>
+                <result column="addtime" property="addtime" jdbcType="VARCHAR"/>
+            </resultMap>
+    <sql id="Base_Column_List">
+        id, xuehao, xingming, banji, zhuanye, kaoqinchengji, shenghupingchengji, jiaoshipingjiachengji, suitangceshichengji, qiangdawentichengji, zongfen, tianjiaren, xueshengid, addtime    </sql>
+    </mapper>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.spring.dao.LaoshiMapper">
+    <resultMap id="BaseResultMap" type="com.spring.entity.Laoshi">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+                            <result column="gonghao" property="gonghao" jdbcType="VARCHAR"/>
+                                    <result column="mima" property="mima" jdbcType="VARCHAR"/>
+                                    <result column="xingming" property="xingming" jdbcType="VARCHAR"/>
+                                    <result column="xingbie" property="xingbie" jdbcType="VARCHAR"/>
+                                    <result column="shoujihaoma" property="shoujihaoma" jdbcType="VARCHAR"/>
+                                    <result column="youxiang" property="youxiang" jdbcType="VARCHAR"/>
+                                    <result column="shenfenzheng" property="shenfenzheng" jdbcType="VARCHAR"/>
+                                    <result column="banji" property="banji" jdbcType="VARCHAR"/>
+                                    <result column="touxiang" property="touxiang" jdbcType="VARCHAR"/>
+                                                <result column="addtime" property="addtime" jdbcType="VARCHAR"/>
+            </resultMap>
+    <sql id="Base_Column_List">
+        id, gonghao, mima, xingming, xingbie, shoujihaoma, youxiang, shenfenzheng, banji, touxiang, addtime    </sql>
+        <select id="login" resultMap="BaseResultMap" parameterType="com.spring.entity.Laoshi">
+        select
+        <include refid="Base_Column_List"/>
+        from laoshi        where gonghao = #{gonghao}
+        AND mima = #{mima}
+    </select>
+    </mapper>

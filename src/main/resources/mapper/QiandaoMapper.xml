@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.spring.dao.QiandaoMapper">
+    <resultMap id="BaseResultMap" type="com.spring.entity.Qiandao">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+                            <result column="kechengxinxi" property="kechengxinxi" jdbcType="INTEGER"/>
+                                    <result column="kechengbianhao" property="kechengbianhao" jdbcType="VARCHAR"/>
+                                    <result column="kechengmingcheng" property="kechengmingcheng" jdbcType="VARCHAR"/>
+                                    <result column="kechengleixing" property="kechengleixing" jdbcType="VARCHAR"/>
+                                    <result column="kaishishijian" property="kaishishijian" jdbcType="VARCHAR"/>
+                                    <result column="jieshushijian" property="jieshushijian" jdbcType="VARCHAR"/>
+                                    <result column="faburen" property="faburen" jdbcType="VARCHAR"/>
+                                    <result column="qiandaoshijian" property="qiandaoshijian" jdbcType="VARCHAR"/>
+                                    <result column="qiandaoren" property="qiandaoren" jdbcType="VARCHAR"/>
+                                                    <result column="keqiankaoqinid" property="keqiankaoqinid" jdbcType="INTEGER"/>
+                <result column="addtime" property="addtime" jdbcType="VARCHAR"/>
+            </resultMap>
+    <sql id="Base_Column_List">
+        id, kechengxinxi, kechengbianhao, kechengmingcheng, kechengleixing, kaishishijian, jieshushijian, faburen, qiandaoshijian, qiandaoren, keqiankaoqinid, addtime    </sql>
+    </mapper>
