@@ -70,6 +70,12 @@ public class TikuController extends BaseController {
         if (!Request.get("tikumingcheng").equals("")) {
             where += " AND tikumingcheng LIKE '%" + Request.get("tikumingcheng") + "%' ";
         }
+        if (!Request.get("tikutype").equals("")) {
+            where += " AND tikutype LIKE '%" + Request.get("tikutype") + "%' ";
+        }
+        if (!Request.get("kechengid").equals("")) {
+            where += " AND kechengid LIKE '%" + Request.get("kechengid") + "%' ";
+        }
         return where;
     }
 
@@ -177,7 +183,12 @@ public class TikuController extends BaseController {
         post.setTikubianhao(Request.get("tikubianhao"));
 
         post.setTikumingcheng(Request.get("tikumingcheng"));
-
+        String kechengid = Request.get("kechengid");
+        if (kechengid == null || "".equals(kechengid) || "null".equals(kechengid)) {
+            kechengid = "0";
+        }
+        post.setKechengid(Integer.valueOf(kechengid));
+        post.setTikutype(Request.get("tikutype"));
         post.setJiaoshi(Request.get("jiaoshi"));
 
         post.setFaburen(Request.get("faburen"));
@@ -209,7 +220,10 @@ public class TikuController extends BaseController {
             post.setJiaoshi(Request.get("jiaoshi"));
         if (!Request.get("faburen").equals(""))
             post.setFaburen(Request.get("faburen"));
-
+        if(!Request.get("kechengid").equals(""))
+            post.setKechengid(Integer.valueOf(Request.get("kechengid")));
+        if (!Request.get("tikutype").equals(""))
+            post.setTikutype(Request.get("tikutype"));
         post.setId(Request.getInt("id"));
         service.update(post); // 更新数据
         int charuid = post.getId().intValue();

@@ -169,6 +169,12 @@ public class ShitiController extends BaseController
         String tmp="";
         Shiti post = new Shiti();  // 创建实体类
         // 设置前台提交上来的数据到实体类中
+        String kechengid = Request.get("kechengid");
+        if (kechengid == null || "".equals(kechengid) || "null".equals(kechengid)) {
+            kechengid = "0";
+        }
+        post.setKechengid(Integer.valueOf(kechengid));
+        post.setTikutype(Request.get("tikutype"));
         post.setTikubianhao(Request.get("tikubianhao"));
 
         post.setTikumingcheng(Request.get("tikumingcheng"));
@@ -214,7 +220,10 @@ public class ShitiController extends BaseController
         post.setDaan(Request.get("daan"));
                 if(!Request.get("faburen").equals(""))
         post.setFaburen(Request.get("faburen"));
-        
+        if(!Request.get("kechengid").equals(""))
+            post.setKechengid(Integer.valueOf(Request.get("kechengid")));
+        if (!Request.get("tikutype").equals(""))
+            post.setTikutype(Request.get("tikutype"));
         post.setId(Request.getInt("id"));
                 service.update(post); // 更新数据
         int charuid = post.getId().intValue();

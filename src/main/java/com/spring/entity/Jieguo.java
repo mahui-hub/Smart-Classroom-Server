@@ -14,7 +14,10 @@ public class Jieguo implements Serializable {
     @Id
     @Column(name = "id",insertable=false)
     private Integer id;
-
+    @Column(name = "kechengid")
+    private Integer kechengid;
+    @Column(name = "tikutype")
+    private String tikutype;
     @Column(name = "tikubianhao")
     private String tikubianhao;
     @Column(name = "tikumingcheng")
@@ -65,7 +68,19 @@ public class Jieguo implements Serializable {
     public void setTikumingcheng(String tikumingcheng) {
         this.tikumingcheng = tikumingcheng == null ? "" : tikumingcheng.trim();
     }
+    public Integer getKechengid() {
+        return  kechengid;
+    }
+    public void setKechengid(Integer kechengid) {
+        this. kechengid =  kechengid;
+    }
 
+    public String getTikutype() {
+        return tikutype;
+    }
+    public void setTikutype(String tikutype) {
+        this.tikutype = tikutype== null ? "" : tikutype.trim();
+    }
     public String getFaburen() {
         return faburen;
     }

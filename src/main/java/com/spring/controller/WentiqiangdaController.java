@@ -78,6 +78,10 @@ public class WentiqiangdaController extends BaseController
                 if(!Request.get("faburen").equals("")) {
             where += " AND faburen LIKE '%"+Request.get("faburen")+"%' ";
         }
+
+        if(!Request.get("kechengid").equals("")) {
+            where += " AND kechengid LIKE '%"+Request.get("kechengid")+"%' ";
+        }
             return where;
     }
 
@@ -187,6 +191,8 @@ public class WentiqiangdaController extends BaseController
         String tmp="";
         Wentiqiangda post = new Wentiqiangda();  // 创建实体类
         // 设置前台提交上来的数据到实体类中
+        String kechengid = Request.get("kechengid");
+        post.setKechengid(Integer.valueOf(kechengid));
         post.setBianhao(Request.get("bianhao"));
 
         post.setBiaoti(Request.get("biaoti"));
@@ -239,6 +245,8 @@ public class WentiqiangdaController extends BaseController
         post.setXiangqing(util.DownloadRemoteImage.run(Request.get("xiangqing")));
             if(!Request.get("faburen").equals(""))
         post.setFaburen(Request.get("faburen"));
+        if(!Request.get("kechengid").equals(""))
+            post.setKechengid(Integer.valueOf(Request.get("kechengid")));
         
         post.setId(Request.getInt("id"));
                 service.update(post); // 更新数据

@@ -99,6 +99,9 @@ public class PingyuewentiController extends BaseController
                 if(!Request.get("pingyuejianjie").equals("")) {
             where += " AND pingyuejianjie LIKE '%"+Request.get("pingyuejianjie")+"%' ";
         }
+        if(!Request.get("kechengid").equals("")) {
+            where += " AND kechengid LIKE '%"+Request.get("kechengid")+"%' ";
+        }
             return where;
     }
 
@@ -256,6 +259,8 @@ public class PingyuewentiController extends BaseController
         _var = new LinkedHashMap(); // 重置数据
         String tmp="";
         Pingyuewenti post = new Pingyuewenti();  // 创建实体类
+        String kechengid = Request.get("kechengid");
+        post.setKechengid(Integer.valueOf(kechengid));
         // 设置前台提交上来的数据到实体类中
         post.setBianhao(Request.get("bianhao"));
 
@@ -309,7 +314,9 @@ public class PingyuewentiController extends BaseController
         post.setPingyuejianjie(Request.get("pingyuejianjie"));
                 if(!Request.get("pingyueren").equals(""))
         post.setPingyueren(Request.get("pingyueren"));
-        
+        if(!Request.get("kechengid").equals(""))
+            post.setKechengid(Integer.valueOf(Request.get("kechengid")));
+
         post.setId(Request.getInt("id"));
                 service.update(post); // 更新数据
         int charuid = post.getId().intValue();

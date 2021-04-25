@@ -14,7 +14,8 @@ public class Wentiqiangda implements Serializable {
     @Id
     @Column(name = "id",insertable=false)
     private Integer id;
-
+    @Column(name = "kechengid")
+    private Integer kechengid;
     @Column(name = "bianhao")
     private String bianhao;
     @Column(name = "biaoti")
@@ -44,7 +45,13 @@ public class Wentiqiangda implements Serializable {
     public void setId(Integer id) {
         this.id = id;
     }
+    public Integer getKechengid() {
+        return kechengid;
+    }
 
+    public void setKechengid(Integer kechengid) {
+        this.kechengid = kechengid;
+    }
     public Long getQiangdawentiCount()
     {
         return Query.make("qiangdawenti").where("wentiqiangdaid" , id).count();

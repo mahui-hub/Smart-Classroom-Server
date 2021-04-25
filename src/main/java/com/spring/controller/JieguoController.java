@@ -81,6 +81,15 @@ public class JieguoController extends BaseController
             if(!Request.get("tikumingcheng").equals("")) {
             where += " AND tikumingcheng LIKE '%"+Request.get("tikumingcheng")+"%' ";
         }
+        if(!Request.get("tikutype").equals("")) {
+            where += " AND tikutype LIKE '%"+Request.get("tikutype")+"%' ";
+        }
+        if(!Request.get("kechengid").equals("")) {
+            where += " AND kechengid LIKE '%"+Request.get("kechengid")+"%' ";
+        }
+        if(!Request.get("shititimu").equals("")) {
+            where += " AND shititimu LIKE '%"+Request.get("shititimu")+"%' ";
+        }
             return where;
     }
 
@@ -201,6 +210,12 @@ public class JieguoController extends BaseController
         String tmp="";
         Jieguo post = new Jieguo();  // 创建实体类
         // 设置前台提交上来的数据到实体类中
+        String kechengid = Request.get("kechengid");
+        if (kechengid == null || "".equals(kechengid) || "null".equals(kechengid)) {
+            kechengid = "0";
+        }
+        post.setKechengid(Integer.valueOf(kechengid));
+        post.setTikutype(Request.get("tikutype"));
         post.setTikubianhao(Request.get("tikubianhao"));
 
         post.setTikumingcheng(Request.get("tikumingcheng"));
@@ -242,6 +257,10 @@ public class JieguoController extends BaseController
         // 创建实体类
         Jieguo post = new Jieguo();
         // 将前台表单数据填充到实体类
+        if(!Request.get("kechengid").equals(""))
+            post.setKechengid(Integer.valueOf(Request.get("kechengid")));
+        if (!Request.get("tikutype").equals(""))
+            post.setTikutype(Request.get("tikutype"));
         if(!Request.get("tikubianhao").equals(""))
         post.setTikubianhao(Request.get("tikubianhao"));
                 if(!Request.get("tikumingcheng").equals(""))

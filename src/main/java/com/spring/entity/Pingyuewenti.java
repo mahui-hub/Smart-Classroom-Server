@@ -14,7 +14,8 @@ public class Pingyuewenti implements Serializable {
     @Id
     @Column(name = "id",insertable=false)
     private Integer id;
-
+    @Column(name = "kechengid")
+    private Integer kechengid;
     @Column(name = "bianhao")
     private String bianhao;
     @Column(name = "biaoti")
@@ -44,7 +45,12 @@ public class Pingyuewenti implements Serializable {
         this.id = id;
     }
 
-
+    public Integer getKechengid() {
+        return kechengid;
+    }
+    public void setKechengid(Integer kechengid) {
+        this.kechengid = kechengid;
+    }
 
     public String getBianhao() {
         return bianhao;

@@ -81,6 +81,9 @@ public class GonggaoController extends BaseController
         if(!Request.get("kechengid").equals("")) {
             where += " AND kechengid LIKE '%"+Request.get("kechengid")+"%' ";
         }
+        if(!Request.get("faburen").equals("")) {
+            where += " AND faburen LIKE '%"+Request.get("faburen")+"%' ";
+        }
             return where;
     }
 

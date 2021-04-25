@@ -94,6 +94,12 @@ public class KaoshijieguoController extends BaseController
         if(!Request.get("danxuantidefen_end").equals("")) {
             where += " AND danxuantidefen <= '"+Request.get("danxuantidefen_end")+"' ";
         }
+        if (!Request.get("tikutype").equals("")) {
+            where += " AND tikutype LIKE '%" + Request.get("tikutype") + "%' ";
+        }
+        if (!Request.get("kechengid").equals("")) {
+            where += " AND kechengid LIKE '%" + Request.get("kechengid") + "%' ";
+        }
             return where;
     }
 
@@ -218,6 +224,10 @@ public class KaoshijieguoController extends BaseController
         String tmp="";
         Kaoshijieguo post = new Kaoshijieguo();  // 创建实体类
         // 设置前台提交上来的数据到实体类中
+        if(!Request.get("kechengid").equals(""))
+            post.setKechengid(Integer.valueOf(Request.get("kechengid")));
+        if (!Request.get("tikutype").equals(""))
+            post.setTikutype(Request.get("tikutype"));
         post.setTikubianhao(Request.get("tikubianhao"));
 
         post.setTikumingcheng(Request.get("tikumingcheng"));

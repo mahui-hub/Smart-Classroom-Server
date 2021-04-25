@@ -90,6 +90,9 @@ public class QiangdawentiController extends BaseController
                 if(!Request.get("qiangdaren").equals("")) {
             where += " AND qiangdaren LIKE '%"+Request.get("qiangdaren")+"%' ";
         }
+        if(!Request.get("kechengid").equals("")) {
+            where += " AND kechengid LIKE '%"+Request.get("kechengid")+"%' ";
+        }
             return where;
     }
 
@@ -210,6 +213,8 @@ public class QiangdawentiController extends BaseController
         String tmp="";
         Qiangdawenti post = new Qiangdawenti();  // 创建实体类
         // 设置前台提交上来的数据到实体类中
+        String kechengid = Request.get("kechengid");
+        post.setKechengid(Integer.valueOf(kechengid));
         post.setBianhao(Request.get("bianhao"));
 
         post.setBiaoti(Request.get("biaoti"));
@@ -258,7 +263,9 @@ public class QiangdawentiController extends BaseController
         post.setBeizhu(Request.get("beizhu"));
                 if(!Request.get("qiangdaren").equals(""))
         post.setQiangdaren(Request.get("qiangdaren"));
-        
+        if(!Request.get("kechengid").equals(""))
+            post.setKechengid(Integer.valueOf(Request.get("kechengid")));
+
         post.setId(Request.getInt("id"));
                 service.update(post); // 更新数据
         int charuid = post.getId().intValue();
