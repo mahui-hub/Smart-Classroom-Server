@@ -14,7 +14,8 @@ public class Xueshenghuping implements Serializable {
     @Id
     @Column(name = "id",insertable=false)
     private Integer id;
-
+    @Column(name = "kechengid")
+    private Integer kechengid;
     @Column(name = "xuehao")
     private String xuehao;
     @Column(name = "xingming")
@@ -26,7 +27,8 @@ public class Xueshenghuping implements Serializable {
     @Column(name = "hupingren")
     private String hupingren;
     private Integer xueshengid;
-
+    @Column(name = "chishu")
+    private Integer chishu;
     @Column(name = "addtime")
     private String addtime;
 
@@ -40,13 +42,25 @@ public class Xueshenghuping implements Serializable {
         this.id = id;
     }
 
-
+    public Integer getKechengid() {
+        return  kechengid;
+    }
+    public void setKechengid(Integer kechengid) {
+        this. kechengid =  kechengid;
+    }
 
     public String getXuehao() {
         return xuehao;
     }
     public void setXuehao(String xuehao) {
         this.xuehao = xuehao == null ? "" : xuehao.trim();
+    }
+
+    public Integer getChishu() {
+        return chishu;
+    }
+    public void setChishu(Integer chishu) {
+        this.chishu = chishu;
     }
 
     public String getXingming() {

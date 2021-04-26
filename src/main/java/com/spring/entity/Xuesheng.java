@@ -29,8 +29,6 @@ public class Xuesheng implements Serializable {
     @Column(name = "banjiid")
     private Integer banjiid;
 
-//    @Column(name = "banjiid")
-//    private String banjiid;
     @Column(name = "zhuanye")
     private String zhuanye;
     @Column(name = "lianxidianhua")
@@ -106,6 +104,7 @@ public class Xuesheng implements Serializable {
     public void setBanjiid(Integer banjiid) {
         this.banjiid = banjiid;
     }
+
 
     public String getZhuanye() {
         return zhuanye;

@@ -120,7 +120,7 @@ public class TikuController extends BaseController {
     /**
      * 前台列表页
      */
-    @RequestMapping("/tikulist")
+    @RequestMapping("/")
     public String index() {
         String order = Request.get("order", "id");
         String sort = Request.get("sort", "desc");

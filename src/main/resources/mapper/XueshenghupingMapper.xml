@@ -3,7 +3,9 @@
 <mapper namespace="com.spring.dao.XueshenghupingMapper">
     <resultMap id="BaseResultMap" type="com.spring.entity.Xueshenghuping">
         <id column="id" property="id" jdbcType="INTEGER"/>
+        <id column="kechengid" property="kechengid" jdbcType="INTEGER"/>
                             <result column="xuehao" property="xuehao" jdbcType="VARCHAR"/>
+        <result column="chishu" property="chishu" jdbcType="INTEGER"/>
                                     <result column="xingming" property="xingming" jdbcType="VARCHAR"/>
                                     <result column="hupingneirong" property="hupingneirong" jdbcType="VARCHAR"/>
                                     <result column="hupingfenshu" property="hupingfenshu" jdbcType="DECIMAL"/>
@@ -12,5 +14,5 @@
                 <result column="addtime" property="addtime" jdbcType="VARCHAR"/>
             </resultMap>
     <sql id="Base_Column_List">
-        id, xuehao, xingming, hupingneirong, hupingfenshu, hupingren, xueshengid, addtime    </sql>
+        id, xuehao,chishu,kechengid, xingming, hupingneirong, hupingfenshu, hupingren, xueshengid, addtime    </sql>
     </mapper>

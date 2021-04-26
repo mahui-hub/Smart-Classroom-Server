@@ -99,7 +99,7 @@ public class XueshengController extends BaseController
     @RequestMapping("/xueshenglist")
     public String index()
     {
-            String order = Request.get("order" , "id");
+        String order = Request.get("order" , "id");
         String sort  = Request.get("sort" , "desc");
 
         Example example = new Example(Xuesheng.class);
@@ -114,10 +114,11 @@ public class XueshengController extends BaseController
         }
         int page = request.getParameter("page") == null ? 1 : Integer.valueOf(request.getParameter("page"));
         page = Math.max(1 , page);
-                    List<Xuesheng> list = service.selectPageExample(example , page , 12);
-            
-                assign("banjiList" , new CommDAO().select("SELECT * FROM banji ORDER BY id desc"));
-            assign("zhuanyeList" , new CommDAO().select("SELECT * FROM zhuanye ORDER BY id desc"));        assign("totalCount" , request.getAttribute("totalCount"));
+        List<Xuesheng> list = service.selectPageExample(example , page , 12);
+
+        assign("banjiList" , new CommDAO().select("SELECT * FROM banji ORDER BY id desc"));
+        assign("zhuanyeList" , new CommDAO().select("SELECT * FROM zhuanye ORDER BY id desc"));
+        assign("totalCount" , request.getAttribute("totalCount"));
         assign("list" , list);
         assign("where" , where);
         assign("orderby" , order);

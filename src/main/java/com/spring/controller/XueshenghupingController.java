@@ -32,7 +32,7 @@ public class XueshenghupingController extends BaseController
      *  后台列表页
      *
      */
-    @RequestMapping("/xueshenghuping_list")
+    @RequestMapping("/ xueshenghuping_list")
     public String list()
     {
 
@@ -89,6 +89,9 @@ public class XueshenghupingController extends BaseController
         }
         if(!Request.get("hupingfenshu_end").equals("")) {
             where += " AND hupingfenshu <= '"+Request.get("hupingfenshu_end")+"' ";
+        }
+        if (!Request.get("kechengid").equals("")) {
+            where += " AND kechengid LIKE '%" + Request.get("kechengid") + "%' ";
         }
             return where;
     }
@@ -173,9 +176,10 @@ public class XueshenghupingController extends BaseController
         Xueshenghuping post = new Xueshenghuping();  // 创建实体类
         // 设置前台提交上来的数据到实体类中
         post.setXuehao(Request.get("xuehao"));
-
+        String kechengid = Request.get("kechengid");
+        post.setKechengid(Integer.valueOf(kechengid));
         post.setXingming(Request.get("xingming"));
-
+        post.setChishu(Integer.valueOf(Request.get("chishu")));
         post.setHupingneirong(Request.get("hupingneirong"));
 
         post.setHupingfenshu(Request.getDouble("hupingfenshu"));
@@ -205,6 +209,8 @@ public class XueshenghupingController extends BaseController
         // 将前台表单数据填充到实体类
         if(!Request.get("xuehao").equals(""))
         post.setXuehao(Request.get("xuehao"));
+        if(!Request.get("kechengid").equals(""))
+            post.setKechengid(Integer.valueOf(Request.get("kechengid")));
                 if(!Request.get("xingming").equals(""))
         post.setXingming(Request.get("xingming"));
                 if(!Request.get("hupingneirong").equals(""))
@@ -213,6 +219,8 @@ public class XueshenghupingController extends BaseController
         post.setHupingfenshu(Request.getDouble("hupingfenshu"));
             if(!Request.get("hupingren").equals(""))
         post.setHupingren(Request.get("hupingren"));
+        if(!Request.get("chishu").equals(""))
+            post.setChishu(Integer.valueOf(Request.get("chishu")));
         
         post.setId(Request.getInt("id"));
                 service.update(post); // 更新数据

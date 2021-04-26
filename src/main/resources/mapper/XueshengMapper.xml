@@ -17,7 +17,7 @@
         <result column="addtime" property="addtime" jdbcType="VARCHAR"/>
             </resultMap>
     <sql id="Base_Column_List">
-        id, xuehao, mima, xingming, xingbie, banji, banjiid, zhuanye, lianxidianhua, qqhao, touxiang, xiangqing, addtime    </sql>
+        id, xuehao, mima,xingming, xingbie, banji, banjiid, zhuanye, lianxidianhua, qqhao, touxiang, xiangqing, addtime    </sql>
         <select id="login" resultMap="BaseResultMap" parameterType="com.spring.entity.Xuesheng">
         select
         <include refid="Base_Column_List"/>
