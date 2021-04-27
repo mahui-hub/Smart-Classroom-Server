@@ -87,6 +87,9 @@ public class ShitiController extends BaseController
                 if(!Request.get("leixing").equals("")) {
             where += " AND leixing ='"+Request.get("leixing")+"' ";
         }
+        if (!Request.get("tikutype").equals("")) {
+            where += " AND tikutype LIKE '%" + Request.get("tikutype") + "%' ";
+        }
             return where;
     }
 

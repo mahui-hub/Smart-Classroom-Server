@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.spring.dao.ChengjibiliMapper">
+    <resultMap id="BaseResultMap" type="com.spring.entity.Chengjibili">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <id column="kechengid" property="kechengid" jdbcType="INTEGER"/>
+        <result column="kaoqinchengji" property="kaoqinchengji" jdbcType="VARCHAR"/>
+        <result column="shenghupingchengji" property="shenghupingchengji" jdbcType="VARCHAR"/>
+        <result column="jiaoshipingjiachengji" property="jiaoshipingjiachengji" jdbcType="VARCHAR"/>
+        <result column="suitangceshichengji" property="suitangceshichengji" jdbcType="VARCHAR"/>
+        <result column="qiangdawentichengji" property="qiangdawentichengji" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id,kechengid, kaoqinchengji, shenghupingchengji, qiangdawentichengji, suitangceshichengji,jiaoshipingjiachengji   </sql>
+</mapper>

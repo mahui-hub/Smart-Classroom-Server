@@ -57,8 +57,6 @@ public class XueshenghupingController extends BaseController
         int page = request.getParameter("page") == null ? 1 : Integer.valueOf(request.getParameter("page"));  // 获取前台提交的URL参数 page  如果没有则设置为1
         page = Math.max(1 , page);  // 取两个数的最大值，防止page 小于1
         List<Xueshenghuping> list = service.selectPageExample(example , page , pagesize);   // 获取当前页的行数
-
-
         
         // 将列表写给界面使用
         assign("totalCount" , request.getAttribute("totalCount"));
