@@ -54,8 +54,7 @@ public class KechengController extends BaseController
         page = Math.max(1 , page);  // 取两个数的最大值，防止page 小于1
         List<Kecheng> list = service.selectPageExample(example , page , pagesize);   // 获取当前页的行数
 
-
-                    assign("kechengleixingList" , new CommDAO().select("SELECT * FROM kechengleixing ORDER BY id desc"));
+        assign("kechengleixingList" , new CommDAO().select("SELECT * FROM kechengleixing ORDER BY id desc"));
         // 将列表写给界面使用
         assign("totalCount" , request.getAttribute("totalCount"));
         assign("list" , list);

@@ -43,7 +43,7 @@ public class QiandaoController extends BaseController
 
         String order = Request.get("order" , "id"); // 获取前台提交的URL参数 order  如果没有则设置为id
         String sort  = Request.get("sort" , "desc"); // 获取前台提交的URL参数 sort  如果没有则设置为desc
-        int    pagesize = Request.getInt("pagesize" , 12); // 获取前台一页多少行数据
+        int   pagesize = Request.getInt("pagesize" , 12); // 获取前台一页多少行数据
         Example example = new Example(Qiandao.class); //  创建一个扩展搜索类
         Example.Criteria criteria = example.createCriteria();          // 创建一个扩展搜索条件类
         String where = " 1=1 ";   // 创建初始条件为：1=1
@@ -58,8 +58,10 @@ public class QiandaoController extends BaseController
         page = Math.max(1 , page);  // 取两个数的最大值，防止page 小于1
         List<Qiandao> list = service.selectPageExample(example , page , pagesize);   // 获取当前页的行数
 
-
-                    assign("kechengleixingList" , new CommDAO().select("SELECT * FROM kechengleixing ORDER BY id desc"));
+        assign("kechengkaoqinCount" , new CommDAO().select("SELECT kechengmingcheng AS kecheng, COUNT(*) AS count FROM keqiankaoqin GROUP BY kechengmingcheng"));
+        assign("kechengkaoqinList" , new CommDAO().select("SELECT * FROM keqiankaoqin ORDER BY id desc"));
+        assign("kechengleixingList" , new CommDAO().select("SELECT * FROM kechengleixing ORDER BY id desc"));
+        assign("qiandaoList" , new CommDAO().select("select kechengmingcheng AS kecheng,qiandaoren AS qiandaoren,COUNT(*) AS count from qiandao GROUP by kechengmingcheng"));
         // 将列表写给界面使用
         assign("totalCount" , request.getAttribute("totalCount"));
         assign("list" , list);

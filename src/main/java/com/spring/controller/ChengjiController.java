@@ -66,6 +66,7 @@ public class ChengjiController extends BaseController {
 
         assign("banjiList", new CommDAO().select("SELECT * FROM banji ORDER BY id desc"));
         assign("zhuanyeList", new CommDAO().select("SELECT * FROM zhuanye ORDER BY id desc"));
+        assign("kechengList" , new CommDAO().select("SELECT * FROM kecheng ORDER BY id desc"));
         // 将列表写给界面使用
         assign("totalCount", request.getAttribute("totalCount"));
         assign("list", list);

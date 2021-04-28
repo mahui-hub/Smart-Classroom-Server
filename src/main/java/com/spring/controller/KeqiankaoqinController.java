@@ -55,7 +55,7 @@ public class KeqiankaoqinController extends BaseController
         List<Keqiankaoqin> list = service.selectPageExample(example , page , pagesize);   // 获取当前页的行数
 
 
-                    assign("kechengleixingList" , new CommDAO().select("SELECT * FROM kechengleixing ORDER BY id desc"));
+        assign("kechengleixingList" , new CommDAO().select("SELECT * FROM kechengleixing ORDER BY id desc"));
         // 将列表写给界面使用
         assign("totalCount" , request.getAttribute("totalCount"));
         assign("list" , list);
@@ -69,29 +69,14 @@ public class KeqiankaoqinController extends BaseController
         _var = new LinkedHashMap(); // 重置数据
         String where = " ";
         // 以下也是一样的操作，判断是否符合条件，符合则写入sql 语句
-            if(!Request.get("kechengxinxi").equals("")) {
-            where += " AND kechengxinxi LIKE '%"+Request.get("kechengxinxi")+"%' ";
-        }
-                if(!Request.get("kechengbianhao").equals("")) {
-            where += " AND kechengbianhao LIKE '%"+Request.get("kechengbianhao")+"%' ";
-        }
                 if(!Request.get("kechengmingcheng").equals("")) {
             where += " AND kechengmingcheng LIKE '%"+Request.get("kechengmingcheng")+"%' ";
         }
                 if(!Request.get("kechengleixing").equals("")) {
             where += " AND kechengleixing ='"+Request.get("kechengleixing")+"' ";
         }
-                if(!Request.get("kaishishijian_start").equals("")) {
-            where += " AND kaishishijian >='"+Request.get("kaishishijian_start")+"' ";
-        }
-        if(!Request.get("kaishishijian_end").equals("")) {
-            where += " AND kaishishijian <= '"+Request.get("kaishishijian_end")+"' ";
-        }
-                if(!Request.get("jieshushijian_start").equals("")) {
-            where += " AND jieshushijian >='"+Request.get("jieshushijian_start")+"' ";
-        }
-        if(!Request.get("jieshushijian_end").equals("")) {
-            where += " AND jieshushijian <= '"+Request.get("jieshushijian_end")+"' ";
+        if(!Request.get("faburen").equals("")) {
+            where += " AND faburen <= '"+Request.get("faburen")+"' ";
         }
             return where;
     }

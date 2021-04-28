@@ -158,6 +158,8 @@ public class CommonController extends BaseController{
     {
         String table = Request.get("table");
         Query query = Query.make(table);
+        String jiaoshiid = Request.get("jiaoshiid");
+        Query query1 = Query.make(jiaoshiid);
         String limit = "50";
         JSONObject where = JSON.parseObject(Request.get("where"));
         for(Map.Entry entry:where.entrySet())
@@ -171,15 +173,19 @@ public class CommonController extends BaseController{
                 {
                     JSONObject w = (JSONObject) value;
                     query.where(key , w.getString("exp") , w.getString("value"));
+                    query1.where(key , w.getString("exp") , w.getString("value"));
                 }else if(value instanceof JSONArray){
                     JSONArray  w = (JSONArray) value;
                     query.where(key , (String) w.get(0) , w.get(1));
+                    query1.where(key , (String) w.get(0) , w.get(1));
                 }else{
                     query.where(key , value);
+                    query1.where(key , value);
                 }
             }
         }
         List list = query.order("id desc").limit(limit).select();
+        List list1 = query1.order("id desc").limit(limit).select();
         return JSON.toJSONString(list);
     }
 
