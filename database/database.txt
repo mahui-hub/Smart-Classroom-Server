@@ -1,0 +1,585 @@
+-- zhkt.admins definition
+
+CREATE TABLE `admins` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `username` varchar(50) NOT NULL COMMENT '�ʺ�',
+  `pwd` varchar(50) NOT NULL COMMENT '����',
+  `addtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '���ʱ��',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='����Ա';
+
+
+-- zhkt.banji definition
+
+CREATE TABLE `banji` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `xueyuan` varchar(50) CHARACTER SET utf8 NOT NULL COMMENT 'ѧԺ',
+  `zhuanye` varchar(255) CHARACTER SET utf8 NOT NULL COMMENT 'רҵ',
+  `banjimingcheng` varchar(255) CHARACTER SET utf8 NOT NULL COMMENT '�༶����',
+  `addtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '���ʱ��',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci COMMENT='�༶';
+
+
+-- zhkt.chengji definition
+
+CREATE TABLE `chengji` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `xuehao` varchar(50) NOT NULL COMMENT 'ѧ��',
+  `xingming` varchar(50) NOT NULL COMMENT '����',
+  `banji` varchar(255) NOT NULL COMMENT '�༶',
+  `zhuanye` varchar(255) NOT NULL COMMENT 'רҵ',
+  `kaoqinchengji` decimal(18,2) NOT NULL COMMENT '���ڳɼ�',
+  `shenghupingchengji` decimal(18,2) NOT NULL COMMENT '�������ɼ�',
+  `jiaoshipingjiachengji` decimal(18,2) NOT NULL COMMENT '��ʦ���۳ɼ�',
+  `suitangceshichengji` decimal(18,2) NOT NULL COMMENT '���ò��Գɼ�',
+  `qiangdawentichengji` decimal(18,2) NOT NULL COMMENT '��������ɼ�',
+  `zongfen` decimal(18,2) NOT NULL COMMENT '�ܷ�',
+  `tianjiaren` varchar(50) NOT NULL COMMENT '�����',
+  `addtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '���ʱ��',
+  `kechengid` int(10) unsigned NOT NULL,
+  `xueshengid` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='�ɼ�';
+
+
+-- zhkt.chengjibili definition
+
+CREATE TABLE `chengjibili` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `kaoqinchengji` varchar(50) COLLATE utf8_estonian_ci NOT NULL,
+  `shenghupingchengji` varchar(50) COLLATE utf8_estonian_ci NOT NULL,
+  `jiaoshipingjiachengji` varchar(50) COLLATE utf8_estonian_ci NOT NULL,
+  `suitangceshichengji` varchar(50) COLLATE utf8_estonian_ci NOT NULL,
+  `qiangdawentichengji` varchar(50) COLLATE utf8_estonian_ci NOT NULL,
+  `kechengid` int(10) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci COMMENT='רҵ';
+
+
+-- zhkt.dati definition
+
+CREATE TABLE `dati` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `suitangceshiid` int(10) unsigned NOT NULL COMMENT '���ò���id',
+  `bianhao` varchar(50) NOT NULL COMMENT '���',
+  `timu` varchar(255) NOT NULL COMMENT '��Ŀ',
+  `faburen` varchar(50) NOT NULL COMMENT '������',
+  `fujian` varchar(255) NOT NULL COMMENT '����',
+  `fenshu` decimal(18,2) NOT NULL COMMENT '����',
+  `beizhu` text NOT NULL COMMENT '��ע',
+  `huidaren` varchar(50) NOT NULL COMMENT '�ش���',
+  `addtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '���ʱ��',
+  PRIMARY KEY (`id`),
+  KEY `dati_suitangceshiid_index` (`suitangceshiid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='����';
+
+
+-- zhkt.datipingyue definition
+
+CREATE TABLE `datipingyue` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `datiid` int(10) unsigned NOT NULL COMMENT '����id',
+  `bianhao` varchar(50) NOT NULL COMMENT '���',
+  `timu` varchar(255) NOT NULL COMMENT '��Ŀ',
+  `faburen` varchar(50) NOT NULL COMMENT '������',
+  `huidaren` varchar(50) NOT NULL COMMENT '�ش���',
+  `dafen` decimal(18,2) NOT NULL COMMENT '���',
+  `beizhu` text NOT NULL COMMENT '��ע',
+  `addtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '���ʱ��',
+  PRIMARY KEY (`id`),
+  KEY `datipingyue_datiid_index` (`datiid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='��������';
+
+
+-- zhkt.dianzan definition
+
+CREATE TABLE `dianzan` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `tieziid` int(10) unsigned NOT NULL COMMENT '����id',
+  `tiezibianhao` varchar(50) NOT NULL COMMENT '���ӱ��',
+  `biaoti` varchar(255) NOT NULL COMMENT '����',
+  `fenlei` int(10) unsigned NOT NULL COMMENT '����',
+  `faburen` varchar(50) NOT NULL COMMENT '������',
+  `beizhu` text NOT NULL COMMENT '��ע',
+  `dianzanren` varchar(50) NOT NULL COMMENT '������',
+  `addtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '���ʱ��',
+  PRIMARY KEY (`id`),
+  KEY `dianzan_tieziid_index` (`tieziid`),
+  KEY `dianzan_fenlei_index` (`fenlei`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='����';
+
+
+-- zhkt.gonggao definition
+
+CREATE TABLE `gonggao` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `bianhao` varchar(50) NOT NULL COMMENT '���',
+  `biaoti` varchar(50) NOT NULL COMMENT '����',
+  `tupian` varchar(255) NOT NULL COMMENT 'ͼƬ',
+  `neirong` longtext NOT NULL COMMENT '����',
+  `faburen` varchar(50) NOT NULL COMMENT '������',
+  `addtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '���ʱ��',
+  `kechengid` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `gonggao_FK` (`kechengid`)
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COMMENT='����';
+
+
+-- zhkt.huidawenti definition
+
+CREATE TABLE `huidawenti` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `qiangdawentiid` int(10) unsigned NOT NULL COMMENT '��������id',
+  `bianhao` varchar(50) NOT NULL COMMENT '���',
+  `biaoti` varchar(50) NOT NULL COMMENT '����',
+  `tupian` varchar(255) NOT NULL COMMENT 'ͼƬ',
+  `faburen` varchar(50) NOT NULL COMMENT '������',
+  `qiangdaren` varchar(50) NOT NULL COMMENT '������',
+  `huidafujian` varchar(255) NOT NULL COMMENT '�ش?�',
+  `fenshu` decimal(18,2) NOT NULL COMMENT '����',
+  `beizhu` text NOT NULL COMMENT '��ע',
+  `addtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '���ʱ��',
+  PRIMARY KEY (`id`),
+  KEY `huidawenti_qiangdawentiid_index` (`qiangdawentiid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='�ش�����';
+
+
+-- zhkt.jiaoshi definition
+
+CREATE TABLE `jiaoshi` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `gonghao` varchar(50) NOT NULL COMMENT '����',
+  `mima` varchar(50) NOT NULL COMMENT '����',
+  `xingming` varchar(50) NOT NULL COMMENT '����',
+  `xingbie` varchar(255) NOT NULL COMMENT '�Ա�',
+  `qqhao` varchar(50) NOT NULL COMMENT 'QQ��',
+  `shouji` varchar(50) NOT NULL COMMENT '�ֻ�',
+  `suojiaobanji` text NOT NULL COMMENT '���̰༶',
+  `xiangqing` longtext NOT NULL COMMENT '����',
+  `addtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `xueyuan` varchar(255) NOT NULL,
+  `zhicheng` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='��ʦ';
+
+
+-- zhkt.jieguo definition
+
+CREATE TABLE `jieguo` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `tikuid` int(10) unsigned NOT NULL COMMENT '���id',
+  `tikubianhao` varchar(50) NOT NULL COMMENT '�����',
+  `tikumingcheng` varchar(255) NOT NULL COMMENT '�������',
+  `faburen` varchar(50) NOT NULL COMMENT '������',
+  `kaoshibianhao` varchar(50) NOT NULL COMMENT '���Ա��',
+  `shititimu` varchar(255) NOT NULL COMMENT '������Ŀ',
+  `leixing` varchar(50) NOT NULL COMMENT '����',
+  `daan` text NOT NULL COMMENT '��',
+  `defen` decimal(18,2) NOT NULL COMMENT '�÷�',
+  `zimu` varchar(50) NOT NULL COMMENT '��ĸ',
+  `kaoshiren` varchar(50) NOT NULL COMMENT '������',
+  `addtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '���ʱ��',
+  `tikutype` varchar(100) NOT NULL,
+  `kechengid` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `jieguo_tikuid_index` (`tikuid`)
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8 COMMENT='���';
+
+
+-- zhkt.kaoshijieguo definition
+
+CREATE TABLE `kaoshijieguo` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `tikuid` int(10) unsigned NOT NULL COMMENT '���id',
+  `tikubianhao` varchar(50) NOT NULL COMMENT '�����',
+  `tikumingcheng` varchar(255) NOT NULL COMMENT '�������',
+  `faburen` varchar(50) NOT NULL COMMENT '������',
+  `kaoshibianhao` varchar(50) NOT NULL COMMENT '���Ա��',
+  `kaoshishichang` varchar(50) NOT NULL COMMENT '����ʱ��',
+  `danxuantidefen` int(11) NOT NULL COMMENT '��ѡ��÷�',
+  `duoxuantidefen` int(11) NOT NULL COMMENT '��ѡ��÷�',
+  `tiankongtidefen` int(11) NOT NULL COMMENT '�����÷�',
+  `zongdefen` int(11) NOT NULL COMMENT '�ܵ÷�',
+  `kaoshiren` varchar(50) NOT NULL COMMENT '������',
+  `addtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '���ʱ��',
+  `kechengid` int(10) unsigned NOT NULL,
+  `tikutype` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `kaoshijieguo_tikuid_index` (`tikuid`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COMMENT='���Խ��';
+
+
+-- zhkt.kechengleixing definition
+
+CREATE TABLE `kechengleixing` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `kechengleixing` varchar(50) NOT NULL COMMENT '�γ�����',
+  `addtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '���ʱ��',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='�γ�����';
+
+
+-- zhkt.keqiankaoqin definition
+
+CREATE TABLE `keqiankaoqin` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `kechengxinxi` int(10) unsigned NOT NULL COMMENT '�γ���ϢID',
+  `kechengbianhao` varchar(50) NOT NULL COMMENT '�γ̱��',
+  `kechengmingcheng` varchar(255) NOT NULL COMMENT '�γ�����',
+  `kechengleixing` varchar(255) NOT NULL COMMENT '�γ�����',
+  `kaishishijian` varchar(25) NOT NULL COMMENT '��ʼʱ��',
+  `jieshushijian` varchar(25) NOT NULL COMMENT '����ʱ��',
+  `faburen` varchar(50) NOT NULL COMMENT '������',
+  `addtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '���ʱ��',
+  PRIMARY KEY (`id`),
+  KEY `keqiankaoqin_kechengxinxi_index` (`kechengxinxi`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COMMENT='��ǰ����';
+
+
+-- zhkt.lunbotu definition
+
+CREATE TABLE `lunbotu` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(50) NOT NULL COMMENT '����',
+  `image` varchar(255) NOT NULL COMMENT 'ͼƬ',
+  `url` varchar(255) NOT NULL COMMENT '���ӵ�ַ',
+  `addtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '���ʱ��',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='�ֲ�ͼ';
+
+
+-- zhkt.pingbici definition
+
+CREATE TABLE `pingbici` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `guanjianzi` varchar(255) NOT NULL COMMENT '�ؼ���',
+  `tihuanci` varchar(50) NOT NULL COMMENT '�滻��',
+  `addtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '���ʱ��',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='���δ�';
+
+
+-- zhkt.pinglun definition
+
+CREATE TABLE `pinglun` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `biao` varchar(50) NOT NULL COMMENT '��',
+  `biaoid` int(11) NOT NULL COMMENT '��id',
+  `biaoti` varchar(255) NOT NULL COMMENT '����',
+  `pingfen` varchar(255) NOT NULL COMMENT '����',
+  `pinglunneirong` text NOT NULL COMMENT '��������',
+  `pinglunren` varchar(50) NOT NULL COMMENT '������',
+  `addtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '���ʱ��',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COMMENT='����';
+
+
+-- zhkt.pingyuewenti definition
+
+CREATE TABLE `pingyuewenti` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `huidawentiid` int(10) unsigned NOT NULL COMMENT '�ش�����id',
+  `bianhao` varchar(50) NOT NULL COMMENT '���',
+  `biaoti` varchar(50) NOT NULL COMMENT '����',
+  `faburen` varchar(50) NOT NULL COMMENT '������',
+  `qiangdaren` varchar(50) NOT NULL COMMENT '������',
+  `pingfen` decimal(18,2) NOT NULL COMMENT '����',
+  `pingyuejianjie` varchar(50) NOT NULL COMMENT '���ļ��',
+  `pingyueren` varchar(50) NOT NULL COMMENT '������',
+  `addtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '���ʱ��',
+  `kechengid` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `pingyuewenti_huidawentiid_index` (`huidawentiid`)
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COMMENT='��������';
+
+
+-- zhkt.qiandao definition
+
+CREATE TABLE `qiandao` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `keqiankaoqinid` int(10) unsigned NOT NULL COMMENT '��ǰ����id',
+  `kechengxinxi` int(10) unsigned NOT NULL COMMENT '�γ���ϢID',
+  `kechengbianhao` varchar(50) NOT NULL COMMENT '�γ̱��',
+  `kechengmingcheng` varchar(255) NOT NULL COMMENT '�γ�����',
+  `kechengleixing` varchar(255) NOT NULL COMMENT '�γ�����',
+  `kaishishijian` varchar(25) NOT NULL COMMENT '��ʼʱ��',
+  `jieshushijian` varchar(25) NOT NULL COMMENT '����ʱ��',
+  `faburen` varchar(50) NOT NULL COMMENT '������',
+  `qiandaoshijian` varchar(25) NOT NULL COMMENT 'ǩ��ʱ��',
+  `qiandaoren` varchar(50) NOT NULL COMMENT 'ǩ����',
+  `addtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '���ʱ��',
+  PRIMARY KEY (`id`),
+  KEY `qiandao_keqiankaoqinid_index` (`keqiankaoqinid`),
+  KEY `qiandao_kechengxinxi_index` (`kechengxinxi`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COMMENT='ǩ��';
+
+
+-- zhkt.qiangdawenti definition
+
+CREATE TABLE `qiangdawenti` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `wentiqiangdaid` int(10) unsigned NOT NULL COMMENT '��������id',
+  `bianhao` varchar(50) NOT NULL COMMENT '���',
+  `biaoti` varchar(50) NOT NULL COMMENT '����',
+  `tupian` varchar(255) NOT NULL COMMENT 'ͼƬ',
+  `faburen` varchar(50) NOT NULL COMMENT '������',
+  `beizhu` text NOT NULL COMMENT '��ע',
+  `qiangdaren` varchar(50) NOT NULL COMMENT '������',
+  `addtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '���ʱ��',
+  `kechengid` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `qiangdawenti_wentiqiangdaid_index` (`wentiqiangdaid`)
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COMMENT='��������';
+
+
+-- zhkt.qiuzhujiaoshi definition
+
+CREATE TABLE `qiuzhujiaoshi` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `laoshigonghao` varchar(50) NOT NULL COMMENT '��ʦ����',
+  `laoshixingming` varchar(50) NOT NULL COMMENT '��ʦ����',
+  `kemu` varchar(50) NOT NULL COMMENT '��Ŀ',
+  `addtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '���ʱ��',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='������ʦ';
+
+
+-- zhkt.shiti definition
+
+CREATE TABLE `shiti` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `tikuid` int(10) unsigned NOT NULL COMMENT '���id',
+  `tikubianhao` varchar(50) NOT NULL COMMENT '�����',
+  `tikumingcheng` varchar(255) NOT NULL COMMENT '�������',
+  `shititimu` text NOT NULL COMMENT '������Ŀ',
+  `leixing` varchar(255) NOT NULL COMMENT '����',
+  `daan` text NOT NULL COMMENT '��',
+  `faburen` varchar(50) NOT NULL COMMENT '������',
+  `addtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '���ʱ��',
+  `kechengid` int(10) unsigned NOT NULL,
+  `tikutype` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `shiti_tikuid_index` (`tikuid`)
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8 COMMENT='����';
+
+
+-- zhkt.suitangceshi definition
+
+CREATE TABLE `suitangceshi` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `bianhao` varchar(50) NOT NULL COMMENT '���',
+  `timu` varchar(255) NOT NULL COMMENT '��Ŀ',
+  `tupian` varchar(255) NOT NULL COMMENT 'ͼƬ',
+  `fujian` varchar(255) NOT NULL COMMENT '����',
+  `xiangqing` longtext NOT NULL COMMENT '����',
+  `faburen` varchar(50) NOT NULL COMMENT '������',
+  `addtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '���ʱ��',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='���ò���';
+
+
+-- zhkt.tiezi definition
+
+CREATE TABLE `tiezi` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `tiezibianhao` varchar(50) NOT NULL COMMENT '���ӱ��',
+  `biaoti` varchar(255) NOT NULL COMMENT '����',
+  `fenlei` int(10) unsigned NOT NULL COMMENT '����',
+  `fujian` varchar(255) NOT NULL COMMENT '����',
+  `dianzanliang` int(11) NOT NULL COMMENT '������',
+  `tupian` varchar(255) NOT NULL COMMENT 'ͼƬ',
+  `neirong` longtext NOT NULL COMMENT '����',
+  `faburen` varchar(50) NOT NULL COMMENT '������',
+  `addtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '���ʱ��',
+  PRIMARY KEY (`id`),
+  KEY `tiezi_fenlei_index` (`fenlei`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='����';
+
+
+-- zhkt.tiezifenlei definition
+
+CREATE TABLE `tiezifenlei` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `fenleimingcheng` varchar(255) NOT NULL COMMENT '��������',
+  `addtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '���ʱ��',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='���ӷ���';
+
+
+-- zhkt.tiezihuifu definition
+
+CREATE TABLE `tiezihuifu` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `tieziid` int(10) unsigned NOT NULL COMMENT '����id',
+  `tiezibianhao` varchar(50) NOT NULL COMMENT '���ӱ��',
+  `biaoti` varchar(255) NOT NULL COMMENT '����',
+  `fenlei` int(10) unsigned NOT NULL COMMENT '����',
+  `huifuneirong` longtext NOT NULL COMMENT '�ظ�����',
+  `huifuren` varchar(50) NOT NULL COMMENT '�ظ���',
+  `addtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '���ʱ��',
+  PRIMARY KEY (`id`),
+  KEY `tiezihuifu_tieziid_index` (`tieziid`),
+  KEY `tiezihuifu_fenlei_index` (`fenlei`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='���ӻظ�';
+
+
+-- zhkt.tiku definition
+
+CREATE TABLE `tiku` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `tikubianhao` varchar(50) NOT NULL COMMENT '�����',
+  `tikumingcheng` varchar(255) NOT NULL COMMENT '�������',
+  `jiaoshi` varchar(255) NOT NULL COMMENT '��ʦ',
+  `faburen` varchar(50) NOT NULL COMMENT '������',
+  `addtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '���ʱ��',
+  `kechengid` int(10) unsigned NOT NULL,
+  `tikutype` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COMMENT='���';
+
+
+-- zhkt.token definition
+
+CREATE TABLE `token` (
+  `token` char(32) NOT NULL COMMENT 'Ψһֵ',
+  `session` text NOT NULL COMMENT '���������',
+  `cx` varchar(50) NOT NULL COMMENT '��¼Ȩ��',
+  `login` varchar(50) NOT NULL COMMENT '��¼ģ��',
+  `username` varchar(50) NOT NULL COMMENT '��¼�û�',
+  `valueid` varchar(50) NOT NULL COMMENT '�û�id',
+  `token_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '��ǰʱ��',
+  PRIMARY KEY (`token`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='ǰ�˵�¼ƾ֤';
+
+
+-- zhkt.wentiqiangda definition
+
+CREATE TABLE `wentiqiangda` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `bianhao` varchar(50) NOT NULL COMMENT '���',
+  `biaoti` varchar(50) NOT NULL COMMENT '����',
+  `tupian` varchar(255) NOT NULL COMMENT 'ͼƬ',
+  `qiangdarenshu` int(11) NOT NULL COMMENT '��������',
+  `yiqiangrenshu` int(11) NOT NULL COMMENT '��������',
+  `fujian` varchar(255) NOT NULL COMMENT '����',
+  `xiangqing` longtext NOT NULL COMMENT '����',
+  `faburen` varchar(50) NOT NULL COMMENT '������',
+  `addtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '���ʱ��',
+  `kechengid` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='��������';
+
+
+-- zhkt.wentisousuo definition
+
+CREATE TABLE `wentisousuo` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `kechengmingcheng` varchar(255) NOT NULL COMMENT '�γ�����',
+  `wentibiaoti` text NOT NULL COMMENT '�������',
+  `wentineirong` text NOT NULL COMMENT '��������',
+  `dayineirong` text NOT NULL COMMENT '��������',
+  `xuehao` varchar(50) NOT NULL COMMENT 'ѧ��',
+  `addtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '���ʱ��',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='��������';
+
+
+-- zhkt.xueshenghuping definition
+
+CREATE TABLE `xueshenghuping` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `xuehao` varchar(50) NOT NULL COMMENT 'ѧ��',
+  `xingming` varchar(50) NOT NULL COMMENT '����',
+  `hupingneirong` text NOT NULL COMMENT '��������',
+  `hupingfenshu` decimal(18,2) NOT NULL COMMENT '��������',
+  `hupingren` varchar(50) NOT NULL COMMENT '������',
+  `addtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '���ʱ��',
+  `kechengid` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COMMENT='ѧ������';
+
+
+-- zhkt.youqinglianjie definition
+
+CREATE TABLE `youqinglianjie` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `wangzhanmingcheng` varchar(50) NOT NULL COMMENT '��վ����',
+  `wangzhi` varchar(50) NOT NULL COMMENT '��ַ',
+  `addtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '���ʱ��',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='��������';
+
+
+-- zhkt.zhuanye definition
+
+CREATE TABLE `zhuanye` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `zhuanyeID` varchar(50) NOT NULL COMMENT 'רҵID',
+  `zhuanye` varchar(50) NOT NULL COMMENT 'רҵ',
+  `addtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '���ʱ��',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COMMENT='רҵ';
+
+
+-- zhkt.ziyuan definition
+
+CREATE TABLE `ziyuan` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `bianhao` varchar(50) NOT NULL COMMENT '���',
+  `biaoti` varchar(50) NOT NULL COMMENT '����',
+  `fenlei` varchar(255) NOT NULL COMMENT '����',
+  `tupian` varchar(255) NOT NULL COMMENT 'ͼƬ',
+  `fujian` varchar(255) NOT NULL COMMENT '����',
+  `xiangqing` longtext NOT NULL COMMENT '����',
+  `faburen` varchar(50) NOT NULL COMMENT '������',
+  `addtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '���ʱ��',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='��Դ';
+
+
+-- zhkt.kecheng definition
+
+CREATE TABLE `kecheng` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `kechengbianhao` varchar(50) NOT NULL COMMENT '�γ̱��',
+  `kechengmingcheng` varchar(255) NOT NULL COMMENT '�γ�����',
+  `kechengleixing` int(10) unsigned NOT NULL COMMENT '�γ�����',
+  `tupian` varchar(255) NOT NULL COMMENT 'ͼƬ',
+  `kechengwendang` varchar(255) NOT NULL COMMENT '�γ��ĵ�',
+  `kechengshipin` varchar(255) NOT NULL COMMENT '�γ���Ƶ',
+  `kechengjieshao` longtext NOT NULL COMMENT '�γ̽���',
+  `faburen` varchar(50) NOT NULL COMMENT '������',
+  `addtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '���ʱ��',
+  `banjimingcheng` varchar(255) NOT NULL,
+  `banjiid` int(10) unsigned NOT NULL,
+  `jiaoshiid` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `kecheng_kechengleixing_index` (`kechengleixing`),
+  KEY `kecheng_FK` (`banjiid`),
+  KEY `kecheng_FK_1` (`jiaoshiid`),
+  CONSTRAINT `kecheng_FK` FOREIGN KEY (`banjiid`) REFERENCES `banji` (`id`),
+  CONSTRAINT `kecheng_FK_1` FOREIGN KEY (`jiaoshiid`) REFERENCES `jiaoshi` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='�γ�';
+
+
+-- zhkt.xuesheng definition
+
+CREATE TABLE `xuesheng` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `xuehao` varchar(50) NOT NULL COMMENT 'ѧ��',
+  `mima` varchar(50) NOT NULL COMMENT '����',
+  `xingming` varchar(50) NOT NULL COMMENT '����',
+  `xingbie` varchar(255) NOT NULL COMMENT '�Ա�',
+  `banji` varchar(255) NOT NULL COMMENT '�༶',
+  `zhuanye` varchar(255) NOT NULL COMMENT 'רҵ',
+  `lianxidianhua` varchar(50) NOT NULL COMMENT '��ϵ�绰',
+  `qqhao` varchar(50) NOT NULL COMMENT 'QQ��',
+  `touxiang` varchar(255) DEFAULT NULL COMMENT 'ͷ',
+  `xiangqing` longtext NOT NULL COMMENT '����',
+  `addtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '���ʱ��',
+  `banjiid` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `xuesheng_FK` (`banjiid`),
+  CONSTRAINT `xuesheng_FK` FOREIGN KEY (`banjiid`) REFERENCES `banji` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='ѧ��';
