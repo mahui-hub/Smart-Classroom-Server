@@ -140,8 +140,7 @@ public class SuitangceshiController extends BaseController
         int page = request.getParameter("page") == null ? 1 : Integer.valueOf(request.getParameter("page"));
         page = Math.max(1 , page);
                     List<Suitangceshi> list = service.selectPageExample(example , page , 12);
-            
-            assign("totalCount" , request.getAttribute("totalCount"));
+                    assign("totalCount" , request.getAttribute("totalCount"));
         assign("list" , list);
         assign("where" , where);
         assign("orderby" , order);

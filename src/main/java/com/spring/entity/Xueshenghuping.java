@@ -26,9 +26,6 @@ public class Xueshenghuping implements Serializable {
     private Double hupingfenshu;
     @Column(name = "hupingren")
     private String hupingren;
-    private Integer xueshengid;
-    @Column(name = "chishu")
-    private Integer chishu;
     @Column(name = "addtime")
     private String addtime;
 
@@ -56,12 +53,6 @@ public class Xueshenghuping implements Serializable {
         this.xuehao = xuehao == null ? "" : xuehao.trim();
     }
 
-    public Integer getChishu() {
-        return chishu;
-    }
-    public void setChishu(Integer chishu) {
-        this.chishu = chishu;
-    }
 
     public String getXingming() {
         return xingming;
@@ -90,17 +81,9 @@ public class Xueshenghuping implements Serializable {
     public void setHupingren(String hupingren) {
         this.hupingren = hupingren == null ? "" : hupingren.trim();
     }
-    public Integer getXueshengid() {
-        return xueshengid;
-    }
-    public void setXueshengid(Integer xueshengid) {
-        this.xueshengid = xueshengid == null ? 0 : xueshengid;
-    }
-
     public String getAddtime() {
         return addtime;
     }
-
     public void setAddtime(String addtime) {
         this.addtime = addtime;
     }

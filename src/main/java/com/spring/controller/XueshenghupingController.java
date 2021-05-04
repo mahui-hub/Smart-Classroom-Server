@@ -32,7 +32,7 @@ public class XueshenghupingController extends BaseController
      *  后台列表页
      *
      */
-    @RequestMapping("/ xueshenghuping_list")
+    @RequestMapping("/xueshenghuping_list")
     public String list()
     {
 
@@ -71,23 +71,26 @@ public class XueshenghupingController extends BaseController
         _var = new LinkedHashMap(); // 重置数据
         String where = " ";
         // 判断URL 参数xueshengid是否大于0
-        if( Request.getInt("xueshengid") > 0 ) {
-            // 大于0 则写入条件
-            where += " AND xueshengid='"+Request.getInt("xueshengid")+"' ";
-        }
+//        if( Request.getInt("xueshengid") > 0 ) {
+//            // 大于0 则写入条件
+//            where += " AND xueshengid='"+Request.getInt("xueshengid")+"' ";
+//        }
         // 以下也是一样的操作，判断是否符合条件，符合则写入sql 语句
             if(!Request.get("xuehao").equals("")) {
             where += " AND xuehao LIKE '%"+Request.get("xuehao")+"%' ";
         }
+        if(!Request.get("hupingren").equals("")) {
+            where += " AND hupingren LIKE '%"+Request.get("hupingren")+"%' ";
+        }
                 if(!Request.get("xingming").equals("")) {
             where += " AND xingming LIKE '%"+Request.get("xingming")+"%' ";
         }
-                if(!Request.get("hupingfenshu_start").equals("")) {
-            where += " AND hupingfenshu >='"+Request.get("hupingfenshu_start")+"' ";
-        }
-        if(!Request.get("hupingfenshu_end").equals("")) {
-            where += " AND hupingfenshu <= '"+Request.get("hupingfenshu_end")+"' ";
-        }
+//                if(!Request.get("hupingfenshu_start").equals("")) {
+//            where += " AND hupingfenshu >='"+Request.get("hupingfenshu_start")+"' ";
+//        }
+//        if(!Request.get("hupingfenshu_end").equals("")) {
+//            where += " AND hupingfenshu <= '"+Request.get("hupingfenshu_end")+"' ";
+//        }
         if (!Request.get("kechengid").equals("")) {
             where += " AND kechengid LIKE '%" + Request.get("kechengid") + "%' ";
         }
@@ -177,14 +180,12 @@ public class XueshenghupingController extends BaseController
         String kechengid = Request.get("kechengid");
         post.setKechengid(Integer.valueOf(kechengid));
         post.setXingming(Request.get("xingming"));
-        post.setChishu(Integer.valueOf(Request.get("chishu")));
         post.setHupingneirong(Request.get("hupingneirong"));
 
         post.setHupingfenshu(Request.getDouble("hupingfenshu"));
 
         post.setHupingren(Request.get("hupingren"));
-
-        post.setXueshengid(Request.getInt("xueshengid"));
+//        post.setXueshengid(Request.getInt("xueshengid"));
 
         
         post.setAddtime(Info.getDateStr()); // 设置添加时间
@@ -217,8 +218,8 @@ public class XueshenghupingController extends BaseController
         post.setHupingfenshu(Request.getDouble("hupingfenshu"));
             if(!Request.get("hupingren").equals(""))
         post.setHupingren(Request.get("hupingren"));
-        if(!Request.get("chishu").equals(""))
-            post.setChishu(Integer.valueOf(Request.get("chishu")));
+//        if(!Request.get("chishu").equals(""))
+//            post.setChishu(Integer.valueOf(Request.get("chishu")));
         
         post.setId(Request.getInt("id"));
                 service.update(post); // 更新数据

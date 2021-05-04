@@ -58,6 +58,10 @@ public class KaoshijieguoController extends BaseController
         page = Math.max(1 , page);  // 取两个数的最大值，防止page 小于1
         List<Kaoshijieguo> list = service.selectPageExample(example , page , pagesize);   // 获取当前页的行数
         // 生成统计语句
+//        for (int i = 0; i < list.size(); i++) {
+//            Kaoshijieguo kaoshijieguo = list.get(i);
+//            list.get(i).setZongfen(list.get(i).getKaoqinchengji()* kaoqinbili + list.get(i).getShenghupingchengji()*shenghubili + list.get(i).getJiaoshipingjiachengji()*jiaoshibili + list.get(i).getSuitangceshichengji()*suitangbili + list.get(i).getQiangdawentichengji()*qingdabili);
+//        }
         HashMap total = Query.make("kaoshijieguo").field("(sum(zongdefen)) sum_zongdefen,(avg(zongdefen)) avg_zongdefen,(min(zongdefen)) min_zongdefen,(max(zongdefen)) max_zongdefen").where(where).find();
         // 将统计语句写给界面调用
         assign("total" , total);
@@ -85,20 +89,23 @@ public class KaoshijieguoController extends BaseController
             if(!Request.get("tikumingcheng").equals("")) {
             where += " AND tikumingcheng LIKE '%"+Request.get("tikumingcheng")+"%' ";
         }
-                if(!Request.get("kaoshibianhao").equals("")) {
-            where += " AND kaoshibianhao LIKE '%"+Request.get("kaoshibianhao")+"%' ";
-        }
-                if(!Request.get("danxuantidefen_start").equals("")) {
-            where += " AND danxuantidefen >='"+Request.get("danxuantidefen_start")+"' ";
-        }
-        if(!Request.get("danxuantidefen_end").equals("")) {
-            where += " AND danxuantidefen <= '"+Request.get("danxuantidefen_end")+"' ";
-        }
+//                if(!Request.get("kaoshibianhao").equals("")) {
+//            where += " AND kaoshibianhao LIKE '%"+Request.get("kaoshibianhao")+"%' ";
+//        }
+//                if(!Request.get("danxuantidefen_start").equals("")) {
+//            where += " AND danxuantidefen >='"+Request.get("danxuantidefen_start")+"' ";
+//        }
+//        if(!Request.get("danxuantidefen_end").equals("")) {
+//            where += " AND danxuantidefen <= '"+Request.get("danxuantidefen_end")+"' ";
+//        }
         if (!Request.get("tikutype").equals("")) {
             where += " AND tikutype LIKE '%" + Request.get("tikutype") + "%' ";
         }
         if (!Request.get("kechengid").equals("")) {
             where += " AND kechengid LIKE '%" + Request.get("kechengid") + "%' ";
+        }
+        if (!Request.get("kaoshiren").equals("")) {
+            where += " AND kaoshiren LIKE '%"+ Request.get("kaoshiren")+ "%' ";
         }
             return where;
     }

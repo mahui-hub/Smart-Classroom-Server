@@ -90,6 +90,9 @@ public class ShitiController extends BaseController
         if (!Request.get("tikutype").equals("")) {
             where += " AND tikutype LIKE '%" + Request.get("tikutype") + "%' ";
         }
+        if (!Request.get("faburen").equals("")) {
+            where += " AND faburen LIKE '%" + Request.get("faburen") + "%' ";
+        }
             return where;
     }
 

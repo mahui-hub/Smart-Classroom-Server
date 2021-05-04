@@ -37,7 +37,10 @@ public class Chengji implements Serializable {
     private Double zongfen;
     @Column(name = "tianjiaren")
     private String tianjiaren;
+    @Column(name = "xueshengid")
     private Integer xueshengid;
+    @Column(name = "kechengid")
+    private Integer kechengid;
 
     @Column(name = "addtime")
     private String addtime;
@@ -136,7 +139,12 @@ public class Chengji implements Serializable {
     public void setXueshengid(Integer xueshengid) {
         this.xueshengid = xueshengid == null ? 0 : xueshengid;
     }
-
+    public Integer getKechengid() {
+        return kechengid;
+    }
+    public void setKechengid(Integer kechengid) {
+        this.kechengid = kechengid== null ? 0 : kechengid;
+    }
     public String getAddtime() {
         return addtime;
     }

@@ -14,8 +14,8 @@
                                     <result column="qiangdawentichengji" property="qiangdawentichengji" jdbcType="DECIMAL"/>
                                     <result column="zongfen" property="zongfen" jdbcType="DECIMAL"/>
                                     <result column="tianjiaren" property="tianjiaren" jdbcType="VARCHAR"/>
-                                                    <result column="xueshengid" property="xueshengid" jdbcType="INTEGER"/>
-                <result column="addtime" property="addtime" jdbcType="VARCHAR"/>
+        <result column="xueshengid" property="xueshengid" jdbcType="INTEGER"/>
+<!--                <result column="addtime" property="addtime" jdbcType="VARCHAR"/>-->
             </resultMap>
     <sql id="Base_Column_List">
         id, xuehao, xingming, banji, zhuanye, kaoqinchengji, shenghupingchengji, jiaoshipingjiachengji, suitangceshichengji, qiangdawentichengji, zongfen, tianjiaren, xueshengid, addtime    </sql>

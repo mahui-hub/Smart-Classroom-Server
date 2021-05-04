@@ -58,6 +58,20 @@ public class ChengjiController extends BaseController {
         int page = request.getParameter("page") == null ? 1 : Integer.valueOf(request.getParameter("page"));  // 获取前台提交的URL参数 page  如果没有则设置为1
         page = Math.max(1, page);  // 取两个数的最大值，防止page 小于1
         List<Chengji> list = service.selectPageExample(example, page, pagesize);   // 获取当前页的行数
+        for (int i = 0; i < list.size(); i++) {
+            Chengji chengji = list.get(i);
+//            String xuehao = chengji.getXuehao();
+            int kechengid = chengji.getKechengid();
+            List<HashMap> bililist = new CommDAO().select("SELECT kaoqinchengji,shenghupingchengji,jiaoshipingjiachengji,suitangceshichengji,qiangdawentichengji FROM chengjibili where kechengid ="+kechengid);
+//            chengji.setKaoqinchengji(Double.parseDouble(list1.get(0).get("")+""));
+
+                Double kaoqinbili = Double.parseDouble(bililist.get(0).get("kaoqinchengji") + "");
+                Double shenghubili = Double.parseDouble(bililist.get(0).get("shenghupingchengji")+"");
+                Double jiaoshibili = Double.parseDouble(bililist.get(0).get("jiaoshipingjiachengji") + "");
+                Double suitangbili = Double.parseDouble(bililist.get(0).get("suitangceshichengji") + "");
+                Double qingdabili = Double.parseDouble(bililist.get(0).get("qiangdawentichengji") + "");
+            list.get(i).setZongfen(list.get(i).getKaoqinchengji()* kaoqinbili + list.get(i).getShenghupingchengji()*shenghubili + list.get(i).getJiaoshipingjiachengji()*jiaoshibili + list.get(i).getSuitangceshichengji()*suitangbili + list.get(i).getQiangdawentichengji()*qingdabili);
+        }
         // 生成统计语句
         HashMap total = Query.make("chengji").field("(sum(zongfen)) sum_zongfen,(avg(zongfen)) avg_zongfen,(min(zongfen)) min_zongfen,(max(zongfen)) max_zongfen").where(where).find();
         // 将统计语句写给界面调用
@@ -237,6 +251,7 @@ public class ChengjiController extends BaseController {
         // 设置前台提交上来的数据到实体类中
         post.setXuehao(Request.get("xuehao"));
 
+
         post.setXingming(Request.get("xingming"));
 
         post.setBanji(Request.get("banji"));
@@ -258,7 +273,7 @@ public class ChengjiController extends BaseController {
         post.setTianjiaren(Request.get("tianjiaren"));
 
         post.setXueshengid(Request.getInt("xueshengid"));
-
+        post.setKechengid(Request.getInt("kechengid"));
 
         post.setAddtime(Info.getDateStr()); // 设置添加时间
         service.insert(post); // 插入数据
@@ -302,7 +317,8 @@ public class ChengjiController extends BaseController {
             post.setZongfen(Request.getDouble("zongfen"));
         if (!Request.get("tianjiaren").equals(""))
             post.setTianjiaren(Request.get("tianjiaren"));
-
+        if (!Request.get("kechengid").equals(""))
+            post.setKechengid(Request.getInt("kechengid"));
         post.setId(Request.getInt("id"));
         service.update(post); // 更新数据
         int charuid = post.getId().intValue();

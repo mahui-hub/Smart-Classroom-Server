@@ -43,7 +43,7 @@ public class QiandaoController extends BaseController
 
         String order = Request.get("order" , "id"); // 获取前台提交的URL参数 order  如果没有则设置为id
         String sort  = Request.get("sort" , "desc"); // 获取前台提交的URL参数 sort  如果没有则设置为desc
-        int   pagesize = Request.getInt("pagesize" , 12); // 获取前台一页多少行数据
+        int  pagesize = Request.getInt("pagesize" , 12); // 获取前台一页多少行数据
         Example example = new Example(Qiandao.class); //  创建一个扩展搜索类
         Example.Criteria criteria = example.createCriteria();          // 创建一个扩展搜索条件类
         String where = " 1=1 ";   // 创建初始条件为：1=1
@@ -58,10 +58,50 @@ public class QiandaoController extends BaseController
         page = Math.max(1 , page);  // 取两个数的最大值，防止page 小于1
         List<Qiandao> list = service.selectPageExample(example , page , pagesize);   // 获取当前页的行数
 
-        assign("kechengkaoqinCount" , new CommDAO().select("SELECT kechengmingcheng AS kecheng, COUNT(*) AS count FROM keqiankaoqin GROUP BY kechengmingcheng"));
-        assign("kechengkaoqinList" , new CommDAO().select("SELECT * FROM keqiankaoqin ORDER BY id desc"));
+            //select pingfen from pingyuewenti where qiangdaren= "" limit 1
+//        List<HashMap> kaoqinFenshu = new CommDAO().select("SELECT kechengmingcheng AS kecheng, COUNT(*) AS count FROM keqiankaoqin GROUP BY kechengmingcheng");
+//        List<HashMap> qiandaoList = new CommDAO().select("select kechengmingcheng AS kecheng,qiandaoren AS qiandaoren,COUNT(*) AS count from qiandao GROUP by kechengmingcheng");
+//            Double pingjun = 0D;
+//            for (int j = 0; j < pingyuewentiList.size(); j++) {
+//                Double pingfen = Double.parseDouble(pingyuewentiList.get(j).get("pingfen") + "");
+//                pingjun = pingjun + pingfen;
+//            }
+//            if (pingyuewentiList != null && pingyuewentiList.size() > 0) {
+//                pingjun = pingjun / pingyuewentiList.size();
+//            }
+//            list.get(i).setQiangdawentichengji(pingjun);
+//            list.get(i).setZongfen(list.get(i).getKaoqinchengji() + list.get(i).getShenghupingchengji() + list.get(i).getJiaoshipingjiachengji() + list.get(i).getSuitangceshichengji() + list.get(i).getQiangdawentichengji());
+
+        assign("kaoqinCount" , new CommDAO().select("select\n" +
+                "\tq.qiandaocount,\n" +
+                "\tq.kecheng,\n" +
+                "\tq.qiandaoren,\n" +
+                "\tk.kechengcount,\n" +
+                "\tq.qiandaocount / k.kechengcount * 100 as kaoqinchengji\n" +
+                "from\n" +
+                "\t(\n" +
+                "\tselect\n" +
+                "\t\tcount(1) as qiandaocount,\n" +
+                "\t\tq.kechengmingcheng as kecheng,\n" +
+                "\t\tq.qiandaoren as qiandaoren\n" +
+                "\tfrom\n" +
+                "\t\tqiandao q\n" +
+                "\tgroup by\n" +
+                "\t\tq.kechengmingcheng,\n" +
+                "\t\tq.qiandaoren ) q,\n" +
+                "\t(\n" +
+                "\tselect\n" +
+                "\t\tkechengmingcheng,\n" +
+                "\t\tcount(1) as kechengcount\n" +
+                "\tfrom\n" +
+                "\t\tkeqiankaoqin\n" +
+                "\tgroup by\n" +
+                "\t\tkechengmingcheng ) k\n" +
+                "where\n" +
+                "\tq.kecheng = k.kechengmingcheng"));
+//        assign("kechengkaoqinList" , new CommDAO().select("SELECT * FROM keqiankaoqin ORDER BY id desc"));
         assign("kechengleixingList" , new CommDAO().select("SELECT * FROM kechengleixing ORDER BY id desc"));
-        assign("qiandaoList" , new CommDAO().select("select kechengmingcheng AS kecheng,qiandaoren AS qiandaoren,COUNT(*) AS count from qiandao GROUP by kechengmingcheng"));
+//        assign("qiandaoList" , new CommDAO().select("select kechengmingcheng AS kecheng,qiandaoren AS qiandaoren,COUNT(*) AS count from qiandao GROUP by kechengmingcheng"));
         // 将列表写给界面使用
         assign("totalCount" , request.getAttribute("totalCount"));
         assign("list" , list);
