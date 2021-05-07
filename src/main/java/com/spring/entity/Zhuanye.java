@@ -15,9 +15,6 @@ public class Zhuanye implements Serializable {
     @Column(name = "id",insertable=false)
     private Integer id;
 
-    @Column(name = "zhuanyeID")
-    private String zhuanyeID;
-
     @Column(name = "zhuanye")
     private String zhuanye;
 
@@ -29,16 +26,8 @@ public class Zhuanye implements Serializable {
     public Integer getId() {
         return id;
     }
-
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getZhuanyeID() {
-        return zhuanyeID;
-    }
-    public void setZhuanyeID(String zhuanyeID) {
-        this.zhuanyeID = zhuanyeID == null ? "" : zhuanyeID.trim();
     }
 
     public String getZhuanye() {

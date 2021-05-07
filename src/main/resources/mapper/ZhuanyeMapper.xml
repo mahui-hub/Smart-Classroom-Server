@@ -3,11 +3,10 @@
 <mapper namespace="com.spring.dao.ZhuanyeMapper">
     <resultMap id="BaseResultMap" type="com.spring.entity.Zhuanye">
         <id column="id" property="id" jdbcType="INTEGER"/>
-        <result column="zhuanyeID" property="zhuanyeID" jdbcType="VARCHAR"/>
         <result column="zhuanye" property="zhuanye" jdbcType="VARCHAR"/>
         <result column="addtime" property="addtime" jdbcType="VARCHAR"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, zhuanyeID,zhuanye, addtime
+        id,zhuanye, addtime
      </sql>
     </mapper>

@@ -72,9 +72,6 @@ public class ZhuanyeController extends BaseController
             if(!Request.get("zhuanye").equals("")) {
             where += " AND zhuanye LIKE '%"+Request.get("zhuanye")+"%' ";
         }
-        if(!Request.get("zhuanyeID").equals("")) {
-            where += " AND zhuanyeID LIKE '%"+Request.get("zhuanyeID")+"%' ";
-        }
             return where;
     }
 
@@ -114,13 +111,11 @@ public class ZhuanyeController extends BaseController
         _var = new LinkedHashMap(); // 重置数据
         String tmp="";
         Zhuanye post = new Zhuanye();  // 创建实体类
-
         // 设置前台提交上来的数据到实体类中
         post.setZhuanye(Request.get("zhuanye"));
-        post.setZhuanyeID(Request.get("zhuanyeID"));
-        
         post.setAddtime(Info.getDateStr()); // 设置添加时间
-                service.insert(post); // 插入数据
+        service.insert(post); // 插入数据
+
         int charuid = post.getId().intValue();
         
         return showSuccess("保存成功" , Request.get("referer").equals("") ? request.getHeader("referer") : Request.get("referer"));
@@ -139,9 +134,6 @@ public class ZhuanyeController extends BaseController
         // 将前台表单数据填充到实体类
         if(!Request.get("zhuanye").equals(""))
             post.setZhuanye(Request.get("zhuanye"));
-
-        if(!Request.get("zhuanyeID").equals(""))
-            post.setZhuanyeID(Request.get("zhuanyeID"));
         post.setId(Request.getInt("id"));
 
         service.update(post); // 更新数据
