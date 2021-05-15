@@ -4,6 +4,7 @@
     <resultMap id="BaseResultMap" type="com.spring.entity.Xueshenghuping">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <id column="kechengid" property="kechengid" jdbcType="INTEGER"/>
+        <id column="banjiid" property="banjiid" jdbcType="INTEGER"/>
                             <result column="xuehao" property="xuehao" jdbcType="VARCHAR"/>
                                     <result column="xingming" property="xingming" jdbcType="VARCHAR"/>
                                     <result column="hupingneirong" property="hupingneirong" jdbcType="VARCHAR"/>
@@ -13,5 +14,5 @@
                 <result column="addtime" property="addtime" jdbcType="VARCHAR"/>
             </resultMap>
     <sql id="Base_Column_List">
-        id, xuehao,kechengid, xingming, hupingneirong, hupingfenshu, hupingren, addtime    </sql>
+        id, banjiid,xuehao,kechengid, xingming, hupingneirong, hupingfenshu, hupingren, addtime    </sql>
     </mapper>

@@ -22,8 +22,7 @@ public class Tiku implements Serializable {
     private String tikubianhao;
     @Column(name = "tikumingcheng")
     private String tikumingcheng;
-    @Column(name = "jiaoshi")
-    private String jiaoshi;
+
     @Column(name = "faburen")
     private String faburen;
 
@@ -81,12 +80,6 @@ public class Tiku implements Serializable {
         this.tikumingcheng = tikumingcheng == null ? "" : tikumingcheng.trim();
     }
 
-    public String getJiaoshi() {
-        return jiaoshi;
-    }
-    public void setJiaoshi(String jiaoshi) {
-        this.jiaoshi = jiaoshi == null ? "" : jiaoshi.trim();
-    }
 
     public String getFaburen() {
         return faburen;

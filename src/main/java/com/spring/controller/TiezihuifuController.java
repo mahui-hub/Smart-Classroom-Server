@@ -3,18 +3,37 @@ package com.spring.controller;
 import com.spring.dao.TiezihuifuMapper;
 import com.spring.entity.Tiezihuifu;
 import com.spring.service.TiezihuifuService;
+import com.spring.util.SensitivewordEngine;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import tk.mybatis.mapper.entity.Example;
-import util.Request;
-import util.Info;
+import util.*;
 import dao.Query;
+
+import java.io.*;
 import java.util.*;
 import dao.CommDAO;
 
 import com.spring.entity.Tiezi;
 import com.spring.service.TieziService;
+
+
+
+/**
+ * 将txt文本读入导入到set中
+ * 问题：
+ * 第一个地方有会多一个 ？--解决问题很简单，但不知道问题的原因
+ */
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
 
 /**
  * 帖子回复 */
@@ -28,6 +47,13 @@ public class TiezihuifuController extends BaseController
 
     @Autowired
     private TieziService serviceRead;
+    
+    private static String ENCODING = "UTF-8";
+
+
+   
+  
+    
     /**
      *  后台列表页
      *
@@ -128,7 +154,8 @@ public class TiezihuifuController extends BaseController
         page = Math.max(1 , page); // 注释同list
 
             List<Tiezihuifu> list = service.selectPageExample(example , page , pagesize);
-                        assign("tiezifenleiList" , new CommDAO().select("SELECT * FROM tiezifenlei ORDER BY id desc"));        assign("totalCount" , request.getAttribute("totalCount"));
+                        assign("tiezifenleiList" , new CommDAO().select("SELECT * FROM tiezifenlei ORDER BY id desc"));       
+                        assign("totalCount" , request.getAttribute("totalCount"));
         assign("list" , list);
                 assign("orderby" , order);
         assign("sort" , sort);
@@ -161,7 +188,6 @@ public class TiezihuifuController extends BaseController
         assign("mmm" , mmm);
         assign("updtself" , 0);
 
-        
         return json();   // 将数据写给前端
     }
     /**
@@ -169,11 +195,39 @@ public class TiezihuifuController extends BaseController
      * @return
      */
     @RequestMapping("/tiezihuifuinsert")
-    public String insert()
-    {
+    public String insert() throws Exception {
         _var = new LinkedHashMap(); // 重置数据
         String tmp="";
         Tiezihuifu post = new Tiezihuifu();  // 创建实体类
+ 
+        
+        long startTime = System.currentTimeMillis(); 
+        String huifuneirong;
+        huifuneirong= Request.get("huifuneirong");
+        
+        //初始化敏感词库，并进行敏感词替换
+        Set<String> set = null;
+        File file = new File("src/main/resources/keywords.txt");    //读取文件
+        InputStreamReader read = new InputStreamReader(new FileInputStream(file),ENCODING);
+        if(file.isFile() && file.exists()){      //文件流是否存在
+            set = new HashSet<String>();
+            BufferedReader bufferedReader = new BufferedReader(read);
+            String txt = null;
+            while((txt = bufferedReader.readLine()) != null){    //读取文件，将文件内容放入到set中
+                set.add(txt);
+            }}
+         SensitivewordEngine.addNewSensitiveWord(set);
+         System.out.println(huifuneirong);
+         System.out.println(SensitivewordEngine.sensitiveWordMap);
+         
+         //敏感词库初始化完成进行替换
+        huifuneirong = SensitivewordEngine.replaceSensitiveWord(huifuneirong,2, "DJTU");
+        System.out.println(huifuneirong);
+        System.err.println(huifuneirong);
+        long endTime = System.currentTimeMillis();    //获取结束时间
+        System.out.println("程序运行时间：" + (endTime - startTime) + "ms");
+
+
         // 设置前台提交上来的数据到实体类中
         post.setTiezibianhao(Request.get("tiezibianhao"));
 
@@ -181,7 +235,8 @@ public class TiezihuifuController extends BaseController
 
         post.setFenlei(Request.get("fenlei"));
 
-        post.setHuifuneirong(util.DownloadRemoteImage.run(Request.get("huifuneirong")));
+        post.setHuifuneirong(DownloadRemoteImage.run(huifuneirong));
+       // post.setHuifuneirong(DownloadRemoteImage.run(Request.get("huifuneirong")));
 
         post.setHuifuren(Request.get("huifuren"));
 
@@ -200,11 +255,41 @@ public class TiezihuifuController extends BaseController
     * @return
     */
     @RequestMapping("/tiezihuifuupdate")
-    public String update()
+    public String update() throws Exception
     {
         _var = new LinkedHashMap(); // 重置数据
         // 创建实体类
         Tiezihuifu post = new Tiezihuifu();
+        
+        
+        
+        long startTime = System.currentTimeMillis(); 
+        String huifuneirong;
+        huifuneirong= Request.get("huifuneirong");
+        
+        //初始化敏感词库，并进行敏感词替换
+        Set<String> set = null;
+        File file = new File("src/main/resources/keywords.txt");    //读取文件
+        InputStreamReader read = new InputStreamReader(new FileInputStream(file),ENCODING);
+        if(file.isFile() && file.exists()){      //文件流是否存在
+            set = new HashSet<String>();
+            BufferedReader bufferedReader = new BufferedReader(read);
+            String txt = null;
+            while((txt = bufferedReader.readLine()) != null){    //读取文件，将文件内容放入到set中
+                set.add(txt);
+            }}
+         SensitivewordEngine.addNewSensitiveWord(set);
+         System.out.println(huifuneirong);
+         System.out.println(SensitivewordEngine.sensitiveWordMap);
+         
+         //敏感词库初始化完成进行替换
+        huifuneirong = SensitivewordEngine.replaceSensitiveWord(huifuneirong,2, "DJTU");
+        System.out.println(huifuneirong);
+        System.err.println(huifuneirong);
+        long endTime = System.currentTimeMillis();    //获取结束时间
+        System.out.println("程序运行时间：" + (endTime - startTime) + "ms");
+
+        
         // 将前台表单数据填充到实体类
         if(!Request.get("tiezibianhao").equals(""))
         post.setTiezibianhao(Request.get("tiezibianhao"));
@@ -212,8 +297,8 @@ public class TiezihuifuController extends BaseController
         post.setBiaoti(Request.get("biaoti"));
                 if(!Request.get("fenlei").equals(""))
         post.setFenlei(Request.get("fenlei"));
-                if(!Request.get("huifuneirong").equals(""))
-        post.setHuifuneirong(util.DownloadRemoteImage.run(Request.get("huifuneirong")));
+                if(!huifuneirong.equals(""))
+        post.setHuifuneirong(util.DownloadRemoteImage.run(huifuneirong));
             if(!Request.get("huifuren").equals(""))
         post.setHuifuren(Request.get("huifuren"));
         
@@ -238,4 +323,8 @@ public class TiezihuifuController extends BaseController
                 service.delete(id);// 根据id 删除某行数据
                 return showSuccess("删除成功",request.getHeader("referer"));//弹出删除成功，并跳回上一页
     }
+
+
+
+
 }

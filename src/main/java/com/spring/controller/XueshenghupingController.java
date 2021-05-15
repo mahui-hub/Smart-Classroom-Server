@@ -85,14 +85,11 @@ public class XueshenghupingController extends BaseController
                 if(!Request.get("xingming").equals("")) {
             where += " AND xingming LIKE '%"+Request.get("xingming")+"%' ";
         }
-//                if(!Request.get("hupingfenshu_start").equals("")) {
-//            where += " AND hupingfenshu >='"+Request.get("hupingfenshu_start")+"' ";
-//        }
-//        if(!Request.get("hupingfenshu_end").equals("")) {
-//            where += " AND hupingfenshu <= '"+Request.get("hupingfenshu_end")+"' ";
-//        }
         if (!Request.get("kechengid").equals("")) {
             where += " AND kechengid LIKE '%" + Request.get("kechengid") + "%' ";
+        }
+        if (!Request.get("banjiid").equals("")) {
+            where += " AND banjiid LIKE '%" + Request.get("banjiid") + "%' ";
         }
             return where;
     }
@@ -179,6 +176,8 @@ public class XueshenghupingController extends BaseController
         post.setXuehao(Request.get("xuehao"));
         String kechengid = Request.get("kechengid");
         post.setKechengid(Integer.valueOf(kechengid));
+        String banjiid = Request.get("banjiid");
+        post.setBanjiid(Integer.valueOf(banjiid));
         post.setXingming(Request.get("xingming"));
         post.setHupingneirong(Request.get("hupingneirong"));
 
@@ -208,6 +207,8 @@ public class XueshenghupingController extends BaseController
         // 将前台表单数据填充到实体类
         if(!Request.get("xuehao").equals(""))
         post.setXuehao(Request.get("xuehao"));
+        if(!Request.get("banjiid").equals(""))
+            post.setBanjiid(Integer.valueOf(Request.get("banjiid")));
         if(!Request.get("kechengid").equals(""))
             post.setKechengid(Integer.valueOf(Request.get("kechengid")));
                 if(!Request.get("xingming").equals(""))

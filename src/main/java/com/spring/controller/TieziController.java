@@ -1,20 +1,30 @@
 package com.spring.controller;
 
-import com.spring.dao.TieziMapper;
-import com.spring.entity.Tiezi;
-import com.spring.service.TieziService;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import tk.mybatis.mapper.entity.Example;
-import util.Minganci;
-import util.Request;
-import util.Info;
-import dao.Query;
 
-import java.util.*;
+import com.spring.dao.TieziMapper;
+import com.spring.entity.Tiezi;
+import com.spring.service.TieziService;
+import com.spring.util.SensitivewordEngine;
 
 import dao.CommDAO;
+import dao.Query;
+import tk.mybatis.mapper.entity.Example;
+import util.Info;
+import util.Minganci;
+import util.Request;
 
 
 /**
@@ -26,6 +36,8 @@ public class TieziController extends BaseController {
     private TieziMapper dao;
     @Autowired
     private TieziService service;
+    
+    private static String ENCODING = "UTF-8";
 
     /**
      * 后台列表页
@@ -62,6 +74,7 @@ public class TieziController extends BaseController {
         assign("list", list);
         assign("orderby", order);  // 把当前排序结果写进前台
         assign("sort", sort);      // 把当前排序结果写进前台
+
         return json();   // 将数据写给前端
     }
 
@@ -179,11 +192,49 @@ public class TieziController extends BaseController {
      * @return
      */
     @RequestMapping("/tieziinsert")
-    public String insert() {
-        _var = new LinkedHashMap(); // 重置数据
+    public String insert() throws Exception {
+     
+//        _var = new LinkedHashMap(); // 重置数据
         String tmp = "";
+        
+
+        String neirong;
+		 neirong= Request.get("neirong");
+
+		 long startTime = System.currentTimeMillis(); 
+		 //初始化敏感词库，并进行敏感词替换
+       Set<String> set = null;
+       File file = new File("src/main/resources/keywords.txt");    //读取文件
+       InputStreamReader read = new InputStreamReader(new FileInputStream(file),ENCODING);
+       if(file.isFile() && file.exists()){      //文件流是否存在
+           set = new HashSet<String>();
+           BufferedReader bufferedReader = new BufferedReader(read);
+           String txt = null;
+           while((txt = bufferedReader.readLine()) != null){    //读取文件，将文件内容放入到set中
+               set.add(txt);
+           }}
+        SensitivewordEngine.addNewSensitiveWord(set);
+        System.out.println(neirong);
+        System.out.println(SensitivewordEngine.sensitiveWordMap);
+        
+        //敏感词库初始化完成进行替换
+        neirong = SensitivewordEngine.replaceSensitiveWord(neirong,2, "DJTU");
+       System.out.println(neirong);
+       System.err.println(neirong);
+       long endTime = System.currentTimeMillis();    //获取结束时间
+       System.out.println("程序运行时间：" + (endTime - startTime) + "ms");
+        
+        
+        
+        
+        
+        
+        
+        
         Tiezi post = new Tiezi();  // 创建实体类
         // 设置前台提交上来的数据到实体类中
+   
+       
         post.setTiezibianhao(Request.get("tiezibianhao"));
 
         post.setBiaoti(Request.get("biaoti"));
@@ -196,7 +247,8 @@ public class TieziController extends BaseController {
 
         post.setTupian(Request.get("tupian"));
 
-        post.setNeirong(util.DownloadRemoteImage.run(Request.get("neirong")));
+        post.setNeirong(util.DownloadRemoteImage.run(neirong));
+        post.setNeirong(util.DownloadRemoteImage.run(neirong));
 
         post.setFaburen(Request.get("faburen"));
 
@@ -214,10 +266,41 @@ public class TieziController extends BaseController {
      * @return
      */
     @RequestMapping("/tieziupdate")
-    public String update() {
+    public String update() throws Exception{
         _var = new LinkedHashMap(); // 重置数据
         // 创建实体类
         Tiezi post = new Tiezi();
+        
+        String neirong;
+		 neirong= Request.get("neirong");
+
+		 long startTime = System.currentTimeMillis(); 
+		 //初始化敏感词库，并进行敏感词替换
+      Set<String> set = null;
+      File file = new File("src/main/resources/keywords.txt");    //读取文件
+      InputStreamReader read = new InputStreamReader(new FileInputStream(file),ENCODING);
+      if(file.isFile() && file.exists()){      //文件流是否存在
+          set = new HashSet<String>();
+          BufferedReader bufferedReader = new BufferedReader(read);
+          String txt = null;
+          while((txt = bufferedReader.readLine()) != null){    //读取文件，将文件内容放入到set中
+              set.add(txt);
+          }}
+       SensitivewordEngine.addNewSensitiveWord(set);
+       System.out.println(neirong);
+       System.out.println(SensitivewordEngine.sensitiveWordMap);
+       
+       //敏感词库初始化完成进行替换
+       neirong = SensitivewordEngine.replaceSensitiveWord(neirong,2, "DJTU");
+      System.out.println(neirong);
+      System.err.println(neirong);
+      long endTime = System.currentTimeMillis();    //获取结束时间
+      System.out.println("程序运行时间：" + (endTime - startTime) + "ms");
+        
+        
+        
+        
+        
         // 将前台表单数据填充到实体类
         if (!Request.get("tiezibianhao").equals(""))
             post.setTiezibianhao(Request.get("tiezibianhao"));
@@ -231,8 +314,8 @@ public class TieziController extends BaseController {
             post.setDianzanliang(Request.getInt("dianzanliang"));
         if (!Request.get("tupian").equals(""))
             post.setTupian(Request.get("tupian"));
-        if (!Request.get("neirong").equals(""))
-            post.setNeirong(util.DownloadRemoteImage.run(Request.get("neirong")));
+        if (!neirong.equals(""))
+            post.setNeirong(util.DownloadRemoteImage.run(neirong));
         if (!Request.get("faburen").equals(""))
             post.setFaburen(Request.get("faburen"));
 

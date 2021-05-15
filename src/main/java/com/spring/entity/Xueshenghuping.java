@@ -16,6 +16,8 @@ public class Xueshenghuping implements Serializable {
     private Integer id;
     @Column(name = "kechengid")
     private Integer kechengid;
+    @Column(name = "banjiid")
+    private Integer banjiid;
     @Column(name = "xuehao")
     private String xuehao;
     @Column(name = "xingming")
@@ -34,7 +36,6 @@ public class Xueshenghuping implements Serializable {
     public Integer getId() {
         return id;
     }
-
     public void setId(Integer id) {
         this.id = id;
     }
@@ -44,6 +45,13 @@ public class Xueshenghuping implements Serializable {
     }
     public void setKechengid(Integer kechengid) {
         this. kechengid =  kechengid;
+    }
+
+    public Integer getBanjiid() {
+        return  banjiid;
+    }
+    public void setBanjiid(Integer banjiid) {
+        this. banjiid =  banjiid;
     }
 
     public String getXuehao() {

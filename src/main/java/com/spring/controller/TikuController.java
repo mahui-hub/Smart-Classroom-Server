@@ -192,7 +192,7 @@ public class TikuController extends BaseController {
         }
         post.setKechengid(Integer.valueOf(kechengid));
         post.setTikutype(Request.get("tikutype"));
-        post.setJiaoshi(Request.get("jiaoshi"));
+
 
         post.setFaburen(Request.get("faburen"));
 
@@ -219,8 +219,7 @@ public class TikuController extends BaseController {
             post.setTikubianhao(Request.get("tikubianhao"));
         if (!Request.get("tikumingcheng").equals(""))
             post.setTikumingcheng(Request.get("tikumingcheng"));
-        if (!Request.get("jiaoshi").equals(""))
-            post.setJiaoshi(Request.get("jiaoshi"));
+
         if (!Request.get("faburen").equals(""))
             post.setFaburen(Request.get("faburen"));
         if(!Request.get("kechengid").equals(""))

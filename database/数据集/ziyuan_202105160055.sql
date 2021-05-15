@@ -1,0 +1,3 @@
+INSERT INTO zhkt.ziyuan (bianhao,biaoti,fenlei,tupian,fujian,xiangqing,faburen,addtime) VALUES
+	 ('04112110589','12','','upload/20210411/bc0af05a-ec30-4c79-b0eb-9dcff72551a9.jpg','upload/20210411/c4802ed3-7508-4aa8-b44f-7b822cb642e5.doc','','JG0001','2021-04-11 21:10:44'),
+	 ('041402111884','swsw','学业交流','','upload/20210414/06aa17a8-d90b-4812-b418-abc995b564e0.mp4','','JG0001','2021-04-14 02:11:38');
