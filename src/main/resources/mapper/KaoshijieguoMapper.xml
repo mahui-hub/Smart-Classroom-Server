@@ -14,10 +14,11 @@
                                     <result column="duoxuantidefen" property="duoxuantidefen" jdbcType="INTEGER"/>
                                     <result column="tiankongtidefen" property="tiankongtidefen" jdbcType="INTEGER"/>
                                     <result column="zongdefen" property="zongdefen" jdbcType="INTEGER"/>
+        <result column="zongfen" property="zongfen" jdbcType="INTEGER"/>
                                     <result column="kaoshiren" property="kaoshiren" jdbcType="VARCHAR"/>
                                                     <result column="tikuid" property="tikuid" jdbcType="INTEGER"/>
                 <result column="addtime" property="addtime" jdbcType="VARCHAR"/>
             </resultMap>
     <sql id="Base_Column_List">
-        id, tikubianhao, kechengid,tikutype, tikumingcheng, faburen, kaoshibianhao, kaoshishichang, danxuantidefen, duoxuantidefen, tiankongtidefen, zongdefen, kaoshiren, tikuid, addtime    </sql>
+        id, tikubianhao,zongfen, kechengid,tikutype, tikumingcheng, faburen, kaoshibianhao, kaoshishichang, danxuantidefen, duoxuantidefen, tiankongtidefen, zongdefen, kaoshiren, tikuid, addtime    </sql>
     </mapper>

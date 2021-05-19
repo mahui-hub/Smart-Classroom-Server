@@ -29,6 +29,8 @@ public class Keqiankaoqin implements Serializable {
     private String jieshushijian;
     @Column(name = "faburen")
     private String faburen;
+@Column(name = "qiandaorens")
+private String qiandaorens;
 
     @Column(name = "addtime")
     private String addtime;
@@ -48,6 +50,10 @@ public class Keqiankaoqin implements Serializable {
         return Query.make("qiandao").where("keqiankaoqinid" , id).count();
     }
 
+//    public Long getQiandaorens()
+//    {
+//        return Query.make("qiandao").where("qiandaoren" , qiandaorens).count();
+//    }
 
     public Integer getKechengxinxi() {
         return kechengxinxi;
@@ -63,6 +69,18 @@ public class Keqiankaoqin implements Serializable {
         this.kechengbianhao = kechengbianhao == null ? "" : kechengbianhao.trim();
     }
 
+    public String getQiandaorens() {
+        return qiandaorens;
+    }
+    public void setQiandaorens(String qiandaorens) {
+        this.qiandaorens = qiandaorens == null ? "": qiandaorens.trim();
+    }
+//    public Integer getQiandaorens() {
+//        return qiandaorens;
+//    }
+//    public void setQiandaorens(Integer qiandaorens) {
+//        this.qiandaorens = qiandaorens == null ? 0: qiandaorens;
+//    }
     public String getKechengmingcheng() {
         return kechengmingcheng;
     }

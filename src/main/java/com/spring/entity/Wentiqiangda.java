@@ -32,7 +32,8 @@ public class Wentiqiangda implements Serializable {
     private String xiangqing;
     @Column(name = "faburen")
     private String faburen;
-
+    @Column(name = "qiangdarens")
+    private String qiangdarens;
     @Column(name = "addtime")
     private String addtime;
 
@@ -63,6 +64,12 @@ public class Wentiqiangda implements Serializable {
     }
     public void setBianhao(String bianhao) {
         this.bianhao = bianhao == null ? "" : bianhao.trim();
+    }
+    public String getQiangdarens() {
+        return qiangdarens;
+    }
+    public void setQiangdarens(String qiangdarens) {
+        this.qiangdarens = qiangdarens == null ? "" : qiangdarens.trim();
     }
 
     public String getBiaoti() {

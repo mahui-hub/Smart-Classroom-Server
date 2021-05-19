@@ -6,6 +6,7 @@
         <id column="kechengid" property="kechengid" jdbcType="INTEGER"/>
                             <result column="bianhao" property="bianhao" jdbcType="VARCHAR"/>
                                     <result column="biaoti" property="biaoti" jdbcType="VARCHAR"/>
+        <result column="qiangdaorens" property="qiangdaorens" jdbcType="VARCHAR"/>
                                     <result column="tupian" property="tupian" jdbcType="VARCHAR"/>
                                     <result column="qiangdarenshu" property="qiangdarenshu" jdbcType="INTEGER"/>
                                     <result column="yiqiangrenshu" property="yiqiangrenshu" jdbcType="INTEGER"/>
@@ -15,5 +16,5 @@
                                                 <result column="addtime" property="addtime" jdbcType="VARCHAR"/>
             </resultMap>
     <sql id="Base_Column_List">
-        id, bianhao,kechengid, biaoti, tupian, qiangdarenshu, yiqiangrenshu, fujian, xiangqing, faburen, addtime    </sql>
+        id, bianhao,kechengid, biaoti, tupian, qiangdarenshu, yiqiangrenshu, fujian, xiangqing, qiangdaorens,faburen, addtime    </sql>
     </mapper>

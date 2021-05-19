@@ -36,6 +36,8 @@ public class Kaoshijieguo implements Serializable {
     private Integer tiankongtidefen;
     @Column(name = "zongdefen")
     private Integer zongdefen;
+    @Column(name = "zongfen")
+    private Integer zongfen;
     @Column(name = "kaoshiren")
     private String kaoshiren;
     private Integer tikuid;
@@ -128,6 +130,12 @@ public class Kaoshijieguo implements Serializable {
     }
     public void setZongdefen(Integer zongdefen) {
         this.zongdefen = zongdefen == null ? 0 : zongdefen;
+    }
+    public Integer getZongfen() {
+        return zongfen;
+    }
+    public void setZongfen(Integer zongfen) {
+        this.zongfen = zongfen == null ? 0 : zongfen;
     }
 
     public String getKaoshiren() {

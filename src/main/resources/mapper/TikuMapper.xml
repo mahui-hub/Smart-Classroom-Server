@@ -5,12 +5,12 @@
         <id column="id" property="id" jdbcType="INTEGER"/>
         <id column="kechengid" property="kechengid" jdbcType="INTEGER"/>
         <result column="tikutype" property="tikutype" jdbcType="VARCHAR"/>
+        <result column="kaoshirens" property="kaoshirens" jdbcType="VARCHAR"/>
                             <result column="tikubianhao" property="tikubianhao" jdbcType="VARCHAR"/>
                                     <result column="tikumingcheng" property="tikumingcheng" jdbcType="VARCHAR"/>
-
                                     <result column="faburen" property="faburen" jdbcType="VARCHAR"/>
                                                 <result column="addtime" property="addtime" jdbcType="VARCHAR"/>
             </resultMap>
     <sql id="Base_Column_List">
-        id, tikubianhao, kechengid,tikutype,tikumingcheng,  faburen, addtime    </sql>
+        id, tikubianhao, kaoshirens，kechengid,tikutype,tikumingcheng,  faburen, addtime    </sql>
     </mapper>

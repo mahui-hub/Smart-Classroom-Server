@@ -53,7 +53,13 @@ public class TikuController extends BaseController {
         int page = request.getParameter("page") == null ? 1 : Integer.valueOf(request.getParameter("page"));  // 获取前台提交的URL参数 page  如果没有则设置为1
         page = Math.max(1, page);  // 取两个数的最大值，防止page 小于1
         List<Tiku> list = service.selectPageExample(example, page, pagesize);   // 获取当前页的行数
-
+        for (int i = 0; i < list.size(); i++) {
+            Tiku tiku = list.get(i);
+            int tikuid = tiku.getId();
+            List<HashMap> kaoshirenlist = new CommDAO().select("select tikuid as id,group_concat(kaoshiren separator '-')  kaoshirens from kaoshijieguo where tikuid="+tikuid);
+            String joiner = String.valueOf(kaoshirenlist.get(0).get("kaoshirens"));
+            list.get(i).setKaoshirens(joiner);
+        }
 
         // 将列表写给界面使用
         assign("totalCount", request.getAttribute("totalCount"));
@@ -192,9 +198,8 @@ public class TikuController extends BaseController {
         }
         post.setKechengid(Integer.valueOf(kechengid));
         post.setTikutype(Request.get("tikutype"));
-
-
         post.setFaburen(Request.get("faburen"));
+        post.setKaoshirens(Request.get("kaoshirens"));
 
 
         post.setAddtime(Info.getDateStr()); // 设置添加时间
@@ -219,7 +224,8 @@ public class TikuController extends BaseController {
             post.setTikubianhao(Request.get("tikubianhao"));
         if (!Request.get("tikumingcheng").equals(""))
             post.setTikumingcheng(Request.get("tikumingcheng"));
-
+        if (!Request.get("kaoshirens").equals(""))
+            post.setKaoshirens(Request.get("kaoshirens"));
         if (!Request.get("faburen").equals(""))
             post.setFaburen(Request.get("faburen"));
         if(!Request.get("kechengid").equals(""))

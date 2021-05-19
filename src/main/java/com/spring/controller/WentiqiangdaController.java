@@ -147,6 +147,13 @@ public class WentiqiangdaController extends BaseController
         int page = request.getParameter("page") == null ? 1 : Integer.valueOf(request.getParameter("page"));
         page = Math.max(1 , page);
                     List<Wentiqiangda> list = service.selectPageExample(example , page , 12);
+        for (int i = 0; i < list.size(); i++) {
+            Wentiqiangda wentiqiangda = list.get(i);
+            int wentiqiangdaid =  wentiqiangda.getId();
+            List<HashMap> wentiqiangdalist = new CommDAO().select("select group_concat(qiangdaren separator '-')  qiangdaren from qiangdawenti where qiangdawenti.wentiqiangdaid="+wentiqiangdaid);
+            String joiner = String.valueOf(wentiqiangdalist.get(0).get("qiangdaren"));
+            list.get(i).setQiangdarens(joiner);
+        }
             
             assign("totalCount" , request.getAttribute("totalCount"));
         assign("list" , list);
@@ -208,6 +215,7 @@ public class WentiqiangdaController extends BaseController
         post.setXiangqing(util.DownloadRemoteImage.run(Request.get("xiangqing")));
 
         post.setFaburen(Request.get("faburen"));
+        post.setQiangdarens(Request.get("qiangdarens"));
 
 
         
@@ -233,6 +241,8 @@ public class WentiqiangdaController extends BaseController
         post.setBianhao(Request.get("bianhao"));
                 if(!Request.get("biaoti").equals(""))
         post.setBiaoti(Request.get("biaoti"));
+        if(!Request.get("qiangdarens").equals(""))
+            post.setQiangdarens(Request.get("qiangdarens"));
                 if(!Request.get("tupian").equals(""))
         post.setTupian(Request.get("tupian"));
                 if(!Request.get("qiangdarenshu").equals(""))
@@ -247,7 +257,7 @@ public class WentiqiangdaController extends BaseController
         post.setFaburen(Request.get("faburen"));
         if(!Request.get("kechengid").equals(""))
             post.setKechengid(Integer.valueOf(Request.get("kechengid")));
-        
+
         post.setId(Request.getInt("id"));
                 service.update(post); // 更新数据
         int charuid = post.getId().intValue();

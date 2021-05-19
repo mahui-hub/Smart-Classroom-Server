@@ -64,7 +64,6 @@ public class ChengjiController extends BaseController {
             int kechengid = chengji.getKechengid();
             List<HashMap> bililist = new CommDAO().select("SELECT kaoqinchengji,shenghupingchengji,jiaoshipingjiachengji,suitangceshichengji,qiangdawentichengji FROM chengjibili where kechengid ="+kechengid);
 //            chengji.setKaoqinchengji(Double.parseDouble(list1.get(0).get("")+""));
-
                 Double kaoqinbili = Double.parseDouble(bililist.get(0).get("kaoqinchengji") + "");
                 Double shenghubili = Double.parseDouble(bililist.get(0).get("shenghupingchengji")+"");
                 Double jiaoshibili = Double.parseDouble(bililist.get(0).get("jiaoshipingjiachengji") + "");

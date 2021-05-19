@@ -10,8 +10,9 @@
                                     <result column="kaishishijian" property="kaishishijian" jdbcType="VARCHAR"/>
                                     <result column="jieshushijian" property="jieshushijian" jdbcType="VARCHAR"/>
                                     <result column="faburen" property="faburen" jdbcType="VARCHAR"/>
+        <result column="qiandaorens" property="qiandaorens" jdbcType="VARCHAR"/>
                                                 <result column="addtime" property="addtime" jdbcType="VARCHAR"/>
             </resultMap>
     <sql id="Base_Column_List">
-        id, kechengxinxi, kechengbianhao, kechengmingcheng, kechengleixing, kaishishijian, jieshushijian, faburen, addtime    </sql>
+        id, kechengxinxi,qiandaorens, kechengbianhao, kechengmingcheng, kechengleixing, kaishishijian, jieshushijian, faburen, addtime    </sql>
     </mapper>

@@ -1,5 +1,7 @@
 package com.spring.controller;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.spring.dao.KaoshijieguoMapper;
 import com.spring.entity.Kaoshijieguo;
 import com.spring.service.KaoshijieguoService;
@@ -28,6 +30,7 @@ public class KaoshijieguoController extends BaseController
 
     @Autowired
     private TikuService serviceRead;
+
     /**
      *  后台列表页
      *
@@ -58,10 +61,24 @@ public class KaoshijieguoController extends BaseController
         page = Math.max(1 , page);  // 取两个数的最大值，防止page 小于1
         List<Kaoshijieguo> list = service.selectPageExample(example , page , pagesize);   // 获取当前页的行数
         // 生成统计语句
-//        for (int i = 0; i < list.size(); i++) {
-//            Kaoshijieguo kaoshijieguo = list.get(i);
-//            list.get(i).setZongfen(list.get(i).getKaoqinchengji()* kaoqinbili + list.get(i).getShenghupingchengji()*shenghubili + list.get(i).getJiaoshipingjiachengji()*jiaoshibili + list.get(i).getSuitangceshichengji()*suitangbili + list.get(i).getQiangdawentichengji()*qingdabili);
-//        }
+        for (int i = 0; i < list.size(); i++) {
+            Kaoshijieguo kaoshijieguo = list.get(i);
+            int tikuid = kaoshijieguo.getTikuid();
+            int zongfen=0;
+            List<HashMap> tikuxuanxiang = new CommDAO().select("select daan from shiti where tikuid ="+ tikuid);
+            for (int j=0;j<tikuxuanxiang.size();j++) {
+                String daanlist = String.valueOf(tikuxuanxiang.get(j).get("daan"));
+                JSONArray json = JSONArray.parseArray(daanlist);
+                for(int z=0;z<json.size();z++){
+                    JSONObject object=json.getJSONObject(z);
+                    String a1=object.get("point")+"";
+                    int a2=Integer.parseInt(a1);
+                    zongfen=zongfen+a2;
+                }
+            }
+            list.get(i).setZongfen(zongfen);
+            list.get(i).setZongdefen(list.get(i).getZongdefen() / zongfen * 100);
+        }
         HashMap total = Query.make("kaoshijieguo").field("(sum(zongdefen)) sum_zongdefen,(avg(zongdefen)) avg_zongdefen,(min(zongdefen)) min_zongdefen,(max(zongdefen)) max_zongdefen").where(where).find();
         // 将统计语句写给界面调用
         assign("total" , total);
@@ -253,6 +270,8 @@ public class KaoshijieguoController extends BaseController
 
         post.setZongdefen(Request.getInt("zongdefen"));
 
+        post.setZongfen(Request.getInt("zongfen"));
+
         post.setKaoshiren(Request.get("kaoshiren"));
 
         post.setTikuid(Request.getInt("tikuid"));
@@ -294,6 +313,8 @@ public class KaoshijieguoController extends BaseController
         post.setTiankongtidefen(Request.getInt("tiankongtidefen"));
             if(!Request.get("zongdefen").equals(""))
         post.setZongdefen(Request.getInt("zongdefen"));
+        if(!Request.get("zongfen").equals(""))
+            post.setZongfen(Request.getInt("zongfen"));
             if(!Request.get("kaoshiren").equals(""))
         post.setKaoshiren(Request.get("kaoshiren"));
         

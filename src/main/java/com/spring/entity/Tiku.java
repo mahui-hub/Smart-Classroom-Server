@@ -22,7 +22,8 @@ public class Tiku implements Serializable {
     private String tikubianhao;
     @Column(name = "tikumingcheng")
     private String tikumingcheng;
-
+    @Column(name = "kaoshirens")
+    private String kaoshirens;
     @Column(name = "faburen")
     private String faburen;
 
@@ -50,6 +51,12 @@ public class Tiku implements Serializable {
     }
     public void setTikutype(String tikutype) {
         this.tikutype = tikutype== null ? "" : tikutype.trim();
+    }
+    public String getKaoshirens() {
+        return kaoshirens;
+    }
+    public void setKaoshirens(String kaoshirens) {
+        this.kaoshirens = kaoshirens== null ? "" : kaoshirens.trim();
     }
 
     public Long getShitiCount()
