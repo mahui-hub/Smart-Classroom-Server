@@ -60,16 +60,14 @@ public class ChengjiController extends BaseController {
         List<Chengji> list = service.selectPageExample(example, page, pagesize);   // 获取当前页的行数
         for (int i = 0; i < list.size(); i++) {
             Chengji chengji = list.get(i);
-//            String xuehao = chengji.getXuehao();
             int kechengid = chengji.getKechengid();
-            List<HashMap> bililist = new CommDAO().select("SELECT kaoqinchengji,shenghupingchengji,jiaoshipingjiachengji,suitangceshichengji,qiangdawentichengji FROM chengjibili where kechengid ="+kechengid);
-//            chengji.setKaoqinchengji(Double.parseDouble(list1.get(0).get("")+""));
-                Double kaoqinbili = Double.parseDouble(bililist.get(0).get("kaoqinchengji") + "");
+            List<HashMap> bililist = new CommDAO().select("SELECT qimochengji,shenghupingchengji,jiaoshipingjiachengji,suitangceshichengji,qiangdawentichengji FROM chengjibili where kechengid ="+kechengid);
+                Double qimobili = Double.parseDouble(bililist.get(0).get("qimochengji") + "");
                 Double shenghubili = Double.parseDouble(bililist.get(0).get("shenghupingchengji")+"");
                 Double jiaoshibili = Double.parseDouble(bililist.get(0).get("jiaoshipingjiachengji") + "");
                 Double suitangbili = Double.parseDouble(bililist.get(0).get("suitangceshichengji") + "");
                 Double qingdabili = Double.parseDouble(bililist.get(0).get("qiangdawentichengji") + "");
-            list.get(i).setZongfen(list.get(i).getKaoqinchengji()* kaoqinbili + list.get(i).getShenghupingchengji()*shenghubili + list.get(i).getJiaoshipingjiachengji()*jiaoshibili + list.get(i).getSuitangceshichengji()*suitangbili + list.get(i).getQiangdawentichengji()*qingdabili);
+            list.get(i).setZongfen(list.get(i).getQimochengji()* qimobili + list.get(i).getShenghupingchengji()*shenghubili + list.get(i).getJiaoshipingjiachengji()*jiaoshibili + list.get(i).getSuitangceshichengji()*suitangbili + list.get(i).getQiangdawentichengji()*qingdabili);
         }
         // 生成统计语句
         HashMap total = Query.make("chengji").field("(sum(zongfen)) sum_zongfen,(avg(zongfen)) avg_zongfen,(min(zongfen)) min_zongfen,(max(zongfen)) max_zongfen").where(where).find();
@@ -99,6 +97,9 @@ public class ChengjiController extends BaseController {
         // 以下也是一样的操作，判断是否符合条件，符合则写入sql 语句
         if (!Request.get("xuehao").equals("")) {
             where += " AND xuehao LIKE '%" + Request.get("xuehao") + "%' ";
+        }
+        if (!Request.get("kechengid").equals("")) {
+            where += " AND kechengid LIKE '%" + Request.get("kechengid") + "%' ";
         }
         if (!Request.get("xingming").equals("")) {
             where += " AND xingming LIKE '%" + Request.get("xingming") + "%' ";
@@ -156,7 +157,7 @@ public class ChengjiController extends BaseController {
                 pingjun = pingjun / pingyuewentiList.size();
             }
             list.get(i).setQiangdawentichengji(pingjun);
-            list.get(i).setZongfen(list.get(i).getKaoqinchengji() + list.get(i).getShenghupingchengji() + list.get(i).getJiaoshipingjiachengji() + list.get(i).getSuitangceshichengji() + list.get(i).getQiangdawentichengji());
+            list.get(i).setZongfen(list.get(i).getQimochengji() + list.get(i).getShenghupingchengji() + list.get(i).getJiaoshipingjiachengji() + list.get(i).getSuitangceshichengji() + list.get(i).getQiangdawentichengji());
         }
         HashMap total = Query.make("chengji").field("(sum(zongfen)) sum_zongfen,(avg(zongfen)) avg_zongfen,(min(zongfen)) min_zongfen,(max(zongfen)) max_zongfen").where(where).find();
         assign("total", total);
@@ -249,28 +250,16 @@ public class ChengjiController extends BaseController {
         Chengji post = new Chengji();  // 创建实体类
         // 设置前台提交上来的数据到实体类中
         post.setXuehao(Request.get("xuehao"));
-
-
         post.setXingming(Request.get("xingming"));
-
         post.setBanji(Request.get("banji"));
-
         post.setZhuanye(Request.get("zhuanye"));
-
-        post.setKaoqinchengji(Request.getDouble("kaoqinchengji"));
-
+        post.setQimochengji(Request.getDouble("qimochengji"));
         post.setShenghupingchengji(Request.getDouble("shenghupingchengji"));
-
         post.setJiaoshipingjiachengji(Request.getDouble("jiaoshipingjiachengji"));
-
         post.setSuitangceshichengji(Request.getDouble("suitangceshichengji"));
-
         post.setQiangdawentichengji(Request.getDouble("qiangdawentichengji"));
-
         post.setZongfen(Request.getDouble("zongfen"));
-
         post.setTianjiaren(Request.get("tianjiaren"));
-
         post.setXueshengid(Request.getInt("xueshengid"));
         post.setKechengid(Request.getInt("kechengid"));
 
@@ -302,8 +291,8 @@ public class ChengjiController extends BaseController {
             post.setBanji(Request.get("banji"));
         if (!Request.get("zhuanye").equals(""))
             post.setZhuanye(Request.get("zhuanye"));
-        if (!Request.get("kaoqinchengji").equals(""))
-            post.setKaoqinchengji(Request.getDouble("kaoqinchengji"));
+        if (!Request.get("qimochengji").equals(""))
+            post.setQimochengji(Request.getDouble("qimochengji"));
         if (!Request.get("shenghupingchengji").equals(""))
             post.setShenghupingchengji(Request.getDouble("shenghupingchengji"));
         if (!Request.get("jiaoshipingjiachengji").equals(""))

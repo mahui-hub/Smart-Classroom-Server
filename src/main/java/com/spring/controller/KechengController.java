@@ -148,7 +148,8 @@ public class KechengController extends BaseController
         int page = request.getParameter("page") == null ? 1 : Integer.valueOf(request.getParameter("page"));
         page = Math.max(1 , page);
                     List<Kecheng> list = service.selectPageExample(example , page , 12);
-                    assign("mapkechengleixing2" , new CommDAO().select("SELECT kechengleixing,kechengleixing FROM kechengleixing"));        assign("totalCount" , request.getAttribute("totalCount"));
+                    assign("mapkechengleixing2" , new CommDAO().select("SELECT * FROM kechengleixing"));
+                    assign("totalCount" , request.getAttribute("totalCount"));
         assign("list" , list);
         assign("where" , where);
         assign("orderby" , order);

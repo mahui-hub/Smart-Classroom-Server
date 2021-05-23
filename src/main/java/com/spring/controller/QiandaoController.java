@@ -132,26 +132,12 @@ public class QiandaoController extends BaseController
                 if(!Request.get("kechengleixing").equals("")) {
             where += " AND kechengleixing ='"+Request.get("kechengleixing")+"' ";
         }
-                if(!Request.get("kaishishijian_start").equals("")) {
-            where += " AND kaishishijian >='"+Request.get("kaishishijian_start")+"' ";
-        }
-        if(!Request.get("kaishishijian_end").equals("")) {
-            where += " AND kaishishijian <= '"+Request.get("kaishishijian_end")+"' ";
-        }
-                if(!Request.get("jieshushijian_start").equals("")) {
-            where += " AND jieshushijian >='"+Request.get("jieshushijian_start")+"' ";
-        }
-        if(!Request.get("jieshushijian_end").equals("")) {
-            where += " AND jieshushijian <= '"+Request.get("jieshushijian_end")+"' ";
-        }
-                if(!Request.get("qiandaoshijian_start").equals("")) {
-            where += " AND qiandaoshijian >='"+Request.get("qiandaoshijian_start")+"' ";
-        }
-        if(!Request.get("qiandaoshijian_end").equals("")) {
-            where += " AND qiandaoshijian <= '"+Request.get("qiandaoshijian_end")+"' ";
-        }
+
                 if(!Request.get("qiandaoren").equals("")) {
             where += " AND qiandaoren LIKE '%"+Request.get("qiandaoren")+"%' ";
+        }
+        if(!Request.get("faburen").equals("")) {
+            where += " AND faburen LIKE '%"+Request.get("faburen")+"%' ";
         }
             return where;
     }

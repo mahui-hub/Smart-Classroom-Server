@@ -64,20 +64,25 @@ public class KaoshijieguoController extends BaseController
         for (int i = 0; i < list.size(); i++) {
             Kaoshijieguo kaoshijieguo = list.get(i);
             int tikuid = kaoshijieguo.getTikuid();
+            String tikutype=kaoshijieguo.getTikutype();
             int zongfen=0;
-            List<HashMap> tikuxuanxiang = new CommDAO().select("select daan from shiti where tikuid ="+ tikuid);
+            List<HashMap> tikuxuanxiang = new CommDAO().select("select daan from shiti where tikutype=\"测验题库\" and tikuid ="+ tikuid );
             for (int j=0;j<tikuxuanxiang.size();j++) {
-                String daanlist = String.valueOf(tikuxuanxiang.get(j).get("daan"));
-                JSONArray json = JSONArray.parseArray(daanlist);
-                for(int z=0;z<json.size();z++){
-                    JSONObject object=json.getJSONObject(z);
-                    String a1=object.get("point")+"";
-                    int a2=Integer.parseInt(a1);
-                    zongfen=zongfen+a2;
+                    String daanlist = String.valueOf(tikuxuanxiang.get(j).get("daan"));
+                    JSONArray json = JSONArray.parseArray(daanlist);
+                    for(int z=0;z<json.size();z++){
+                        JSONObject object=json.getJSONObject(z);
+                        String a1=object.get("point")+"";
+                        int a2=Integer.parseInt(a1);
+                        zongfen=zongfen+a2;
+                    }
                 }
-            }
-            list.get(i).setZongfen(zongfen);
-            list.get(i).setZongdefen(list.get(i).getZongdefen() / zongfen * 100);
+                list.get(i).setZongfen(zongfen);
+                int zongdefen=0;
+                if(zongfen!=0){
+                   zongdefen=list.get(i).getZongdefen() / zongfen * 100 ;
+                }
+                list.get(i).setZongdefen(zongdefen);
         }
         HashMap total = Query.make("kaoshijieguo").field("(sum(zongdefen)) sum_zongdefen,(avg(zongdefen)) avg_zongdefen,(min(zongdefen)) min_zongdefen,(max(zongdefen)) max_zongdefen").where(where).find();
         // 将统计语句写给界面调用

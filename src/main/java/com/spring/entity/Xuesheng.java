@@ -35,6 +35,8 @@ public class Xuesheng implements Serializable {
     private String lianxidianhua;
     @Column(name = "qqhao")
     private String qqhao;
+    @Column(name = "hupingrens")
+    private String hupingrens;
     @Column(name = "touxiang")
     private String touxiang;
     @Column(name = "xiangqing")
@@ -69,7 +71,12 @@ public class Xuesheng implements Serializable {
     public void setXuehao(String xuehao) {
         this.xuehao = xuehao == null ? "" : xuehao.trim();
     }
-
+    public String getHupingrens() {
+        return hupingrens;
+    }
+    public void setHupingrens(String hupingrens) {
+        this.hupingrens = hupingrens == null ? "" : hupingrens.trim();
+    }
     public String getMima() {
         return mima;
     }

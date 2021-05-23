@@ -28,6 +28,8 @@ public class Qiangdawenti implements Serializable {
     private String beizhu;
     @Column(name = "qiangdaren")
     private String qiangdaren;
+    @Column(name = "pingyueren")
+    private String pingyueren;
     private Integer wentiqiangdaid;
 
     @Column(name = "addtime")
@@ -88,6 +90,12 @@ public class Qiangdawenti implements Serializable {
     }
     public void setBeizhu(String beizhu) {
         this.beizhu = beizhu == null ? "" : beizhu.trim();
+    }
+    public String getPingyueren() {
+        return pingyueren;
+    }
+    public void setPingyueren(String pingyueren) {
+        this.pingyueren = pingyueren== null ? "" : pingyueren.trim();
     }
 
     public String getQiangdaren() {

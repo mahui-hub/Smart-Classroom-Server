@@ -69,6 +69,7 @@ public class TieziController extends BaseController {
 
 
         assign("tiezifenleiList", new CommDAO().select("SELECT * FROM tiezifenlei ORDER BY id desc"));
+        assign("tieziEcharts", new CommDAO().select("select t2.fenleimingcheng as fenlei,round(rand()*50)+1 as score,count( t1.id) as amount from tiezi t1,tiezifenlei t2 where t1.fenlei =t2.id group by t1.fenlei ORDER BY t1.fenlei desc"));
         // 将列表写给界面使用
         assign("totalCount", request.getAttribute("totalCount"));
         assign("list", list);

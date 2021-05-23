@@ -7,7 +7,7 @@
                                     <result column="xingming" property="xingming" jdbcType="VARCHAR"/>
                                     <result column="banji" property="banji" jdbcType="VARCHAR"/>
                                     <result column="zhuanye" property="zhuanye" jdbcType="VARCHAR"/>
-                                    <result column="kaoqinchengji" property="kaoqinchengji" jdbcType="DECIMAL"/>
+                                    <result column="qimochengji" property="qimochengji" jdbcType="DECIMAL"/>
                                     <result column="shenghupingchengji" property="shenghupingchengji" jdbcType="DECIMAL"/>
                                     <result column="jiaoshipingjiachengji" property="jiaoshipingjiachengji" jdbcType="DECIMAL"/>
                                     <result column="suitangceshichengji" property="suitangceshichengji" jdbcType="DECIMAL"/>
@@ -18,5 +18,5 @@
 <!--                <result column="addtime" property="addtime" jdbcType="VARCHAR"/>-->
             </resultMap>
     <sql id="Base_Column_List">
-        id, xuehao, xingming, banji, zhuanye, kaoqinchengji, shenghupingchengji, jiaoshipingjiachengji, suitangceshichengji, qiangdawentichengji, zongfen, tianjiaren, xueshengid, addtime    </sql>
+        id, xuehao, xingming, qimochengji,banji, zhuanye, kaoqinchengji, shenghupingchengji, jiaoshipingjiachengji, suitangceshichengji, qiangdawentichengji, zongfen, tianjiaren, xueshengid, addtime    </sql>
     </mapper>

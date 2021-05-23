@@ -24,6 +24,8 @@ public class Tiku implements Serializable {
     private String tikumingcheng;
     @Column(name = "kaoshirens")
     private String kaoshirens;
+    @Column(name = "pingjiarens")
+    private String pingjiarens;
     @Column(name = "faburen")
     private String faburen;
 
@@ -58,7 +60,12 @@ public class Tiku implements Serializable {
     public void setKaoshirens(String kaoshirens) {
         this.kaoshirens = kaoshirens== null ? "" : kaoshirens.trim();
     }
-
+    public String getPingjiarens() {
+        return pingjiarens;
+    }
+    public void setPingjiarens(String pingjiarens) {
+        this.pingjiarens = pingjiarens== null ? "" :pingjiarens.trim();
+    }
     public Long getShitiCount()
     {
         return Query.make("shiti").where("tikuid" , id).count();

@@ -112,7 +112,7 @@ public class ChengjibiliController extends BaseController {
         String kechengid = Request.get("kechengid");
         post.setKechengid(Integer.valueOf(kechengid));
 
-        post.setKaoqinchengji(Request.get("kaoqinchengji"));
+        post.setQimochengji(Request.get("kaoqinchengji"));
 
         post.setShenghupingchengji(Request.get("shenghupingchengji"));
 
@@ -141,8 +141,8 @@ public class ChengjibiliController extends BaseController {
         // 将前台表单数据填充到实体类
         if(!Request.get("kechengid").equals(""))
             post.setKechengid(Integer.valueOf(Request.get("kechengid")));
-        if(!Request.get("kaoqinchengji").equals(""))
-            post.setKaoqinchengji(Request.get("kaoqinchengji"));
+        if(!Request.get("qimochengji").equals(""))
+            post.setQimochengji(Request.get("qimochengji"));
         if(!Request.get("suitangceshichengji").equals(""))
             post.setSuitangceshichengji(Request.get("suitangceshichengji"));
         if(!Request.get("jiaoshipingjiachengji").equals(""))

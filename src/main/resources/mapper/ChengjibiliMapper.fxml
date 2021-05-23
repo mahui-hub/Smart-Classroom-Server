@@ -4,12 +4,12 @@
     <resultMap id="BaseResultMap" type="com.spring.entity.Chengjibili">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <id column="kechengid" property="kechengid" jdbcType="INTEGER"/>
-        <result column="kaoqinchengji" property="kaoqinchengji" jdbcType="VARCHAR"/>
+        <result column="Qimochengji" property="Qimochengji" jdbcType="VARCHAR"/>
         <result column="shenghupingchengji" property="shenghupingchengji" jdbcType="VARCHAR"/>
         <result column="jiaoshipingjiachengji" property="jiaoshipingjiachengji" jdbcType="VARCHAR"/>
         <result column="suitangceshichengji" property="suitangceshichengji" jdbcType="VARCHAR"/>
         <result column="qiangdawentichengji" property="qiangdawentichengji" jdbcType="VARCHAR"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id,kechengid, kaoqinchengji, shenghupingchengji, qiangdawentichengji, suitangceshichengji,jiaoshipingjiachengji   </sql>
+        id,kechengid, Qimochengji,kaoqinchengji, shenghupingchengji, qiangdawentichengji, suitangceshichengji,jiaoshipingjiachengji   </sql>
 </mapper>

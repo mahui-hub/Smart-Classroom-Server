@@ -56,9 +56,18 @@ public class TikuController extends BaseController {
         for (int i = 0; i < list.size(); i++) {
             Tiku tiku = list.get(i);
             int tikuid = tiku.getId();
-            List<HashMap> kaoshirenlist = new CommDAO().select("select tikuid as id,group_concat(kaoshiren separator '-')  kaoshirens from kaoshijieguo where tikuid="+tikuid);
-            String joiner = String.valueOf(kaoshirenlist.get(0).get("kaoshirens"));
+            String tikutype=tiku.getTikutype();
+            String joiner="";
+            String joiner1="";
+            if(tikutype=="测验题库"){
+                List<HashMap> kaoshirenlist = new CommDAO().select("select tikuid as id,group_concat(kaoshiren separator '-')  kaoshirens from kaoshijieguo where tikutype = \"测验题库\" and tikuid="+tikuid);
+               joiner = String.valueOf(kaoshirenlist.get(0).get("kaoshirens"));
+            }else {
+                List<HashMap> pingjiarenlist = new CommDAO().select("select tikuid as id,group_concat(kaoshiren separator '-')  pingjiarens from kaoshijieguo where tikutype = \"评价题库\" and tikuid="+tikuid);
+                joiner1 = String.valueOf(pingjiarenlist.get(0).get("pingjiarens"));
+            }
             list.get(i).setKaoshirens(joiner);
+            list.get(i).setPingjiarens(joiner1);
         }
 
         // 将列表写给界面使用
@@ -200,6 +209,7 @@ public class TikuController extends BaseController {
         post.setTikutype(Request.get("tikutype"));
         post.setFaburen(Request.get("faburen"));
         post.setKaoshirens(Request.get("kaoshirens"));
+        post.setPingjiarens(Request.get("pingjiarens"));
 
 
         post.setAddtime(Info.getDateStr()); // 设置添加时间
@@ -232,6 +242,8 @@ public class TikuController extends BaseController {
             post.setKechengid(Integer.valueOf(Request.get("kechengid")));
         if (!Request.get("tikutype").equals(""))
             post.setTikutype(Request.get("tikutype"));
+        if (!Request.get("pingjiarens").equals(""))
+            post.setPingjiarens(Request.get("pingjiarens"));
         post.setId(Request.getInt("id"));
         service.update(post); // 更新数据
         int charuid = post.getId().intValue();

@@ -1,2 +1,0 @@
-INSERT INTO zhkt.chengji (xuehao,xingming,banji,zhuanye,kaoqinchengji,shenghupingchengji,jiaoshipingjiachengji,suitangceshichengji,qiangdawentichengji,zongfen,tianjiaren,addtime,kechengid,xueshengid) VALUES
-	 ('1618200126','赵雨晴','R信管161','信息管理与信息系统＋软件工程',50.00,85.00,80.00,100.00,90.00,405.00,'JG0001','2021-05-04 22:19:18',4,3);

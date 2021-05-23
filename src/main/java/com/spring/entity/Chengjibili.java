@@ -16,8 +16,8 @@ public class Chengjibili implements Serializable {
     @Column(name = "kechengid")
     private Integer kechengid;
 
-    @Column(name = "kaoqinchengji")
-    private String kaoqinchengji;
+    @Column(name = "qimochengji")
+    private String qimochengji;
     @Column(name = "shenghupingchengji")
     private String shenghupingchengji;
     @Column(name = "suitangceshichengji")
@@ -71,11 +71,11 @@ public class Chengjibili implements Serializable {
         this.qiangdawentichengji = qiangdawentichengji == null ? "" : qiangdawentichengji.trim();
     }
 
-    public String getKaoqinchengji() {
-        return kaoqinchengji;
+    public String getQimochengji() {
+        return qimochengji;
     }
-    public void setKaoqinchengji(String kaoqinchengji) {
-        this.kaoqinchengji = kaoqinchengji == null ? "" : kaoqinchengji.trim();
+    public void setQimochengji(String qimochengji) {
+        this.qimochengji = qimochengji == null ? "" : qimochengji.trim();
     }
 
 

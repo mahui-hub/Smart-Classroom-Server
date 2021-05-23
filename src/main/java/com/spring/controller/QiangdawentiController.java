@@ -57,9 +57,24 @@ public class QiangdawentiController extends BaseController
         int page = request.getParameter("page") == null ? 1 : Integer.valueOf(request.getParameter("page"));  // 获取前台提交的URL参数 page  如果没有则设置为1
         page = Math.max(1 , page);  // 取两个数的最大值，防止page 小于1
         List<Qiangdawenti> list = service.selectPageExample(example , page , pagesize);   // 获取当前页的行数
+        for (int i = 0; i < list.size(); i++) {
+            Qiangdawenti qiangdawenti = list.get(i);
+            String bianhao = qiangdawenti.getBianhao();
+            String qiangdaren=qiangdawenti.getQiangdaren();
+            List<HashMap> pingyuerenlist = new CommDAO().select("select pingyueren as pingyueren from pingyuewenti where bianhao="+ bianhao +" and qiangdaren = "+qiangdaren);
+            String joiner="";
+            if(pingyuerenlist.size()>0){
+    joiner = String.valueOf(pingyuerenlist.get(0).get("pingyueren"));
+}else {
+    joiner ="";
+}
+
+            list.get(i).setPingyueren(joiner);
+        }
 
 
-        
+
+
         // 将列表写给界面使用
         assign("totalCount" , request.getAttribute("totalCount"));
         assign("list" , list);
@@ -220,6 +235,7 @@ public class QiangdawentiController extends BaseController
         post.setBiaoti(Request.get("biaoti"));
 
         post.setTupian(Request.get("tupian"));
+        post.setPingyueren(Request.get("pingyueren"));
 
         post.setFaburen(Request.get("faburen"));
 
@@ -263,6 +279,9 @@ public class QiangdawentiController extends BaseController
         post.setBeizhu(Request.get("beizhu"));
                 if(!Request.get("qiangdaren").equals(""))
         post.setQiangdaren(Request.get("qiangdaren"));
+//
+        if(!Request.get("pingyueren").equals(""))
+            post.setPingyueren(Request.get("pingyueren"));
         if(!Request.get("kechengid").equals(""))
             post.setKechengid(Integer.valueOf(Request.get("kechengid")));
 

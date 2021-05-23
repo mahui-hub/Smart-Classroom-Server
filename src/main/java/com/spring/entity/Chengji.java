@@ -23,8 +23,8 @@ public class Chengji implements Serializable {
     private String banji;
     @Column(name = "zhuanye")
     private String zhuanye;
-    @Column(name = "kaoqinchengji")
-    private Double kaoqinchengji;
+    @Column(name = "qimochengji")
+    private Double qimochengji;
     @Column(name = "shenghupingchengji")
     private Double shenghupingchengji;
     @Column(name = "jiaoshipingjiachengji")
@@ -55,8 +55,6 @@ public class Chengji implements Serializable {
         this.id = id;
     }
 
-
-
     public String getXuehao() {
         return xuehao;
     }
@@ -85,11 +83,11 @@ public class Chengji implements Serializable {
         this.zhuanye = zhuanye == null ? "" : zhuanye.trim();
     }
 
-    public Double getKaoqinchengji() {
-        return kaoqinchengji;
+    public Double getQimochengji() {
+        return qimochengji;
     }
-    public void setKaoqinchengji(Double kaoqinchengji) {
-        this.kaoqinchengji = kaoqinchengji == null ? 0.0f : kaoqinchengji;
+    public void setQimochengji(Double qimochengji) {
+        this.qimochengji = qimochengji == null ? 0.0f : qimochengji;
     }
 
     public Double getShenghupingchengji() {

@@ -53,6 +53,13 @@ public class XueshengController extends BaseController
         int page = request.getParameter("page") == null ? 1 : Integer.valueOf(request.getParameter("page"));  // 获取前台提交的URL参数 page  如果没有则设置为1
         page = Math.max(1 , page);  // 取两个数的最大值，防止page 小于1
         List<Xuesheng> list = service.selectPageExample(example , page , pagesize);   // 获取当前页的行数
+        for (int i = 0; i < list.size(); i++) {
+            Xuesheng xuesheng = list.get(i);
+            String xuehao = xuesheng.getXuehao();
+            List<HashMap> hupingrenlist = new CommDAO().select("select group_concat(hupingren separator '-')  hupingrens from xueshenghuping where xuehao="+xuehao);
+            String joiner = String.valueOf(hupingrenlist.get(0).get("hupingrens"));
+            list.get(i).setHupingrens(joiner);
+        }
 
 
                     assign("banjiList" , new CommDAO().select("SELECT * FROM banji ORDER BY id desc"));
@@ -115,6 +122,13 @@ public class XueshengController extends BaseController
         int page = request.getParameter("page") == null ? 1 : Integer.valueOf(request.getParameter("page"));
         page = Math.max(1 , page);
         List<Xuesheng> list = service.selectPageExample(example , page , 12);
+        for (int i = 0; i < list.size(); i++) {
+            Xuesheng xuesheng = list.get(i);
+            String xuehao = xuesheng.getXuehao();
+            List<HashMap> hupingrenlist = new CommDAO().select("select group_concat(hupingren separator '-')  hupingrens from xueshenghuping where xuehao="+xuehao);
+            String joiner = String.valueOf(hupingrenlist.get(0).get("hupingrens"));
+            list.get(i).setHupingrens(joiner);
+        }
 
         assign("banjiList" , new CommDAO().select("SELECT * FROM banji ORDER BY id desc"));
         assign("zhuanyeList" , new CommDAO().select("SELECT * FROM zhuanye ORDER BY id desc"));
@@ -180,6 +194,7 @@ public class XueshengController extends BaseController
         post.setMima(Request.get("mima"));
 
         post.setXingming(Request.get("xingming"));
+        post.setHupingrens(Request.get("hupingrens"));
 
         post.setXingbie(Request.get("xingbie"));
 
@@ -230,6 +245,8 @@ public class XueshengController extends BaseController
             post.setBanjiid(Integer.valueOf(Request.get("banjiid")));
                 if(!Request.get("zhuanye").equals(""))
         post.setZhuanye(Request.get("zhuanye"));
+        if(!Request.get("hupingrens").equals(""))
+            post.setHupingrens(Request.get("hupingrens"));
                 if(!Request.get("lianxidianhua").equals(""))
         post.setLianxidianhua(Request.get("lianxidianhua"));
                 if(!Request.get("qqhao").equals(""))
