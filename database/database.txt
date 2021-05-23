@@ -59,7 +59,7 @@ CREATE TABLE `dianzan` (
   PRIMARY KEY (`id`),
   KEY `dianzan_tieziid_index` (`tieziid`),
   KEY `dianzan_fenlei_index` (`fenlei`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COMMENT='点赞信息表';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='点赞信息表';
 
 
 -- zhkt.gonggao definition
@@ -75,7 +75,7 @@ CREATE TABLE `gonggao` (
   `kechengid` int(10) unsigned NOT NULL COMMENT '课程ID',
   PRIMARY KEY (`id`),
   KEY `gonggao_FK` (`kechengid`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COMMENT='公告信息表';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='公告信息表';
 
 
 -- zhkt.huidawenti definition
@@ -113,7 +113,7 @@ CREATE TABLE `jiaoshi` (
   `xueyuan` varchar(255) NOT NULL COMMENT '所属学院',
   `zhicheng` varchar(255) NOT NULL COMMENT '教师职称',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='教师信息表';
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COMMENT='教师信息表';
 
 
 -- zhkt.jieguo definition
@@ -136,7 +136,7 @@ CREATE TABLE `jieguo` (
   `kechengid` int(10) unsigned NOT NULL COMMENT '课程ID',
   PRIMARY KEY (`id`),
   KEY `jieguo_tikuid_index` (`tikuid`)
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8 COMMENT='试题结果信息表';
+) ENGINE=InnoDB AUTO_INCREMENT=115 DEFAULT CHARSET=utf8 COMMENT='试题结果信息表';
 
 
 -- zhkt.kaoshijieguo definition
@@ -157,9 +157,10 @@ CREATE TABLE `kaoshijieguo` (
   `addtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '添加时间',
   `kechengid` int(10) unsigned NOT NULL COMMENT '课程ID',
   `tikutype` varchar(100) NOT NULL COMMENT '题库类型',
+  `zongfen` int(10) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `kaoshijieguo_tikuid_index` (`tikuid`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COMMENT='考试结果信息表';
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8 COMMENT='考试结果信息表';
 
 
 -- zhkt.kechengleixing definition
@@ -171,6 +172,20 @@ CREATE TABLE `kechengleixing` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `kechengleixing_un` (`kechengleixing`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='课程类型信息表';
+
+
+-- zhkt.kechengziyuan definition
+
+CREATE TABLE `kechengziyuan` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `fujian` text NOT NULL COMMENT '附件',
+  `kechengid` int(10) unsigned NOT NULL COMMENT '课程ID',
+  `faburen` varchar(50) NOT NULL COMMENT '发布人',
+  `addtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '添加时间',
+  `ziyuanname` varchar(50) NOT NULL,
+  `kechengmingcheng` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COMMENT='课程资源信息表';
 
 
 -- zhkt.keqiankaoqin definition
@@ -185,9 +200,10 @@ CREATE TABLE `keqiankaoqin` (
   `jieshushijian` varchar(25) NOT NULL COMMENT '结束时间',
   `faburen` varchar(50) NOT NULL COMMENT '发布人',
   `addtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '添加时间',
+  `qiandaorens` varchar(255) DEFAULT NULL COMMENT '签到人',
   PRIMARY KEY (`id`),
   KEY `keqiankaoqin_kechengxinxi_index` (`kechengxinxi`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COMMENT='课程考勤信息表';
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COMMENT='课程考勤信息表';
 
 
 -- zhkt.lunbotu definition
@@ -199,7 +215,7 @@ CREATE TABLE `lunbotu` (
   `url` varchar(255) NOT NULL COMMENT '链接地址',
   `addtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '添加时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='轮播图';
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COMMENT='轮播图';
 
 
 -- zhkt.pingbici definition
@@ -210,7 +226,7 @@ CREATE TABLE `pingbici` (
   `tihuanci` varchar(50) NOT NULL COMMENT '替换词',
   `addtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '添加时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='屏蔽词信息表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='屏蔽词信息表';
 
 
 -- zhkt.pinglun definition
@@ -225,7 +241,7 @@ CREATE TABLE `pinglun` (
   `pinglunren` varchar(50) NOT NULL COMMENT '评论人',
   `addtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '添加时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COMMENT='评论信息表';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='评论信息表';
 
 
 -- zhkt.pingyuewenti definition
@@ -244,7 +260,7 @@ CREATE TABLE `pingyuewenti` (
   `kechengid` int(10) unsigned NOT NULL COMMENT '课程ID',
   PRIMARY KEY (`id`),
   KEY `pingyuewenti_huidawentiid_index` (`huidawentiid`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COMMENT='评阅问题信息表';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='评阅问题信息表';
 
 
 -- zhkt.qiandao definition
@@ -265,7 +281,7 @@ CREATE TABLE `qiandao` (
   PRIMARY KEY (`id`),
   KEY `qiandao_keqiankaoqinid_index` (`keqiankaoqinid`),
   KEY `qiandao_kechengxinxi_index` (`kechengxinxi`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COMMENT='签到信息表';
+) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8 COMMENT='签到信息表';
 
 
 -- zhkt.qiangdawenti definition
@@ -281,9 +297,10 @@ CREATE TABLE `qiangdawenti` (
   `qiangdaren` varchar(50) NOT NULL COMMENT '抢答人',
   `addtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '添加时间',
   `kechengid` int(10) unsigned NOT NULL COMMENT '课程ID',
+  `pingyueren` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `qiangdawenti_wentiqiangdaid_index` (`wentiqiangdaid`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COMMENT='抢答问题信息表';
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='抢答问题信息表';
 
 
 -- zhkt.qiuzhujiaoshi definition
@@ -314,7 +331,7 @@ CREATE TABLE `shiti` (
   `tikutype` varchar(100) NOT NULL COMMENT '题库类型',
   PRIMARY KEY (`id`),
   KEY `shiti_tikuid_index` (`tikuid`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8 COMMENT='试题信息表';
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8 COMMENT='试题信息表';
 
 
 -- zhkt.suitangceshi definition
@@ -329,7 +346,7 @@ CREATE TABLE `suitangceshi` (
   `faburen` varchar(50) NOT NULL COMMENT '发布人',
   `addtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '添加时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='随堂测试信息表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='随堂测试信息表';
 
 
 -- zhkt.tiezi definition
@@ -347,7 +364,7 @@ CREATE TABLE `tiezi` (
   `addtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '添加时间',
   PRIMARY KEY (`id`),
   KEY `tiezi_fenlei_index` (`fenlei`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COMMENT='帖子信息表';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='帖子信息表';
 
 
 -- zhkt.tiezifenlei definition
@@ -374,7 +391,7 @@ CREATE TABLE `tiezihuifu` (
   PRIMARY KEY (`id`),
   KEY `tiezihuifu_tieziid_index` (`tieziid`),
   KEY `tiezihuifu_fenlei_index` (`fenlei`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='帖子回复信息表';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='帖子回复信息表';
 
 
 -- zhkt.tiku definition
@@ -383,13 +400,14 @@ CREATE TABLE `tiku` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '编号',
   `tikubianhao` varchar(50) NOT NULL COMMENT '题库编号',
   `tikumingcheng` varchar(255) NOT NULL COMMENT '题库名称',
-  `jiaoshi` varchar(255) NOT NULL COMMENT '��ʦ',
   `faburen` varchar(50) NOT NULL COMMENT '发布人',
   `addtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '添加时间',
   `kechengid` int(10) unsigned NOT NULL COMMENT '课程ID',
   `tikutype` varchar(100) NOT NULL COMMENT '题库类型',
+  `kaoshirens` varchar(255) DEFAULT NULL COMMENT '考试人',
+  `pingjiarens` varchar(255) DEFAULT NULL COMMENT '评价人',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COMMENT='题库信息表';
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COMMENT='题库信息表';
 
 
 -- zhkt.token definition
@@ -406,6 +424,17 @@ CREATE TABLE `token` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='token信息表';
 
 
+-- zhkt.xueyuan definition
+
+CREATE TABLE `xueyuan` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '学院ID',
+  `xueyuan` varchar(50) NOT NULL COMMENT '学院名称',
+  `addtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '添加时间',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `xueyuan_un` (`xueyuan`)
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8 COMMENT='学院信息表';
+
+
 -- zhkt.youqinglianjie definition
 
 CREATE TABLE `youqinglianjie` (
@@ -417,6 +446,17 @@ CREATE TABLE `youqinglianjie` (
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='友情链接表';
 
 
+-- zhkt.zhicheng definition
+
+CREATE TABLE `zhicheng` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '职称ID',
+  `zhicheng` varchar(50) NOT NULL COMMENT '教师职称',
+  `addtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '添加时间',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `zhicheng_un` (`zhicheng`)
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8 COMMENT='职称信息表';
+
+
 -- zhkt.zhuanye definition
 
 CREATE TABLE `zhuanye` (
@@ -425,7 +465,7 @@ CREATE TABLE `zhuanye` (
   `addtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '添加时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `zhuanye_un` (`zhuanye`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COMMENT='专业信息表';
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COMMENT='专业信息表';
 
 
 -- zhkt.ziyuan definition
@@ -456,7 +496,7 @@ CREATE TABLE `banji` (
   UNIQUE KEY `banji_un` (`banjimingcheng`),
   KEY `banji_FK` (`zhuanye`),
   CONSTRAINT `banji_FK` FOREIGN KEY (`zhuanye`) REFERENCES `zhuanye` (`zhuanye`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COMMENT='班级信息表';
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COMMENT='班级信息表';
 
 
 -- zhkt.kecheng definition
@@ -485,7 +525,7 @@ CREATE TABLE `kecheng` (
   CONSTRAINT `kecheng_FK_1` FOREIGN KEY (`jiaoshiid`) REFERENCES `jiaoshi` (`id`),
   CONSTRAINT `kecheng_FK_2` FOREIGN KEY (`kechengleixing`) REFERENCES `kechengleixing` (`id`),
   CONSTRAINT `kecheng_FK_3` FOREIGN KEY (`banjimingcheng`) REFERENCES `banji` (`banjimingcheng`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='课程信息表';
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COMMENT='课程信息表';
 
 
 -- zhkt.wentiqiangda definition
@@ -502,6 +542,7 @@ CREATE TABLE `wentiqiangda` (
   `faburen` varchar(50) NOT NULL COMMENT '发布人',
   `addtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '添加时间',
   `kechengid` int(10) unsigned NOT NULL COMMENT '课程ID',
+  `qiangdarens` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `wentiqiangda_FK` (`kechengid`),
   CONSTRAINT `wentiqiangda_FK` FOREIGN KEY (`kechengid`) REFERENCES `kecheng` (`id`)
@@ -521,7 +562,7 @@ CREATE TABLE `wentisousuo` (
   PRIMARY KEY (`id`),
   KEY `wentisousuo_FK` (`kechengmingcheng`),
   CONSTRAINT `wentisousuo_FK` FOREIGN KEY (`kechengmingcheng`) REFERENCES `kecheng` (`kechengmingcheng`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='问题答疑信息表';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='问题答疑信息表';
 
 
 -- zhkt.xuesheng definition
@@ -540,10 +581,11 @@ CREATE TABLE `xuesheng` (
   `xiangqing` longtext COMMENT '详情',
   `addtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '添加时间',
   `banjiid` int(10) unsigned NOT NULL COMMENT '班级ID',
+  `hupingrens` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `xuesheng_FK` (`banjiid`),
   CONSTRAINT `xuesheng_FK` FOREIGN KEY (`banjiid`) REFERENCES `banji` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='学生信息表';
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COMMENT='学生信息表';
 
 
 -- zhkt.xueshenghuping definition
@@ -561,7 +603,7 @@ CREATE TABLE `xueshenghuping` (
   PRIMARY KEY (`id`),
   KEY `xueshenghuping_FK` (`kechengid`),
   CONSTRAINT `xueshenghuping_FK` FOREIGN KEY (`kechengid`) REFERENCES `kecheng` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COMMENT='学生互评成绩表';
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COMMENT='学生互评成绩表';
 
 
 -- zhkt.chengji definition
@@ -589,14 +631,14 @@ CREATE TABLE `chengji` (
   CONSTRAINT `chengji_FK` FOREIGN KEY (`xueshengid`) REFERENCES `xuesheng` (`id`),
   CONSTRAINT `chengji_FK_1` FOREIGN KEY (`zhuanye`) REFERENCES `zhuanye` (`zhuanye`),
   CONSTRAINT `chengji_FK_2` FOREIGN KEY (`kechengid`) REFERENCES `kecheng` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='成绩信息表';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='成绩信息表';
 
 
 -- zhkt.chengjibili definition
 
 CREATE TABLE `chengjibili` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `kaoqinchengji` varchar(50) CHARACTER SET utf8 COLLATE utf8_estonian_ci NOT NULL COMMENT '考勤成绩',
+  `qimochengji` varchar(50) CHARACTER SET utf8 COLLATE utf8_estonian_ci NOT NULL COMMENT '考勤成绩',
   `shenghupingchengji` varchar(50) CHARACTER SET utf8 COLLATE utf8_estonian_ci NOT NULL COMMENT '学生互评成绩',
   `jiaoshipingjiachengji` varchar(50) CHARACTER SET utf8 COLLATE utf8_estonian_ci NOT NULL COMMENT '教师评价成绩',
   `suitangceshichengji` varchar(50) CHARACTER SET utf8 COLLATE utf8_estonian_ci NOT NULL COMMENT '随堂测试成绩',
@@ -605,4 +647,4 @@ CREATE TABLE `chengjibili` (
   PRIMARY KEY (`id`),
   KEY `chengjibili_FK` (`kechengid`),
   CONSTRAINT `chengjibili_FK` FOREIGN KEY (`kechengid`) REFERENCES `kecheng` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='成绩比例表';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='成绩比例表';
