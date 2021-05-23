@@ -1,3 +1,0 @@
-前端克隆地址：https://github.com/mahui-hub/Smart-Classroom-Client.git
-
-后端：https://github.com/mahui-hub/Smart-Classroom-Server.git
