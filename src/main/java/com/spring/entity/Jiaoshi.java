@@ -27,8 +27,8 @@ public class Jiaoshi implements Serializable {
     private String qqhao;
     @Column(name = "shouji")
     private String shouji;
-    @Column(name = "suojiaobanji")
-    private String suojiaobanji;
+//    @Column(name = "suojiaobanji")
+//    private String suojiaobanji;
     @Column(name = "xiangqing")
     private String xiangqing;
     @Column(name = "xueyuan")
@@ -93,12 +93,12 @@ public class Jiaoshi implements Serializable {
         this.shouji = shouji == null ? "" : shouji.trim();
     }
 
-    public String getSuojiaobanji() {
-        return suojiaobanji;
-    }
-    public void setSuojiaobanji(String suojiaobanji) {
-        this.suojiaobanji = suojiaobanji == null ? "" : suojiaobanji.trim();
-    }
+//    public String getSuojiaobanji() {
+//        return suojiaobanji;
+//    }
+//    public void setSuojiaobanji(String suojiaobanji) {
+//        this.suojiaobanji = suojiaobanji == null ? "" : suojiaobanji.trim();
+//    }
 
     public String getXiangqing() {
         return xiangqing;

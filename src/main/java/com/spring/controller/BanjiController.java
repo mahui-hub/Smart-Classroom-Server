@@ -76,7 +76,7 @@ public class BanjiController extends BaseController
             where += " AND xueyuan LIKE '%"+Request.get("xueyuan")+"%' ";
 
         }
-                if(!Request.get("banjimingcheng").equals("")) {
+        if(!Request.get("banjimingcheng").equals("")) {
             where += " AND banjimingcheng LIKE '%"+Request.get("banjimingcheng")+"%' ";
         }
 

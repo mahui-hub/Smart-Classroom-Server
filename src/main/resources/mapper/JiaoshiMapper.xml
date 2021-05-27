@@ -9,14 +9,14 @@
                                     <result column="xingbie" property="xingbie" jdbcType="VARCHAR"/>
                                     <result column="qqhao" property="qqhao" jdbcType="VARCHAR"/>
                                     <result column="shouji" property="shouji" jdbcType="VARCHAR"/>
-                                    <result column="suojiaobanji" property="suojiaobanji" jdbcType="VARCHAR"/>
+<!--                                    <result column="suojiaobanji" property="suojiaobanji" jdbcType="VARCHAR"/>-->
                                     <result column="xiangqing" property="xiangqing" jdbcType="VARCHAR"/>
         <result column="xueyuan" property="xueyuan" jdbcType="VARCHAR"/>
         <result column="zhicheng" property="zhicheng" jdbcType="VARCHAR"/>
                                                 <result column="addtime" property="addtime" jdbcType="VARCHAR"/>
             </resultMap>
     <sql id="Base_Column_List">
-        id, gonghao, mima, xingming, xingbie,xueyuan, qqhao,zhicheng, shouji, suojiaobanji, xiangqing, addtime    </sql>
+        id, gonghao, mima, xingming, xingbie,xueyuan, qqhao,zhicheng, shouji, xiangqing, addtime    </sql>
         <select id="login" resultMap="BaseResultMap" parameterType="com.spring.entity.Jiaoshi">
         select
         <include refid="Base_Column_List"/>

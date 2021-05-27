@@ -122,6 +122,7 @@ public class UserController extends BaseController{
             session.setAttribute("login" , cx);
                         session.setAttribute("xuehao", user.getXuehao());
                         session.setAttribute("mima", user.getMima());
+            session.setAttribute("xueyuan", user.getXueyuan());
                         session.setAttribute("xingming", user.getXingming());
                         session.setAttribute("xingbie", user.getXingbie());
                         session.setAttribute("banji", user.getBanji());
@@ -151,7 +152,7 @@ public class UserController extends BaseController{
                         session.setAttribute("xingbie", user.getXingbie());
                         session.setAttribute("qqhao", user.getQqhao());
                         session.setAttribute("shouji", user.getShouji());
-                        session.setAttribute("suojiaobanji", user.getSuojiaobanji());
+//                        session.setAttribute("suojiaobanji", user.getSuojiaobanji());
                         session.setAttribute("xiangqing", user.getXiangqing());
                                     JSONObject jsonObject = JSON.parseObject(JSON.toJSONString(user));
             jsonObject.put("cx" , session.getAttribute("cx"));

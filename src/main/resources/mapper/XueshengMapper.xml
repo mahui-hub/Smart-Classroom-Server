@@ -9,6 +9,7 @@
                                     <result column="xingming" property="xingming" jdbcType="VARCHAR"/>
                                     <result column="xingbie" property="xingbie" jdbcType="VARCHAR"/>
                                     <result column="banjiid" property="banjiid" jdbcType="INTEGER"/>
+        <result column="xueyuan" property="xueyuan" jdbcType="VARCHAR"/>
                                     <result column="banji" property="banji" jdbcType="VARCHAR"/>
                                     <result column="zhuanye" property="zhuanye" jdbcType="VARCHAR"/>
                                     <result column="lianxidianhua" property="lianxidianhua" jdbcType="VARCHAR"/>
@@ -18,7 +19,7 @@
         <result column="addtime" property="addtime" jdbcType="VARCHAR"/>
             </resultMap>
     <sql id="Base_Column_List">
-        id, xuehao, hupingrens,mima,xingming, xingbie, banji, banjiid, zhuanye, lianxidianhua, qqhao, touxiang, xiangqing, addtime    </sql>
+        id, xuehao,xueyuan, hupingrens,mima,xingming, xingbie, banji, banjiid, zhuanye, lianxidianhua, qqhao, touxiang, xiangqing, addtime    </sql>
         <select id="login" resultMap="BaseResultMap" parameterType="com.spring.entity.Xuesheng">
         select
         <include refid="Base_Column_List"/>

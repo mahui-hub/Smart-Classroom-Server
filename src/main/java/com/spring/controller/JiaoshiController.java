@@ -78,9 +78,9 @@ public class JiaoshiController extends BaseController
         if(!Request.get("xueyuan").equals("")) {
             where += " AND xueyuan LIKE '%"+Request.get("xueyuan")+"%' ";
         }
-        if(!Request.get("suojiaobanji").equals("")) {
-            where += " AND suojiaobanji LIKE '%"+Request.get("suojiaobanji")+"%' ";
-        }
+//        if(!Request.get("suojiaobanji").equals("")) {
+//            where += " AND suojiaobanji LIKE '%"+Request.get("suojiaobanji")+"%' ";
+//        }
             return where;
     }
 
@@ -175,7 +175,7 @@ public class JiaoshiController extends BaseController
 
         post.setShouji(Request.get("shouji"));
 
-        post.setSuojiaobanji(Request.get("suojiaobanji"));
+//        post.setSuojiaobanji(Request.get("suojiaobanji"));
 
         post.setXiangqing(util.DownloadRemoteImage.run(Request.get("xiangqing")));
 
@@ -214,8 +214,8 @@ public class JiaoshiController extends BaseController
         post.setQqhao(Request.get("qqhao"));
                 if(!Request.get("shouji").equals(""))
         post.setShouji(Request.get("shouji"));
-                if(!Request.get("suojiaobanji").equals(""))
-        post.setSuojiaobanji(Request.get("suojiaobanji"));
+//                if(!Request.get("suojiaobanji").equals(""))
+//        post.setSuojiaobanji(Request.get("suojiaobanji"));
                 if(!Request.get("xiangqing").equals(""))
         post.setXiangqing(util.DownloadRemoteImage.run(Request.get("xiangqing")));
         if(!Request.get("xueyuan").equals(""))

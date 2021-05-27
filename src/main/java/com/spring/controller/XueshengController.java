@@ -92,8 +92,11 @@ public class XueshengController extends BaseController
         if(!Request.get("banjiid").equals("")) {
             where += " AND banjiid ='"+Request.get("banjiid")+"' ";
         }
-                if(!Request.get("zhuanye").equals("")) {
+        if(!Request.get("zhuanye").equals("")) {
             where += " AND zhuanye ='"+Request.get("zhuanye")+"' ";
+        }
+        if(!Request.get("xueyuan").equals("")) {
+            where += " AND xueyuan ='"+Request.get("xueyuan")+"' ";
         }
             return where;
     }
@@ -147,8 +150,8 @@ public class XueshengController extends BaseController
     {
         _var = new LinkedHashMap(); // 重置数据
 
-                    assign("banjiList" , new CommDAO().select("SELECT * FROM banji ORDER BY id desc"));
-            assign("zhuanyeList" , new CommDAO().select("SELECT * FROM zhuanye ORDER BY id desc"));
+        assign("banjiList" , new CommDAO().select("SELECT * FROM banji ORDER BY id desc"));
+        assign("zhuanyeList" , new CommDAO().select("SELECT * FROM zhuanye ORDER BY id desc"));
         return json();   // 将数据写给前端
     }
 
@@ -175,8 +178,8 @@ public class XueshengController extends BaseController
         Xuesheng mmm = service.find(id);
         assign("mmm" , mmm);
         assign("updtself" , 1);
-                assign("banjiList" , new CommDAO().select("SELECT * FROM banji ORDER BY id desc"));
-            assign("zhuanyeList" , new CommDAO().select("SELECT * FROM zhuanye ORDER BY id desc"));        return json();   // 将数据写给前端
+        assign("banjiList" , new CommDAO().select("SELECT * FROM banji ORDER BY id desc"));
+        assign("zhuanyeList" , new CommDAO().select("SELECT * FROM zhuanye ORDER BY id desc"));        return json();   // 将数据写给前端
     }
     /**
      * 添加内容
@@ -190,9 +193,16 @@ public class XueshengController extends BaseController
         Xuesheng post = new Xuesheng();  // 创建实体类
         // 设置前台提交上来的数据到实体类中
         post.setXuehao(Request.get("xuehao"));
-
         post.setMima(Request.get("mima"));
 
+        int banji=Integer.valueOf(Request.get("banjiid"));
+        List<HashMap> infolist = new CommDAO().select("select xueyuan,zhuanye from banji where id="+banji);
+        String xueyuan = String.valueOf(infolist.get(0).get("xueyuan"));
+        String zhuanye = String.valueOf(infolist.get(0).get("zhuanye"));
+        post.setXueyuan(xueyuan);
+        post.setZhuanye(zhuanye);
+//        post.setXueyuan(Request.get("xueyuan"));
+//        post.setZhuanye(Request.get("zhuanye"));
         post.setXingming(Request.get("xingming"));
         post.setHupingrens(Request.get("hupingrens"));
 
@@ -201,9 +211,6 @@ public class XueshengController extends BaseController
         post.setBanji(Request.get("banji"));
 
         post.setBanjiid(Integer.valueOf(Request.get("banjiid")));
-
-        post.setZhuanye(Request.get("zhuanye"));
-
         post.setLianxidianhua(Request.get("lianxidianhua"));
 
         post.setQqhao(Request.get("qqhao"));
@@ -234,6 +241,8 @@ public class XueshengController extends BaseController
         post.setXuehao(Request.get("xuehao"));
                 if(!Request.get("mima").equals(""))
         post.setMima(Request.get("mima"));
+        if(!Request.get("xueyuan").equals(""))
+            post.setXueyuan(Request.get("xueyuan"));
                 if(!Request.get("xingming").equals(""))
         post.setXingming(Request.get("xingming"));
                 if(!Request.get("xingbie").equals(""))

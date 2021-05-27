@@ -18,6 +18,9 @@ public class Zhuanye implements Serializable {
     @Column(name = "zhuanye")
     private String zhuanye;
 
+    @Column(name = "xueyuan")
+    private String xueyuan;
+
     @Column(name = "addtime")
     private String addtime;
 
@@ -30,6 +33,13 @@ public class Zhuanye implements Serializable {
         this.id = id;
     }
 
+    public String getXueyuan() {
+        return xueyuan;
+    }
+    public void setXueyuan(String xueyuan) {
+        this.xueyuan = xueyuan == null ? "" : xueyuan.trim();
+    }
+
     public String getZhuanye() {
         return zhuanye;
     }
@@ -40,7 +50,6 @@ public class Zhuanye implements Serializable {
     public String getAddtime() {
         return addtime;
     }
-
     public void setAddtime(String addtime) {
         this.addtime = addtime;
     }

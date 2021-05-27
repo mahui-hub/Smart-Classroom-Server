@@ -82,7 +82,7 @@ public class XueshenghupingController extends BaseController
         if(!Request.get("hupingren").equals("")) {
             where += " AND hupingren LIKE '%"+Request.get("hupingren")+"%' ";
         }
-                if(!Request.get("xingming").equals("")) {
+        if(!Request.get("xingming").equals("")) {
             where += " AND xingming LIKE '%"+Request.get("xingming")+"%' ";
         }
         if (!Request.get("kechengid").equals("")) {
@@ -91,7 +91,7 @@ public class XueshenghupingController extends BaseController
         if (!Request.get("banjiid").equals("")) {
             where += " AND banjiid LIKE '%" + Request.get("banjiid") + "%' ";
         }
-            return where;
+        return where;
     }
 
     /**
@@ -179,14 +179,8 @@ public class XueshenghupingController extends BaseController
         String banjiid = Request.get("banjiid");
         post.setBanjiid(Integer.valueOf(banjiid));
         post.setXingming(Request.get("xingming"));
-        post.setHupingneirong(Request.get("hupingneirong"));
-
         post.setHupingfenshu(Request.getDouble("hupingfenshu"));
-
         post.setHupingren(Request.get("hupingren"));
-//        post.setXueshengid(Request.getInt("xueshengid"));
-
-        
         post.setAddtime(Info.getDateStr()); // 设置添加时间
                 service.insert(post); // 插入数据
         int charuid = post.getId().intValue();
@@ -211,17 +205,12 @@ public class XueshenghupingController extends BaseController
             post.setBanjiid(Integer.valueOf(Request.get("banjiid")));
         if(!Request.get("kechengid").equals(""))
             post.setKechengid(Integer.valueOf(Request.get("kechengid")));
-                if(!Request.get("xingming").equals(""))
+        if(!Request.get("xingming").equals(""))
         post.setXingming(Request.get("xingming"));
-                if(!Request.get("hupingneirong").equals(""))
-        post.setHupingneirong(Request.get("hupingneirong"));
-                if(!Request.get("hupingfenshu").equals(""))
+        if(!Request.get("hupingfenshu").equals(""))
         post.setHupingfenshu(Request.getDouble("hupingfenshu"));
             if(!Request.get("hupingren").equals(""))
         post.setHupingren(Request.get("hupingren"));
-//        if(!Request.get("chishu").equals(""))
-//            post.setChishu(Integer.valueOf(Request.get("chishu")));
-        
         post.setId(Request.getInt("id"));
                 service.update(post); // 更新数据
         int charuid = post.getId().intValue();
@@ -254,5 +243,18 @@ public class XueshenghupingController extends BaseController
 
                 service.delete(id);// 根据id 删除某行数据
                 return showSuccess("删除成功",request.getHeader("referer"));//弹出删除成功，并跳回上一页
+    }
+    @RequestMapping("/xueshenghuping_chaxun")
+    public String chaxun()
+    {
+        _var = new LinkedHashMap(); // 重置数据
+        if(!checkLogin()){
+            return showError("尚未登录");
+        }
+        String xuehao = Request.get("xuehao");  // 根据id 删除某行数据
+        String hupingren = Request.get("hupingren");  // 根据id 删除某行数据
+        List<HashMap> kechengidList = new CommDAO().select("select kechengid from xueshenghuping x where xuehao = "+ xuehao + " and hupingren = "+ hupingren);
+        assign("kechengidList" , kechengidList);
+        return json();   // 将数据写给前端
     }
 }

@@ -53,6 +53,7 @@ public class KechengziyuanController extends BaseController {
         }
         int page = request.getParameter( "page") == null ? 1 : Integer.valueOf(request.getParameter("page"));  // 获取前台提交的URL参数 page  如果没有则设置为1
         page = Math.max(1 , page);  // 取两个数的最大值，防止page 小于1
+        int kechengid = Request.getInt("kechengid"); // 获取前台kechengid
         List<Kechengziyuan> list = service.selectPageExample(example , page , pagesize);   // 获取当前页的行数
 
         // 将列表写给界面使用
@@ -77,6 +78,9 @@ public class KechengziyuanController extends BaseController {
         if (!Request.get("kechengid").equals("")) {
             where += " AND kechengid LIKE '%" + Request.get("kechengid") + "%' ";
         }
+//        if (!Request.get("kechengid").equals("")) {
+//            where += " kechengid = " + Request.get("kechengid");
+//        }
         if (!Request.get("ziyuanname").equals("")) {
             where += " AND ziyuanname LIKE '%" + Request.get("ziyuanname") + "%' ";
         }
@@ -107,9 +111,10 @@ public class KechengziyuanController extends BaseController {
         }
         int page = request.getParameter( "page") == null ? 1 : Integer.valueOf(request.getParameter("page"));  // 获取前台提交的URL参数 page  如果没有则设置为1
         page = Math.max(1 , page);  // 取两个数的最大值，防止page 小于1
-//        List<Kechengziyuan> list = service.selectPageExample(example , page , pagesize);   // 获取当前页的行数
-//        List<Kechengziyuan> echartList= new CommDAO().select("select kechengmingcheng as name ,count(ziyuanname) as value  from kechengziyuan k group by kechengid");
-        assign("echartList" ,new CommDAO().select("select kechengmingcheng as name ,count(ziyuanname) as value  from kechengziyuan k group by kechengid"));
+        int kechengid = Request.getInt("kechengid"); // 获取前台kechengid
+        List<HashMap> echartList = new CommDAO().select("select kechengmingcheng as name ,count(ziyuanname) as value  from kechengziyuan k where kechengid =" + kechengid +" group by kechengid");
+
+        assign("echartList" ,echartList);
         return json();   // 将数据写给前端
     }
 
@@ -117,8 +122,6 @@ public class KechengziyuanController extends BaseController {
     public String add()
     {
         _var = new LinkedHashMap(); // 重置数据
-
-//        assign("zhuanyeList" , new CommDAO().select("SELECT * FROM zhuanye ORDER BY id desc"));
         return json();   // 将数据写给前端
     }
 
@@ -131,8 +134,6 @@ public class KechengziyuanController extends BaseController {
         Kechengziyuan mmm = service.find(id);
         assign("mmm" , mmm);
         assign("updtself" , 0);
-
-//        assign("zhuanyeList" , new CommDAO().select("SELECT * FROM zhuanye ORDER BY id desc"));
         return json();   // 将数据写给前端
     }
     /**

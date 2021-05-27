@@ -25,7 +25,8 @@ public class Xuesheng implements Serializable {
     private String xingbie;
     @Column(name = "banji")
     private String banji;
-
+    @Column(name = "xueyuan")
+    private String xueyuan;
     @Column(name = "banjiid")
     private Integer banjiid;
 
@@ -63,7 +64,12 @@ public class Xuesheng implements Serializable {
     {
         return Query.make("xueshenghuping").where("xueshengid" , id).count();
     }
-
+    public String getXueyuan() {
+        return xueyuan;
+    }
+    public void setXueyuan(String xueyuan) {
+        this.xueyuan = xueyuan == null ? "" :xueyuan.trim();
+    }
 
     public String getXuehao() {
         return xuehao;

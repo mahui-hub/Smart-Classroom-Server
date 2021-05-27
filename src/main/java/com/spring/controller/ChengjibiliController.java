@@ -112,7 +112,7 @@ public class ChengjibiliController extends BaseController {
         String kechengid = Request.get("kechengid");
         post.setKechengid(Integer.valueOf(kechengid));
 
-        post.setQimochengji(Request.get("kaoqinchengji"));
+        post.setQimochengji(Request.get("qimochengji"));
 
         post.setShenghupingchengji(Request.get("shenghupingchengji"));
 
