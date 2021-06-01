@@ -35,7 +35,7 @@ public class Kaoshijieguo implements Serializable {
     @Column(name = "tiankongtidefen")
     private Integer tiankongtidefen;
     @Column(name = "zongdefen")
-    private Integer zongdefen;
+    private Double zongdefen;
     @Column(name = "zongfen")
     private Integer zongfen;
     @Column(name = "kaoshiren")
@@ -125,11 +125,11 @@ public class Kaoshijieguo implements Serializable {
         this.tiankongtidefen = tiankongtidefen == null ? 0 : tiankongtidefen;
     }
 
-    public Integer getZongdefen() {
+    public Double getZongdefen() {
         return zongdefen;
     }
-    public void setZongdefen(Integer zongdefen) {
-        this.zongdefen = zongdefen == null ? 0 : zongdefen;
+    public void setZongdefen(Double zongdefen) {
+        this.zongdefen = zongdefen == null ? 0D : zongdefen;
     }
     public Integer getZongfen() {
         return zongfen;

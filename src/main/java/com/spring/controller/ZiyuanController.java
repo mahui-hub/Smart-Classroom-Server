@@ -95,7 +95,7 @@ public class ZiyuanController extends BaseController
         String sort  = Request.get("sort" , "desc"); // 获取前台提交的URL参数 sort  如果没有则设置为desc
         int    pagesize = Request.getInt("pagesize" , 12); // 获取前台一页多少行数据
 
-        
+
         Example example = new Example(Ziyuan.class);  //  创建一个扩展搜索类
         Example.Criteria criteria = example.createCriteria();           // 创建一个扩展搜索条件类
         // 初始化一个条件，条件为：发布人=当前登录用户
@@ -143,7 +143,12 @@ public class ZiyuanController extends BaseController
         int page = request.getParameter("page") == null ? 1 : Integer.valueOf(request.getParameter("page"));
         page = Math.max(1 , page);
                     List<Ziyuan> list = service.selectPageExample(example , page , 12);
-            
+                    assign("ziyuanEcharts",new CommDAO().select("select fenlei as name,count(id) as value from ziyuan group by fenlei"));
+//        assign("ziyuanEcharts", new CommDAO().select("select t2.fenleimingcheng as fenlei,"
+//                + "round(rand()*50)+1 as score,"
+//                + "count( t1.id) as amount from ziyuan t1,"
+//                + "tiezifenlei t2 where t1.fenlei =t2.fenleimingcheng group by t1.fenlei "
+//                + "ORDER BY t1.fenlei desc"));
             assign("totalCount" , request.getAttribute("totalCount"));
         assign("list" , list);
         assign("where" , where);
@@ -202,11 +207,11 @@ public class ZiyuanController extends BaseController
         post.setFaburen(Request.get("faburen"));
 
 
-        
+
         post.setAddtime(Info.getDateStr()); // 设置添加时间
                 service.insert(post); // 插入数据
         int charuid = post.getId().intValue();
-        
+
         return showSuccess("保存成功" , Request.get("referer").equals("") ? request.getHeader("referer") : Request.get("referer"));
     }
 
@@ -235,7 +240,7 @@ public class ZiyuanController extends BaseController
         post.setXiangqing(util.DownloadRemoteImage.run(Request.get("xiangqing")));
             if(!Request.get("faburen").equals(""))
         post.setFaburen(Request.get("faburen"));
-        
+
         post.setId(Request.getInt("id"));
                 service.update(post); // 更新数据
         int charuid = post.getId().intValue();
@@ -262,8 +267,8 @@ public class ZiyuanController extends BaseController
         _var = new LinkedHashMap(); // 重置数据
         int id = Request.getInt("id");
         Ziyuan map = service.find(id);
-                        
-        
+
+
         assign("map" , map);
         return json();   // 将数据写给前端
     }

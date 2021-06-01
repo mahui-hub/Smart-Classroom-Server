@@ -61,29 +61,6 @@ public class KaoshijieguoController extends BaseController
         page = Math.max(1 , page);  // 取两个数的最大值，防止page 小于1
         List<Kaoshijieguo> list = service.selectPageExample(example , page , pagesize);   // 获取当前页的行数
         // 生成统计语句
-        for (int i = 0; i < list.size(); i++) {
-            Kaoshijieguo kaoshijieguo = list.get(i);
-            int tikuid = kaoshijieguo.getTikuid();
-            String tikutype=kaoshijieguo.getTikutype();
-            int zongfen=0;
-            List<HashMap> tikuxuanxiang = new CommDAO().select("select daan from shiti where tikutype=\"测验题库\" and tikuid ="+ tikuid );
-            for (int j=0;j<tikuxuanxiang.size();j++) {
-                    String daanlist = String.valueOf(tikuxuanxiang.get(j).get("daan"));
-                    JSONArray json = JSONArray.parseArray(daanlist);
-                    for(int z=0;z<json.size();z++){
-                        JSONObject object=json.getJSONObject(z);
-                        String a1=object.get("point")+"";
-                        int a2=Integer.parseInt(a1);
-                        zongfen=zongfen+a2;
-                    }
-                }
-                list.get(i).setZongfen(zongfen);
-                int zongdefen=0;
-                if(zongfen!=0){
-                   zongdefen=list.get(i).getZongdefen() / zongfen * 100 ;
-                }
-                list.get(i).setZongdefen(zongdefen);
-        }
         HashMap total = Query.make("kaoshijieguo").field("(sum(zongdefen)) sum_zongdefen,(avg(zongdefen)) avg_zongdefen,(min(zongdefen)) min_zongdefen,(max(zongdefen)) max_zongdefen").where(where).find();
         // 将统计语句写给界面调用
         assign("total" , total);
@@ -111,15 +88,6 @@ public class KaoshijieguoController extends BaseController
             if(!Request.get("tikumingcheng").equals("")) {
             where += " AND tikumingcheng LIKE '%"+Request.get("tikumingcheng")+"%' ";
         }
-//                if(!Request.get("kaoshibianhao").equals("")) {
-//            where += " AND kaoshibianhao LIKE '%"+Request.get("kaoshibianhao")+"%' ";
-//        }
-//                if(!Request.get("danxuantidefen_start").equals("")) {
-//            where += " AND danxuantidefen >='"+Request.get("danxuantidefen_start")+"' ";
-//        }
-//        if(!Request.get("danxuantidefen_end").equals("")) {
-//            where += " AND danxuantidefen <= '"+Request.get("danxuantidefen_end")+"' ";
-//        }
         if (!Request.get("tikutype").equals("")) {
             where += " AND tikutype LIKE '%" + Request.get("tikutype") + "%' ";
         }
@@ -252,6 +220,7 @@ public class KaoshijieguoController extends BaseController
         _var = new LinkedHashMap(); // 重置数据
         String tmp="";
         Kaoshijieguo post = new Kaoshijieguo();  // 创建实体类
+
         // 设置前台提交上来的数据到实体类中
         if(!Request.get("kechengid").equals(""))
             post.setKechengid(Integer.valueOf(Request.get("kechengid")));
@@ -273,15 +242,12 @@ public class KaoshijieguoController extends BaseController
 
         post.setTiankongtidefen(Request.getInt("tiankongtidefen"));
 
-        post.setZongdefen(Request.getInt("zongdefen"));
+        post.setZongdefen(Request.getDouble("zongdefen"));
 
         post.setZongfen(Request.getInt("zongfen"));
-
         post.setKaoshiren(Request.get("kaoshiren"));
-
         post.setTikuid(Request.getInt("tikuid"));
 
-        
         post.setAddtime(Info.getDateStr()); // 设置添加时间
                 service.insert(post); // 插入数据
         int charuid = post.getId().intValue();
@@ -317,7 +283,7 @@ public class KaoshijieguoController extends BaseController
             if(!Request.get("tiankongtidefen").equals(""))
         post.setTiankongtidefen(Request.getInt("tiankongtidefen"));
             if(!Request.get("zongdefen").equals(""))
-        post.setZongdefen(Request.getInt("zongdefen"));
+        post.setZongdefen(Request.getDouble("zongdefen"));
         if(!Request.get("zongfen").equals(""))
             post.setZongfen(Request.getInt("zongfen"));
             if(!Request.get("kaoshiren").equals(""))

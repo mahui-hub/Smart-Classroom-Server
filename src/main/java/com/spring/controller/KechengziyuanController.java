@@ -55,10 +55,11 @@ public class KechengziyuanController extends BaseController {
         page = Math.max(1 , page);  // 取两个数的最大值，防止page 小于1
         int kechengid = Request.getInt("kechengid"); // 获取前台kechengid
         List<Kechengziyuan> list = service.selectPageExample(example , page , pagesize);   // 获取当前页的行数
-
         // 将列表写给界面使用
+
+        assign("list" ,new CommDAO().select("select * from kechengziyuan where kechengid="+kechengid));
+//        assign("list" , list);
         assign("totalCount" , request.getAttribute("totalCount"));
-        assign("list" , list);
         assign("orderby" , order);  // 把当前排序结果写进前台
         assign("sort" , sort);      // 把当前排序结果写进前台
         return json();   // 将数据写给前端
@@ -78,9 +79,9 @@ public class KechengziyuanController extends BaseController {
         if (!Request.get("kechengid").equals("")) {
             where += " AND kechengid LIKE '%" + Request.get("kechengid") + "%' ";
         }
-//        if (!Request.get("kechengid").equals("")) {
-//            where += " kechengid = " + Request.get("kechengid");
-//        }
+        if (!Request.get("kechengid").equals("")) {
+            where += " kechengid = " + Request.get("kechengid");
+        }
         if (!Request.get("ziyuanname").equals("")) {
             where += " AND ziyuanname LIKE '%" + Request.get("ziyuanname") + "%' ";
         }
@@ -112,9 +113,16 @@ public class KechengziyuanController extends BaseController {
         int page = request.getParameter( "page") == null ? 1 : Integer.valueOf(request.getParameter("page"));  // 获取前台提交的URL参数 page  如果没有则设置为1
         page = Math.max(1 , page);  // 取两个数的最大值，防止page 小于1
         int kechengid = Request.getInt("kechengid"); // 获取前台kechengid
-        List<HashMap> echartList = new CommDAO().select("select kechengmingcheng as name ,count(ziyuanname) as value  from kechengziyuan k where kechengid =" + kechengid +" group by kechengid");
+//        List<HashMap> echartList = new CommDAO().select("select kechengmingcheng as name ,count(ziyuanname) as value  from kechengziyuan k where kechengid =" + kechengid +" group by kechengid");
+        List<HashMap> banjiidList = new CommDAO().select("select banjiid  from kecheng where id =" + kechengid);
+       String banjiid = String.valueOf(banjiidList.get(0).get("banjiid"));
 
-        assign("echartList" ,echartList);
+//        Integer banjiid=Request.getInt("banjiid");
+        // assign("list" ,new CommDAO().select("select * from kechengziyuan where kechengid="+kechengid));
+        assign("echartList" ,new CommDAO().select("select kechengmingcheng as name ,count(ziyuanname) as value  from kechengziyuan k group by kechengid"));
+        assign("xueshengrenshu" ,new CommDAO().select("select 'xueshengrenshu' as name ,count(xuehao) as value from xuesheng where banjiid="+banjiid));
+        assign("yishangchuan" ,new CommDAO().select("select 'yishangchuan' as name, count(distinct faburen) as value from kechengziyuan where kechengid="+kechengid));
+//        assign("echartList" ,echartList);
         return json();   // 将数据写给前端
     }
 

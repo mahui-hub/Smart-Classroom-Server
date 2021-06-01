@@ -13,8 +13,6 @@ import dao.Query;
 import java.util.*;
 import dao.CommDAO;
 
-import com.spring.entity.Huidawenti;
-import com.spring.service.HuidawentiService;
 
 /**
  * 评阅问题 */
@@ -26,8 +24,7 @@ public class PingyuewentiController extends BaseController
     @Autowired
     private PingyuewentiService service;
 
-    @Autowired
-    private HuidawentiService serviceRead;
+
     /**
      *  后台列表页
      *
@@ -227,12 +224,6 @@ public class PingyuewentiController extends BaseController
     public String add()
     {
         _var = new LinkedHashMap(); // 重置数据
-        int id = Request.getInt("id");  // 根据id 获取 回答问题模块中的数据
-        Huidawenti readMap = serviceRead.find(id);
-        // 将数据行写入给前台jsp页面
-        assign("readMap" , readMap);
-
-        
         return json();   // 将数据写给前端
     }
 

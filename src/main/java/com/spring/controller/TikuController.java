@@ -59,8 +59,8 @@ public class TikuController extends BaseController {
             String tikutype=tiku.getTikutype();
             String joiner="";
             String joiner1="";
-            if(tikutype=="测验题库"){
-                List<HashMap> kaoshirenlist = new CommDAO().select("select tikuid as id,group_concat(kaoshiren separator '-')  kaoshirens from kaoshijieguo where tikutype = \"测验题库\" and tikuid="+tikuid);
+            if(tikutype.equals("测验题库")){
+                List<HashMap> kaoshirenlist = new CommDAO().select("select tikuid as id,group_concat(kaoshiren separator '-')  kaoshirens from kaoshijieguo where tikutype=\"测验题库\" and tikuid="+tikuid);
                joiner = String.valueOf(kaoshirenlist.get(0).get("kaoshirens"));
             }else {
                 List<HashMap> pingjiarenlist = new CommDAO().select("select tikuid as id,group_concat(kaoshiren separator '-')  pingjiarens from kaoshijieguo where tikutype = \"评价题库\" and tikuid="+tikuid);
@@ -138,7 +138,7 @@ public class TikuController extends BaseController {
     /**
      * 前台列表页
      */
-    @RequestMapping("/")
+    @RequestMapping("/tikulist")
     public String index() {
         String order = Request.get("order", "id");
         String sort = Request.get("sort", "desc");

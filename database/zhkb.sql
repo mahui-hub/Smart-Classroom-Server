@@ -682,7 +682,7 @@ INSERT INTO `tiku` VALUES ('5', '040812548386', '物流管理教学评价题库'
 DROP TABLE IF EXISTS `token`;
 CREATE TABLE `token` (
   `token` char(32) NOT NULL COMMENT 'Ψһֵ',
-  `session` text NOT NULL COMMENT '���������',
+  `` text NOT NULL COMMENT '���������',
   `cx` varchar(50) NOT NULL COMMENT '��¼Ȩ��',
   `login` varchar(50) NOT NULL COMMENT '��¼ģ��',
   `username` varchar(50) NOT NULL COMMENT '��¼�û�',
