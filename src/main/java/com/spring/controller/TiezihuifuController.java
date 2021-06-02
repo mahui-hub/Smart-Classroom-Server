@@ -221,7 +221,7 @@ public class TiezihuifuController extends BaseController
          System.out.println(SensitivewordEngine.sensitiveWordMap);
          
          //敏感词库初始化完成进行替换
-        huifuneirong = SensitivewordEngine.replaceSensitiveWord(huifuneirong,2, "DJTU");
+        huifuneirong = SensitivewordEngine.replaceSensitiveWord(huifuneirong,2, "*");
         System.out.println(huifuneirong);
         System.err.println(huifuneirong);
         long endTime = System.currentTimeMillis();    //获取结束时间
@@ -283,7 +283,7 @@ public class TiezihuifuController extends BaseController
          System.out.println(SensitivewordEngine.sensitiveWordMap);
          
          //敏感词库初始化完成进行替换
-        huifuneirong = SensitivewordEngine.replaceSensitiveWord(huifuneirong,2, "DJTU");
+        huifuneirong = SensitivewordEngine.replaceSensitiveWord(huifuneirong,2, "*");
         System.out.println(huifuneirong);
         System.err.println(huifuneirong);
         long endTime = System.currentTimeMillis();    //获取结束时间

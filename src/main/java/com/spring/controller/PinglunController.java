@@ -177,7 +177,7 @@ public class PinglunController extends BaseController {
          System.out.println(pinglunneirong);
          System.out.println(SensitivewordEngine.sensitiveWordMap);      
          //敏感词库初始化完成进行替换
-         pinglunneirong = SensitivewordEngine.replaceSensitiveWord(pinglunneirong,2, "DJTU");
+         pinglunneirong = SensitivewordEngine.replaceSensitiveWord(pinglunneirong,2, "*");
         System.out.println(pinglunneirong);
         System.err.println(pinglunneirong);
         long endTime = System.currentTimeMillis();    //获取结束时间
@@ -244,7 +244,7 @@ public class PinglunController extends BaseController {
          System.out.println(pinglunneirong);
          System.out.println(SensitivewordEngine.sensitiveWordMap);      
          //敏感词库初始化完成进行替换
-         pinglunneirong = SensitivewordEngine.replaceSensitiveWord(pinglunneirong,2, "DJTU");
+         pinglunneirong = SensitivewordEngine.replaceSensitiveWord(pinglunneirong,2, "*");
         System.out.println(pinglunneirong);
         System.err.println(pinglunneirong);
         long endTime = System.currentTimeMillis();    //获取结束时间

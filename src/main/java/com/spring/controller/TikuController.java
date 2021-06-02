@@ -276,12 +276,12 @@ public class TikuController extends BaseController {
 
         List<HashMap> wenda = Query.make("shiti").where("tikuid",id)
                 .where("leixing" , "单选题")
-                .limit("10").order("rand()").select();
+               .order("rand()").select();
 
 
         wenda.addAll(Query.make("shiti")
                 .where("tikuid",id).where("leixing","多选题")
-                .limit("10")
+
                 .order("rand()")
                 .select());
 

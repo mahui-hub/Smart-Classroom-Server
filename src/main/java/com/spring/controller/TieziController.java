@@ -219,7 +219,7 @@ public class TieziController extends BaseController {
         System.out.println(SensitivewordEngine.sensitiveWordMap);
         
         //敏感词库初始化完成进行替换
-        neirong = SensitivewordEngine.replaceSensitiveWord(neirong,2, "DJTU");
+        neirong = SensitivewordEngine.replaceSensitiveWord(neirong,2, "*");
        System.out.println(neirong);
        System.err.println(neirong);
        long endTime = System.currentTimeMillis();    //获取结束时间
@@ -292,7 +292,7 @@ public class TieziController extends BaseController {
        System.out.println(SensitivewordEngine.sensitiveWordMap);
        
        //敏感词库初始化完成进行替换
-       neirong = SensitivewordEngine.replaceSensitiveWord(neirong,2, "DJTU");
+       neirong = SensitivewordEngine.replaceSensitiveWord(neirong,2, "*");
       System.out.println(neirong);
       System.err.println(neirong);
       long endTime = System.currentTimeMillis();    //获取结束时间
