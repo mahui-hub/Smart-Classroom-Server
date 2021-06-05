@@ -648,3 +648,15 @@ CREATE TABLE `chengjibili` (
   UNIQUE KEY `chengjibili_un` (`kechengid`),
   CONSTRAINT `chengjibili_FK` FOREIGN KEY (`kechengid`) REFERENCES `kecheng` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='成绩比例表';
+
+CREATE TABLE `liuyan` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '问题ID',
+  `kechengid` varchar(50) NOT NULL COMMENT '课程ID',
+  `wentibiaoti` text NOT NULL COMMENT '问题标题',
+  `wentineirong` text NOT NULL COMMENT '问题内容',
+  `qiuzhuren` varchar(50) NOT NULL COMMENT '求助人',
+  `dayineirong` text NOT NULL COMMENT '答疑内容',
+  `jiedaren` varchar(50) NOT NULL COMMENT '解答人',
+  `addtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '添加时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='留言信息表';
