@@ -149,7 +149,7 @@ public class ZiyuanController extends BaseController
 //				+ "count( t1.id) as amount from ziyuan t1,"
 //				+ "ziyuanfenlei t2 where t1.fenlei =t2.fenlei group by t1.fenlei "
 //				+ "ORDER BY t1.fenlei desc"));
-		assign("ziyuanEcharts1", new CommDAO().select("select fenlei as name,count(*) as value from ziyuan"));
+		assign("ziyuanEcharts1", new CommDAO().select("select fenlei as name,count(*) as value from ziyuan group by fenlei "));
 		//        assign("tieziEcharts", new CommDAO().select("select t2.fenleimingcheng as fenlei,"
 		//        		+ "round(rand()*50)+1 as score,"
 		//        		+ "count( t1.id) as amount from tiezi t1,"

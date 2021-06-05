@@ -28,6 +28,9 @@ public class Kechengziyuan implements Serializable {
     @Column(name = "kechengmingcheng")
     private String kechengmingcheng;
 
+    @Column(name = "role")
+    private String role;
+
     @Column(name = "addtime")
     private String addtime;
 
@@ -57,6 +60,13 @@ public class Kechengziyuan implements Serializable {
     }
     public void setKechengmingcheng(String kechengmingcheng) {
         this.kechengmingcheng = kechengmingcheng == null ? "" : kechengmingcheng.trim();
+    }
+
+    public String getRole() {
+        return role;
+    }
+    public void setRole(String role) {
+        this.role = role == null ? "" : role.trim();
     }
 
     public String getFaburen() {

@@ -120,7 +120,7 @@ public class KechengziyuanController extends BaseController {
         // assign("list" ,new CommDAO().select("select * from kechengziyuan where kechengid="+kechengid));
         assign("echartList" ,new CommDAO().select("select kechengmingcheng as name ,count(ziyuanname) as value  from kechengziyuan k group by kechengid"));
         assign("xueshengrenshu" ,new CommDAO().select("select 'xueshengrenshu' as name ,count(xuehao) as value from xuesheng where banjiid="+banjiid));
-        assign("yishangchuan" ,new CommDAO().select("select 'yishangchuan' as name, count(distinct faburen) as value from kechengziyuan where kechengid=" + kechengid));
+        assign("yishangchuan" ,new CommDAO().select("select 'yishangchuan' as name, count(distinct faburen) as value from kechengziyuan where kechengid=" + kechengid+" and role = '学生'"));
         assign("wendangshu" ,new CommDAO().select("select kechengmingcheng ,faburen as name, count(fujian) as value from kechengziyuan where kechengid =" + kechengid + " group by faburen"));
 //        assign("echartList" ,echartList);
         return json();   // 将数据写给前端
@@ -161,6 +161,7 @@ public class KechengziyuanController extends BaseController {
         post.setKechengid(Integer.valueOf(Request.get("kechengid")));
         post.setZiyuanname(Request.get("ziyuanname"));
         post.setKechengmingcheng(Request.get("kechengmingcheng"));
+        post.setRole(Request.get("role"));
         post.setAddtime(Info.getDateStr()); // 设置添加时间
 
         service.insert(post); // 插入数据
@@ -190,6 +191,8 @@ public class KechengziyuanController extends BaseController {
             post.setZiyuanname(Request.get("ziyuanname"));
         if(!Request.get("kechengmingcheng").equals(""))
             post.setKechengmingcheng(Request.get("kechengmingcheng"));
+        if(!Request.get("role").equals(""))
+            post.setRole(Request.get("role"));
 
         post.setId(Request.getInt("id"));
         service.update(post); // 更新数据

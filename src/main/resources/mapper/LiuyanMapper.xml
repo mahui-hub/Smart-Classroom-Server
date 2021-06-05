@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.spring.dao.LiuyanMapper">
+    <resultMap id="BaseResultMap" type="com.spring.entity.Liuyan">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <id column="kechengid" property="kechengid" jdbcType="INTEGER"/>
+        <result column="wentibiaoti" property="wentibiaoti" jdbcType="VARCHAR"/>
+        <result column="wentineirong" property="wentineirong" jdbcType="VARCHAR"/>
+        <result column="dayineirong" property="dayineirong" jdbcType="VARCHAR"/>
+        <result column="qiuzhuren" property="qiuzhuren" jdbcType="VARCHAR"/>
+        <result column="jiedaren" property="jiedaren" jdbcType="VARCHAR"/>
+        <result column="addtime" property="addtime" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, kechengid, wentibiaoti, wentineirong, dayineirong,qiuzhuren,jiedaren, addtime    </sql>
+</mapper>

@@ -416,4 +416,23 @@ public class UserController extends BaseController{
         }
         return showSuccess("修改密码成功" , "./mod.do");
     }
+    @RequestMapping("/user_echart")
+    public String echart()
+    {
+
+        // 检测是否有登录，没登录则跳转到登录页面
+        if(!checkLogin()){
+            return showError("尚未登录" , "./login.do");
+        }
+
+        String order = Request.get("order" , "id"); // 获取前台提交的URL参数 order  如果没有则设置为id
+        String sort  = Request.get("sort" , "desc"); // 获取前台提交的URL参数 sort  如果没有则设置为desc
+        int pagesize = Request.getInt("pagesize" , 12); // 获取前台一页多少行数据
+
+        String where = " 1=1 ";   // 创建初始条件为：1=1
+        List<HashMap> userlist = new CommDAO().select("select '教师' as name,count(id) from jiaoshi  union select '学生' as name,count(id) from xuesheng");
+
+        assign("userlist" ,userlist);
+        return json();   // 将数据写给前端
+    }
 }
