@@ -36,7 +36,9 @@ public class DESUtil {
      * @throws Exception
      */
     private static Key generateKey(String password) throws Exception {
+        //设置编码
         DESKeySpec dks = new DESKeySpec(password.getBytes(CHARSET));
+        //密钥算法
         SecretKeyFactory keyFactory = SecretKeyFactory.getInstance(ALGORITHM);
         return keyFactory.generateSecret(dks);
     }
