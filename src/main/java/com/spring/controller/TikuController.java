@@ -91,6 +91,9 @@ public class TikuController extends BaseController {
         if (!Request.get("kechengid").equals("")) {
             where += " AND kechengid LIKE '%" + Request.get("kechengid") + "%' ";
         }
+        if (!Request.get("state").equals("")) {
+            where += " AND state LIKE '%" + Request.get("state") + "%' ";
+        }
         if (!Request.get("faburen").equals("")) {
             where += " AND faburen LIKE '%" + Request.get("faburen") + "%' ";
         }
@@ -206,6 +209,7 @@ public class TikuController extends BaseController {
             kechengid = "0";
         }
         post.setKechengid(Integer.valueOf(kechengid));
+        post.setState(Integer.valueOf(Request.get("state")));
         post.setTikutype(Request.get("tikutype"));
         post.setFaburen(Request.get("faburen"));
         post.setKaoshirens(Request.get("kaoshirens"));
@@ -240,6 +244,8 @@ public class TikuController extends BaseController {
             post.setFaburen(Request.get("faburen"));
         if(!Request.get("kechengid").equals(""))
             post.setKechengid(Integer.valueOf(Request.get("kechengid")));
+        if(!Request.get("state").equals(""))
+            post.setState(Integer.valueOf(Request.get("state")));
         if (!Request.get("tikutype").equals(""))
             post.setTikutype(Request.get("tikutype"));
         if (!Request.get("pingjiarens").equals(""))

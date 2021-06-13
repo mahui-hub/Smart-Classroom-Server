@@ -14,6 +14,8 @@ public class Tiku implements Serializable {
     @Id
     @Column(name = "id",insertable=false)
     private Integer id;
+    @Column(name = "state")
+    private Integer state;
     @Column(name = "kechengid")
     private Integer kechengid;
     @Column(name = "tikutype")
@@ -39,6 +41,13 @@ public class Tiku implements Serializable {
     }
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getState() {
+        return state;
+    }
+    public void setState(Integer state) {
+        this.state= state;
     }
 
     public Integer getKechengid() {
