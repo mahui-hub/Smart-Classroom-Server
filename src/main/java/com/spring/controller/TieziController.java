@@ -139,7 +139,7 @@ public class TieziController extends BaseController {
      */
     @RequestMapping("/tiezilist")
     public String index() {
-        String order = Request.get("order", "id");
+        String order = Request.get("order", "dianzanliang");
         String sort = Request.get("sort", "desc");
 
         Example example = new Example(Tiezi.class);

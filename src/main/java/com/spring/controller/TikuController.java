@@ -59,11 +59,11 @@ public class TikuController extends BaseController {
             String tikutype=tiku.getTikutype();
             String joiner="";
             String joiner1="";
-            if(tikutype.equals("测验题库")){
-                List<HashMap> kaoshirenlist = new CommDAO().select("select tikuid as id,group_concat(kaoshiren separator '-')  kaoshirens from kaoshijieguo where tikutype=\"测验题库\" and tikuid="+tikuid);
+            if(tikutype.equals("测验试卷")){
+                List<HashMap> kaoshirenlist = new CommDAO().select("select tikuid as id,group_concat(kaoshiren separator '-')  kaoshirens from kaoshijieguo where tikutype=\"测验试卷\" and tikuid="+tikuid);
                joiner = String.valueOf(kaoshirenlist.get(0).get("kaoshirens"));
             }else {
-                List<HashMap> pingjiarenlist = new CommDAO().select("select tikuid as id,group_concat(kaoshiren separator '-')  pingjiarens from kaoshijieguo where tikutype = \"评价题库\" and tikuid="+tikuid);
+                List<HashMap> pingjiarenlist = new CommDAO().select("select tikuid as id,group_concat(kaoshiren separator '-')  pingjiarens from kaoshijieguo where tikutype = \"评价问卷\" and tikuid="+tikuid);
                 joiner1 = String.valueOf(pingjiarenlist.get(0).get("pingjiarens"));
             }
             list.get(i).setKaoshirens(joiner);

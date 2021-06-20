@@ -42,7 +42,7 @@ public class PoperController extends BaseController{
                 }
             }
         }else{
-            List<HashMap> tikuxuanxiang1 = new CommDAO().select("select daan from shiti where tikutype=\"评价题库\" and tikuid ="+ id );
+            List<HashMap> tikuxuanxiang1 = new CommDAO().select("select daan from shiti where tikutype=\"评价问卷\" and tikuid ="+ id );
             for (int j=0;j<tikuxuanxiang1.size();j++) {
                 String daanlist1 = String.valueOf(tikuxuanxiang1.get(j).get("daan"));
                 JSONArray jsonArray1 = JSONArray.parseArray(daanlist1);
